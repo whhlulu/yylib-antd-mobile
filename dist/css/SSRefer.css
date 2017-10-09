@@ -1,0 +1,8 @@
+.am-list-item .am-list-line .am-list-extra{
+    -webkit-flex-basis: 269px;
+    -ms-flex-preferred-size: 269px;
+    flex-basis: 269px;
+}
+.borderBottom .am-list-line:after{
+    left:63px !important;
+}

@@ -1,0 +1,20 @@
+.am-popup-slide-up {
+    top: 0;
+}
+
+.am-popup{
+    z-index: 5500;
+}
+
+.ss-refer-list .am-list-header{
+    padding: 0;
+}
+
+.ss-refer-list .list-content{
+    height: 9rem;
+    overflow: auto;
+}
+
+.ss-refer-list .am-pagination.custom-pagination-with-icon{
+    bottom: 0;
+}
