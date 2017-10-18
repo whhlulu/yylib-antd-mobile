@@ -3,9 +3,9 @@
  */
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom'
-import {ListView, RefreshControl, Toast, ActivityIndicator} from 'antd-mobile';
+import {ListView, RefreshControl, Toast, ActivityIndicator} from 'antd-mobile/lib/index';
 import classNames from 'classnames';
-import '../../css/SSList.css'
+import '../../../css/SSList.css'
 import _ from 'lodash'
 import PropTypes from 'prop-types';
 import {LoadMore} from 'react-weui'

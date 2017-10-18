@@ -2,17 +2,17 @@
  * Created by ByChan on 2017.8.29.
  */
 import React from 'react'
-import { Button, Flex, WingBlank } from 'antd-mobile'
+import { Button, Flex, WingBlank } from 'antd-mobile/lib/index'
 import PropTypes from 'prop-types'
 import SSIcon from '../icon/SSIcon'
-import '../../css/SSButton.css'
+import '../../../css/SSButton.css'
 import classNames from 'classnames'
 import { hashHistory } from 'react-router'
 
 /*
 * SSButton组件
 * type
-*   fill :项目里面一整行的绿色图标   可以传递fix 固定在页面底部
+*   fill :项目里面一整行的绿色图标1   可以传递fix 固定在页面底部
 *   center :项目里面两翼留白的绿色图标
 *   dashed :项目里面的蓝色虚线图标
 *   add : 所有列表页的圆形增加图标(已加上定位)

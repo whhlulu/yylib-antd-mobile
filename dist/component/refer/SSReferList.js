@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import ajax from '../utils/ajax';
-import {List, Checkbox, SearchBar, WhiteSpace, Pagination, Toast, Popup, Radio, ActivityIndicator} from 'antd-mobile';
-import '../../css/SSReferList.css'
-import RestUrl from "./RestUrl";
-import SSNavBar from "./component/navbar/SSNavBar";
+import ajax from '../../utils/ajax';
+import {List, Checkbox, SearchBar, WhiteSpace, Pagination, Toast, Popup, Radio, ActivityIndicator} from 'antd-mobile/lib/index';
+import '../../../css/SSReferList.css'
+import RestUrl from "../../common/RestUrl";
+import SSNavBar from "../navbar/SSNavBar";
 import {hashHistory} from 'react-router';
 
 let CheckboxItem = Checkbox.CheckboxItem;

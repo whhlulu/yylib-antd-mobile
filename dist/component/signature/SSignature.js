@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import $ from 'jquery'
-import UploadFileUtils from "../utils/UploadFileUtils";
 import SSButton from "../button/SSButton";
-import {WhiteSpace,Toast} from 'antd-mobile';
+import {WhiteSpace,Toast} from 'antd-mobile/lib/index';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import ajax from '../utils/ajax'
-import BaseHost from '../utils/BaseHost'
+import ajax from '../../utils/ajax'
+import BaseHost from '../../utils/BaseHost'
 //上传url
 var uploadUrl = '/icop-file/file/muploadx';
 var ADDR = BaseHost.ADDR

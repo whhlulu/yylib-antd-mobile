@@ -2,7 +2,7 @@
  * Created By TANGJQ 2017/8/30
  * */
 import React, {Component} from 'react';
-import { List, Stepper } from 'antd-mobile';
+import { List, Stepper } from 'antd-mobile/lib/index';
 import SSIcon from '../icon/SSIcon'
 import _ from 'lodash';
 

@@ -2,12 +2,12 @@
  * Created By Tangjingqi 2017/8/30
  * */
 import React, {Component} from 'react';
-import {Tabs, WhiteSpace, Badge} from 'antd-mobile';
+import {Tabs, WhiteSpace, Badge} from 'antd-mobile/lib/index';
 import PropTypes from 'prop-types';
 // import {createForm} from 'rc-form';
 import _ from 'lodash';
 import SSPosition from '../position/SSPosition';
-import '../../css/SSTab.css';
+import '../../../css/SSTab.css';
 
 /*
 |||||||||||||||||||||关于定位的修改///////////////////////////

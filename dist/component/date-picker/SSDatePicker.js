@@ -2,14 +2,14 @@
  * Created by Tangjingqi on 2017/8/24.
  */
 import React, {Component} from 'react';
-import {DatePicker, List} from 'antd-mobile';
+import {DatePicker, List} from 'antd-mobile/lib/index';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 // import enUs from 'antd-mobile/lib/date-picker/locale/en_US';
 // import PropTypes from 'prop-types';
 import _ from 'lodash';
 import SSIcon from '../icon/SSIcon';
-import '../../css/SSDatePicker.css'
+import '../../../css/SSDatePicker.css'
 
 class SSDatePicker extends Component {
     state = {

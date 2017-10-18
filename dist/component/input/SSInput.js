@@ -2,12 +2,12 @@
  * Created by hezx on 2017/8/24.
  */
 import React, {Component} from 'react';
-import {List, InputItem, WhiteSpace} from 'antd-mobile';
+import {List, InputItem, WhiteSpace} from 'antd-mobile/lib/index';
 // import {createForm} from 'rc-form';
 // import PropTypes from 'prop-types';
 import _ from 'lodash'
 import SSIcon from "../icon/SSIcon";
-import '../../css/SSInput.css'
+import '../../../css/SSInput.css'
 
 const Item = List.Item;
 class SSInput extends Component {

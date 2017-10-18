@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Popup} from 'react-weui';
-import '../../css/SSNavBar.css'
+import '../../../css/SSNavBar.css'
 import _ from 'lodash';
 
 class SSPopup extends Component {
@@ -19,7 +19,7 @@ class SSPopup extends Component {
     }
 
     render() {
-        const {enableMask, show, fullScreen} = this.props;
+        const {show, fullScreen} = this.props;
         let style = {
             height: fullScreen ? '100vh' : 'auto',
             overflow: 'scroll',
@@ -37,19 +37,9 @@ class SSPopup extends Component {
             </div>
         );
     }
-
-    /*<Popup
-                    enableMask={enableMask}
-                    show={show}
-                    onRequestClose={this.onRequestClose}>
-                    <div className="animated fadeInRight" style={{height: fullScreen ? '100vh' : 'auto', overflow: 'scroll'}}>
-                        {this.props.children}
-                    </div>
-                </Popup>*/
 }
 
 SSPopup.defaultProps = {
-    enableMask: false,
     show: false,
     fullScreen: true,
 }

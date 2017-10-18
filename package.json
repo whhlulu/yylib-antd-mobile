@@ -1,8 +1,8 @@
 {
   "name": "sslib-react",
-  "version": "1.0.1",
+  "version": "1.0.27",
   "description": "sslib-react",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "dependencies": {
     "antd-mobile": "^1.6.7",
     "autoprefixer": "7.1.2",
@@ -12,7 +12,9 @@
     "babel-jest": "20.0.3",
     "babel-loader": "7.1.1",
     "babel-plugin-import": "^1.4.0",
-    "babel-preset-react-app": "^3.0.2",
+    "babel-preset-es2015": "6.9.0",
+    "babel-preset-react": "6.5.0",
+    "babel-preset-stage-0": "6.24.1",
     "babel-runtime": "6.23.0",
     "case-sensitive-paths-webpack-plugin": "2.1.1",
     "chalk": "1.1.3",
@@ -74,16 +76,13 @@
     "url": "http://123.103.9.205/app-smart-site/sslib-react.git"
   },
   "scripts": {
+    "compile": "node_modules/.bin/babel -d lib/ dist/",
+    "prepublish": "npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "sslib-react"
   ],
   "author": "liwfd",
-  "license": "ISC",
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
-  }
+  "license": "ISC"
 }

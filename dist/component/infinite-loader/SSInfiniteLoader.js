@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from '../utils/classnames';
+import classNames from '../../utils/classnames';
 import { LoadMore } from 'react-weui';
 
-import '../../css/SSInfiniteLoader.less';
+import '../../../css/SSInfiniteLoader.less';
 
 /**
  *  A Container trigger loading once it reach certain scrolltop

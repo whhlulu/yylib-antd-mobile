@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 /*import {List} from 'antd-mobile';*/
 import classNames from 'classnames';
-import SSIcon from '../../common/SSIcon'
+import SSIcon from '../icon/SSIcon';
 /*const Item = List.Item;
 const Brief = Item.Brief;*/
 class SSListBrief extends Component {

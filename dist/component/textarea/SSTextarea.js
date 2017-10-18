@@ -2,7 +2,7 @@
  * Created By Tangjingqi 2017/8/24
  * */
 import React, {Component} from 'react';
-import {TextareaItem, Icon} from 'antd-mobile';
+import {TextareaItem, Icon} from 'antd-mobile/lib/index';
 // import PropTypes from 'prop-types';
 // import {createForm} from 'rc-form';
 import _ from 'lodash';
@@ -99,7 +99,11 @@ class SSTextarea extends React.Component {
             trigger, label, field, clear, hasError, count
         } = this.props;
         let getFieldProps = form ? form.getFieldProps : null;
-        value = _.isObject(value) ? value.name : value;
+        if(_.isEmpty(value)){
+            value = '';
+        }else{
+            value = _.isObject(value) ? value.name : value;
+        }
         let style = {
             paddingTop: '10px',
             paddingLeft: '14px',

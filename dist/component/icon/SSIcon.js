@@ -2,7 +2,7 @@
  * Created by TJQ on 2017/8/24.
  */
 import React, {Component} from 'react';
-import {Icon} from 'antd-mobile';
+import {Icon} from 'antd-mobile/lib/index';
 import PropTypes from 'prop-types';
 
 class SSIcon extends Component {
@@ -11,7 +11,7 @@ class SSIcon extends Component {
         let svg = void 0;
         if(icon){
             try {
-                svg = require('../../svg/' + icon + '.svg');
+                svg = require('../../../svg/' + icon + '.svg');
             } catch (e) {
                 console.error(e);
             } finally {

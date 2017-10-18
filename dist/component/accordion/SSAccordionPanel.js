@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Accordion } from 'antd-mobile';
+import { Accordion } from 'antd-mobile/lib/index';
 
 class SSAccordionPanel extends Component{
     render() {

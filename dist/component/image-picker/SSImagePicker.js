@@ -2,15 +2,13 @@
  * Created by liulei on 2017/8/24.
  */
 import React, {Component} from 'react';
-import {List, WhiteSpace, Modal} from 'antd-mobile';
-import {ImagePicker, Toast} from 'antd-mobile';
+import {List, WhiteSpace, Modal, ImagePicker, Toast} from 'antd-mobile/lib/index';
 import {Gallery, GalleryDelete} from 'react-weui';
 import PropTypes from 'prop-types';
-import '../../css/SSImagePicker.css';
-import SSIcon from '../common/SSIcon'
+import '../../../css/SSImagePicker.css';
+import SSIcon from '../icon/SSIcon'
 import _ from 'lodash';
-import UploadFileUtils from '../utils/UploadFileUtils';
-import MathUtils from "../utils/MathUtils";
+import UploadFileUtils from '../../utils/UploadFileUtils';
 
 const Item = List.Item;
 const alert = Modal.alert;

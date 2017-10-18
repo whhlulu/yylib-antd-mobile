@@ -2,10 +2,11 @@
  * Created by liulei on 2017/8/24.
  */
 import React, {Component} from 'react';
-import {List} from 'antd-mobile';
+import {List} from 'antd-mobile/lib/index';
 import PropTypes from 'prop-types';
-import {SSExtraItem, SSListBrief} from '../../common/list'
-import SSIcon from '../../common/SSIcon'
+import SSIcon from '../icon/SSIcon';
+import SSExtraItem from './SSExtraItem';
+import SSListBrief from './SSListBrief';
 import classNames from 'classnames';
 import _ from 'lodash';
 const Item = List.Item;
@@ -40,6 +41,13 @@ class SSListItem extends Component {
             height: '0.5rem',
             lineHeight: '0.5rem'
         };
+        //针对type为9 l3,type为3 l4和type为4时l2的样式
+        let lastBriefStyle={
+            color: '#868686',
+            position:'absolute'
+        }
+
+
         /*  let extraIcoBColor = {
          color: '#1482FF'
          };*/
@@ -147,7 +155,7 @@ class SSListItem extends Component {
                 child2Icon = 'icon-Time';
                 briefStyle.height = '0.85rem';
                 briefStyle.lineHeight = '1.2rem';
-                extraStyle.width = '2.8rem';
+                extraStyle.width = '2.6rem';
                 itemHeight = '2rem';
                 r2 = '';
                 l3 = '';
@@ -164,6 +172,7 @@ class SSListItem extends Component {
                 extraStyle.fontStyle = 'italic';
                 briefStyle.height = '0.85rem';
                 briefStyle.lineHeight = '1.2rem';
+                briefStyle.width='89%';
                 extraStyle.width = '1.8rem';
                 itemHeight = '2rem';
                 l3 = '';
@@ -233,6 +242,7 @@ class SSListItem extends Component {
                 child2Icon = 'icon-Person';
                 extraIcon = 'icon-Time';
                 itemHeight = '2.35rem';
+                briefStyle.width='89%';
                 if (r1 == '已同步') {
                     extraStyle.color = '#75BC97';
                     extraStyle.fontStyle = 'italic'
@@ -258,13 +268,13 @@ class SSListItem extends Component {
         let childR1 = r1 ? (<SSExtraItem text={r1} extraStyle={extraStyle} extraIcon={childR1Icon}
                                          extraIconColor={extraIconColor}/>) : null;
         let child2 = l2 ? (
-            <SSListBrief text={l2} extra={r2 ? r2 : null} briefStyle={briefStyle} icon={child2Icon}
+            <SSListBrief text={l2} extra={r2 ? r2 : null} briefStyle={type==='4'?lastBriefStyle:briefStyle} icon={child2Icon}
                          extraIcon={extraIcon} type={type}/>) : null;
         let child3 = l3 ? (
-            <SSListBrief text={l3} extra={r3 ? r3 : null} briefStyle={type==='7'?otherBriefStyle:briefStyle} icon={child3Icon}
+            <SSListBrief text={l3} extra={r3 ? r3 : null} briefStyle={type==='7'?otherBriefStyle:type==='9'?lastBriefStyle:briefStyle} icon={child3Icon}
                          type={type}/>) : null;
         let child4 = l4 ? (
-            <SSListBrief text={l4} extra={r4 ? r4 : null} briefStyle={briefStyle} icon={child4Icon}/>) : null;
+            <SSListBrief text={l4} extra={r4 ? r4 : null} briefStyle={type==='3'?lastBriefStyle:briefStyle} icon={child4Icon}/>) : null;
 
 
         const cls = classNames({

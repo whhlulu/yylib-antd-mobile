@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { Accordion } from 'antd-mobile';
-import '../../css/SSAccordion.css'
+import { Accordion } from 'antd-mobile/lib/index';
+import '../../../css/SSAccordion.css'
 
 class SSAccordion extends Component{
     render() {

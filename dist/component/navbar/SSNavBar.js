@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { NavBar, Icon } from 'antd-mobile';
-import '../../css/SSNavBar.css'
+import { NavBar, Icon } from 'antd-mobile/lib/index';
+import '../../../css/SSNavBar.css'
 import _ from 'lodash';
 import { hashHistory } from 'react-router'
 

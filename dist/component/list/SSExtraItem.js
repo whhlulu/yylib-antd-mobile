@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import SSIcon from '../../common/SSIcon'
+import SSIcon from '../icon/SSIcon'
 class SSExtraItem extends Component {
     renderBackgroundImg(){
         var {extraIcon,extraIconColor}=this.props;

@@ -1,9 +1,8 @@
 /**
  * Created by liulei on 2017/8/24.
  */
-import
-  React, {Component} from 'react'
-import {List, Popup, InputItem} from 'antd-mobile'
+import React, {Component} from 'react'
+import {List, Popup, InputItem} from 'antd-mobile/lib/index'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import SSReferList from './SSReferList'

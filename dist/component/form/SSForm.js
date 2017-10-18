@@ -4,7 +4,7 @@ import {createForm} from 'rc-form';
 class SSForm extends Component {
     render() {
         return (
-            <div className="animated fadeInRight">
+            <div>
                 <form>
                     {this.props.children}
                 </form>

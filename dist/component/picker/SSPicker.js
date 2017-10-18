@@ -2,7 +2,7 @@
  * Created by hezx on 2017/8/24.
  */
 import React, {Component} from 'react';
-import {List, Picker, WhiteSpace} from 'antd-mobile';
+import {List, Picker, WhiteSpace} from 'antd-mobile/lib/index';
 // import {createForm} from 'rc-form';
 // import PropTypes from 'prop-types';
 import _ from 'lodash'

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { PopupHeader } from 'react-weui';
-import '../../css/SSNavBar.css'
+import '../../../css/SSNavBar.css'
 import _ from 'lodash';
 
 class SSPopupHeader extends Component{

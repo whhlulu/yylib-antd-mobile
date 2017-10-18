@@ -2,15 +2,14 @@
  * Created By Tangjingqi 2017/8/30
  * */
 import React, {Component} from 'react';
-import {Tabs, WhiteSpace, Badge} from 'antd-mobile';
 import PropTypes from 'prop-types';
 // import {createForm} from 'rc-form';
 import _ from 'lodash';
 import SSIcon from '../icon/SSIcon';
-import ajax from '../utils/ajax'
-import EnvUtils from '../utils/EnvUtils'
-import RestUrl from '../common/RestUrl'
-import {Toast} from 'antd-mobile';
+import ajax from '../../utils/ajax'
+import EnvUtils from '../../utils/EnvUtils'
+import RestUrl from "../../common/RestUrl";
+import {Toast} from 'antd-mobile/lib/index';
 let ADDR = RestUrl.ADDR;
 let ROOT_PATH = RestUrl.ROOT_PATH;
 let GETPROJECT=ADDR + ROOT_PATH + "/pub/getProjectByOrgId";
