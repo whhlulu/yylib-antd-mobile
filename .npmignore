@@ -1,0 +1,17 @@
+# dependencies
+/node_modules
+
+# idea
+/.idea
+
+# config
+/config
+
+# src
+/src
+
+# scripts
+/scripts
+
+# public
+/public
