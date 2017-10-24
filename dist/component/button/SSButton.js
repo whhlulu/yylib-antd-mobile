@@ -2,17 +2,17 @@
  * Created by ByChan on 2017.8.29.
  */
 import React from 'react'
-import { Button, Flex, WingBlank } from 'antd-mobile/lib/index'
+import { Button, Flex, WingBlank } from 'antd-mobile'
 import PropTypes from 'prop-types'
-import SSIcon from '../icon/SSIcon'
-import '../../../css/SSButton.css'
+import SSIcon from './SSIcon'
+import './css/SSButton.css'
 import classNames from 'classnames'
 import { hashHistory } from 'react-router'
 
 /*
 * SSButton组件
 * type
-*   fill :项目里面一整行的绿色图标1   可以传递fix 固定在页面底部
+*   fill :项目里面一整行的绿色图标   可以传递fix 固定在页面底部
 *   center :项目里面两翼留白的绿色图标
 *   dashed :项目里面的蓝色虚线图标
 *   add : 所有列表页的圆形增加图标(已加上定位)
@@ -134,7 +134,7 @@ export default class SSButton extends React.Component {
             </Flex.Item>
             <Flex.Item>
               <Button
-                  style={this.props.rStyle}
+                style={this.props.rStyle}
                 className={classNames({'pjtGreenBtn': 1, 'disabledStyle': rdisabled})}
                 activeStyle={false}
                 type="primary"
@@ -152,17 +152,15 @@ export default class SSButton extends React.Component {
                   className={classNames({'disabledStyle2': ldisabled})}>
               <SSIcon
                 icon={'icon-bohui'}
-                color={ldisabled ? '#808080' : '#19AF19'}
-                marginRight={'5px'}></SSIcon>
-              {lText}
+                color={ldisabled ? '#808080' : '#19AF19'}></SSIcon>
+              <span style={{marginLeft:'5px'}}>{lText}</span>
               </span>
             <span onClick={cdisabled?'':cClick}
                   className={classNames({'disabledStyle2': cdisabled})}>
               <SSIcon
                 icon={'icon-shanchu1'}
-                color={cdisabled ? '#808080' : '#FA503C'}
-                marginRight={'5px'}></SSIcon>
-              {cText}
+                color={cdisabled ? '#808080' : '#FA503C'}></SSIcon>
+              <span style={{marginLeft:'5px'}}>{cText}</span>
               </span>
           </div>
           <span className={classNames({'right_btn': 1, 'disabledStyle': rdisabled})} onClick={rdisabled ? '' : rClick}>{rText}</span>
