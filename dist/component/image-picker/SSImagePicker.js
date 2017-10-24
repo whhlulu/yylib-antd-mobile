@@ -103,7 +103,7 @@ class SSImagePicker extends Component {
 
     componentWillReceiveProps(nextProps){
         if(this.props.source && this.props.source.sourceId != nextProps.source.sourceId){
-            this.loadAttachList(this.props.source);
+            this.loadAttachList(nextProps.source);
         }
         if (JSON.stringify(nextProps.files) !== JSON.stringify(this.props.files)) {
             this.setState({
