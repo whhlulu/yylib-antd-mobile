@@ -133,7 +133,7 @@ class SSTextarea extends React.Component {
                     </span>
                     <span style={{display: required ? '' : 'none'}}><SSIcon icon="icon-bixutian" color="red"/></span>
                     <div style={{float: 'right', display: 'inline-block', marginRight: '0.3rem'}}><a
-                        onClick={this.expand}>{this.state.expand ? <Icon type="up"/> : <Icon type="down"/>}</a></div>
+                        onClick={this.expand}>{this.state.expand ? <Icon style={{color: '#aaa'}} type="up"/> : <Icon style={{color: '#aaa'}} type="down"/>}</a></div>
                 </div>
                 <TextareaItem
                     {..._.isFunction(getFieldProps) ? getFieldProps(field, {

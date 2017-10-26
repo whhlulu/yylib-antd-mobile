@@ -11,6 +11,15 @@ class SSSwitch extends Component {
     state = {
         checked: !!this.props.value
     }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.value !== this.props.value) {
+            this.setState({
+                checked: nextProps.value
+            })
+        }
+    }
+
     onChange = (flag) => {
         if (_.isFunction(this.props.onChange)) this.props.onChange(flag);
         this.setState({
@@ -18,7 +27,7 @@ class SSSwitch extends Component {
         })
     }
     render() {
-        const {form, value, label, icon, iconColor, disabled, field, checkedText, unCheckedText} = this.props;
+        const {form, value, label, icon, iconColor, disabled, field, checkedText, unCheckedText, showIcon} = this.props;
         let getFieldProps = form ? form.getFieldProps : null;
         return (
             <Item
@@ -31,7 +40,7 @@ class SSSwitch extends Component {
                     platform="cross"
                     disabled={disabled}
                 /></div>}
-                thumb={<SSIcon icon={icon} color={iconColor}/>}
+                thumb={showIcon ? <SSIcon color={iconColor} icon={icon}/> : <span style={{marginLeft: '0.3rem'}}></span>}
             >{label}</Item>
         );
     };
@@ -41,6 +50,7 @@ SSSwitch.defaultProps={
     icon: "icon-xingzhuang9",
     color: "green",
     value: true,
+    showIcon: true,
     field: '',
     disabled: false,
     checkedText: '',

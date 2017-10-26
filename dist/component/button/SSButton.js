@@ -4,8 +4,8 @@
 import React from 'react'
 import { Button, Flex, WingBlank } from 'antd-mobile'
 import PropTypes from 'prop-types'
-import SSIcon from './SSIcon'
-import './css/SSButton.css'
+import SSIcon from '../icon/SSIcon'
+import '../../../css/SSButton.css'
 import classNames from 'classnames'
 import { hashHistory } from 'react-router'
 

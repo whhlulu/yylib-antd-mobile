@@ -103,7 +103,8 @@ class SSReferTree extends Component {
         this.setState({
             animating: true
         })
-        ajax.getJSON(referUrl, referParams, function (result) {
+        ajax.getText(referUrl, referParams, function (result) {
+            result = JSON.parse(result);
             page.setState({
                 data: result,
                 animating: false

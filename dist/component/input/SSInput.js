@@ -54,10 +54,9 @@ class SSInput extends Component {
     }
     render() {
         const {name, field, required, hasError, editable, disabled, extra, placeholder,
-            maxLength, visible, type, label, trigger, clear, form, value, iconColor, icon} = this.props;
+            maxLength, visible, type, label, trigger, clear, form, value, iconColor, icon, showIcon} = this.props;
         let getFieldProps = form.getFieldProps;
         let errorMsg='必填项'+ label+'未填写';
-        // let initialValue = _.isArray(value)?value.map(v=>v.name).join():(_.isObject(value)?value.name:value)
         return (
             <Item style={{display: visible ? '' : 'none'}} className="borderBottom">
                 <InputItem
@@ -83,7 +82,7 @@ class SSInput extends Component {
                     placeholder={disabled?'':placeholder}
                     maxLength={maxLength}
                     onChange={this.onChange}
-                ><SSIcon color={iconColor} icon={icon}/>
+                >{showIcon ? <SSIcon color={iconColor} icon={icon}/> : <span style={{marginLeft: '0.3rem'}}></span>}
                     <span style={{marginLeft: '0.3rem'}}>{label}</span>
                     <span style={{display: required ? '' : 'none'}}><SSIcon icon="icon-bixutian" color="red"/></span>
                 </InputItem>
@@ -111,6 +110,7 @@ SSInput.defaultProps = {
     trigger: "onChange",
     iconColor: "red",
     icon: "icon-xingzhuang7",
-    placeholder: "请输入"
+    placeholder: "请输入",
+    showIcon: true
 }
 export default SSInput;

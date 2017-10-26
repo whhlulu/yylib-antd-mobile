@@ -2,6 +2,7 @@
     -webkit-flex-basis: 375px;
     -ms-flex-preferred-size: 375px;
     flex-basis: 375px;
+    text-overflow: ellipsis;
 }
 .am-list-item .am-input-control input{
     text-align: right;

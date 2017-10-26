@@ -4,11 +4,6 @@ import PropTypes from 'prop-types';
 
 class SSPage extends Component{
 
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-
     /**
      *  路由跳转控制
      *  */
