@@ -329,7 +329,7 @@ class SSList extends Component {
 SSList.propTypes = {
     params: PropTypes.object,
     url: PropTypes.string,
-    initData:PropTypes.func.isRequired,
+    initData:PropTypes.func,
     onLoadMore:PropTypes.func
 
 

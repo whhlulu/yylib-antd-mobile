@@ -65,11 +65,17 @@ class SSListItem extends Component {
             l1,
             r1,
             l2,
+            l2Icon,
             r2,
+            r2Icon,
             l3,
+            l3Icon,
             r3,
+            r3Icon,
             l4,
+            l4Icon,
             r4,
+            r4Icon,
             type,
             error,
             wrap,
@@ -96,8 +102,8 @@ class SSListItem extends Component {
                 r3 = '';
                 l4 = '';
                 r4 = '';
-                child2Icon = 'icon-Person';
-                child3Icon = 'icon-Time';
+                child2Icon =l2Icon|| 'icon-Person';
+                child3Icon = l3Icon||'icon-Time';
                 extraStyle.width = '2.5rem';
                 itemHeight = '2.3rem';
                 if (r1 == '未确认' || r1 == '未同步') {
@@ -123,9 +129,9 @@ class SSListItem extends Component {
                 }
                 break;
             case '3':
-                child2Icon = 'icon-Name';
-                child3Icon = 'icon-Model';
-                child4Icon = 'icon-Number';
+                child2Icon =l2Icon||'icon-Name';
+                child3Icon = l3Icon||'icon-Model';
+                child4Icon = l4Icon||'icon-Number';
                 briefStyle.overflow = 'hidden';
                 extraStyle.width = '2.8rem';
                 itemHeight = '2.95rem';
@@ -151,8 +157,8 @@ class SSListItem extends Component {
             case '4':
                 extraStyle.backgroundColor = '#EFF7FF';
                 extraStyle.color = '#3099FF';
-                child4Icon = 'icon-Type';
-                child2Icon = 'icon-Time';
+                child4Icon =l4Icon||'icon-Type';
+                child2Icon =l2Icon||'icon-Time';
                 briefStyle.height = '0.85rem';
                 briefStyle.lineHeight = '1.2rem';
                 extraStyle.width = '2.6rem';
@@ -165,8 +171,8 @@ class SSListItem extends Component {
                 break;
 
             case '5':
-                child2Icon = 'icon-weizhi';
-                extraIcon = 'icon-Time';
+                child2Icon = l2Icon || 'icon-weizhi';
+                extraIcon = r2Icon || 'icon-Time';
                 childR1Icon = 'icon-biaoqian';
                 extraStyle.color = '#fff';
                 extraStyle.fontStyle = 'italic';
@@ -199,6 +205,9 @@ class SSListItem extends Component {
                 extraStyle.color = '#3099FF';
                 extraStyle.width = '2.5rem';
                 itemHeight = '2.35rem';
+                child2Icon =l2Icon||'';
+                child3Icon = l3Icon||'';
+                extraIcon = r3Icon||'';
                 r2 = '';
                 l4 = '';
                 r4 = '';
@@ -212,7 +221,8 @@ class SSListItem extends Component {
                     extraStyle.color = '#FF9322';
 
                 }
-                child2Icon = 'icon-Person';
+                child2Icon =l2Icon||'icon-Person';
+                extraIcon = r2Icon||'';
                 briefStyle.height = '0.7rem';
                 briefStyle.lineHeight = '1rem';
                 extraStyle.width = '2.5rem';
@@ -222,8 +232,9 @@ class SSListItem extends Component {
                 r4 = '';
                 break;
             case '8':
-                child2Icon = 'icon-Person';
-                child3Icon = 'icon-Time';
+                child2Icon = l2Icon||'icon-Person';
+                child3Icon = l3Icon||'icon-Time';
+                extraIcon = r3Icon||'';
                 childR1Icon = 'icon-biaoqian';
                 extraStyle.width = '2.3rem';
                 extraStyle.color = '#fff';
@@ -239,8 +250,9 @@ class SSListItem extends Component {
                 }
                 break;
             case '9':
-                child2Icon = 'icon-Person';
-                extraIcon = 'icon-Time';
+                child2Icon = l2Icon||'icon-Person';
+                child3Icon=l3Icon||'';
+                extraIcon = r2Icon||'icon-Time';
                 itemHeight = '2.35rem';
                 briefStyle.width='89%';
                 if (r1 == '已同步') {
@@ -252,14 +264,36 @@ class SSListItem extends Component {
                 r4 = '';
                 break;
             case '10':
-                child2Icon = 'icon-shuji';
-                extraIcon = 'icon-Time';
+                child2Icon = l2Icon||'icon-shuji';
+                extraIcon = r2Icon||'icon-Time';
                 itemHeight = '1.7rem';
                 r3 = '';
                 l3 = '';
                 l4 = '';
                 r4 = '';
                 break;
+            case '11':
+                child2Icon =l2Icon|| 'icon-Person';
+                extraIcon = r2Icon||'icon-Time';
+                childR1Icon = 'icon-biaoqian';
+                extraStyle.color = '#fff';
+                extraStyle.fontStyle = 'italic';
+                briefStyle.height = '0.85rem';
+                briefStyle.lineHeight = '1.2rem';
+                briefStyle.width='89%';
+                extraStyle.width = '1.8rem';
+                itemHeight = '2rem';
+                l3 = '';
+                r3 = '';
+                l4 = '';
+                r4 = '';
+                if (r1 == '0') {
+                    extraIconColor = '#17C06E';
+                    r1 = '自由态';
+                } else if (r1 == '3') {
+                    r1 = '审批完成';
+                    extraIconColor = '#3099FF';
+                }
             default:
                 break
 
@@ -272,7 +306,7 @@ class SSListItem extends Component {
                          extraIcon={extraIcon} type={type}/>) : null;
         let child3 = l3 ? (
             <SSListBrief text={l3} extra={r3 ? r3 : null} briefStyle={type==='7'?otherBriefStyle:type==='9'?lastBriefStyle:briefStyle} icon={child3Icon}
-                         type={type}/>) : null;
+                         type={type}  extraIcon={extraIcon}/>) : null;
         let child4 = l4 ? (
             <SSListBrief text={l4} extra={r4 ? r4 : null} briefStyle={type==='3'?lastBriefStyle:briefStyle} icon={child4Icon}/>) : null;
 
@@ -330,7 +364,13 @@ SSListItem.propTypes = {
     r3: PropTypes.string,
     l4: PropTypes.string,
     r4: PropTypes.string,
-    l1Icon: PropTypes.string
+    l2Icon: PropTypes.string,
+    r2Icon: PropTypes.string,
+    l3Icon: PropTypes.string,
+    r3Icon: PropTypes.string,
+    r4Icon: PropTypes.string,
+    l4Icon: PropTypes.string,
+
     /* subText: PropTypes.string,//列表内的子标题
      extraText: PropTypes.string,//列表右侧上方内容
      extraAlign: PropTypes.string,//列表右侧上方内容对齐形式和右侧箭头对齐形式
