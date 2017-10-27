@@ -8,11 +8,22 @@ import SSPage from '../../page/SSPage';
 import SSInput from '../../input/SSInput';
 import SSRefer from '../../refer/SSRefer';
 import SSTextarea from '../../textarea/SSTextarea';
+import SSTree from '../../tree/SSTree';
 
 class NativeDemo extends SSPage {
-
+    state = {
+      searchText:'fuck',
+    }
     change(flag) {
-        debugger;
+
+    }
+    onClick=()=>{
+      this.setState({
+        searchText:'hehe'
+      })
+    }
+    treeChange=(selectedNode)=>{
+      debugger
     }
     render() {
         let source = {
@@ -21,10 +32,11 @@ class NativeDemo extends SSPage {
             billType: 'POV01'  //单据类型
         }
         const {form} = this.props;
+        const {searchText} = this.state;
         return (
             <div>
                 <SSForm>
-                    <SSButton>呵呵</SSButton>
+                    <SSButton onClick={this.onClick}>呵呵</SSButton>
                     <SSImagePicker label="附件3" source={source}/>
                     <SSIcon color="red" icon="icon-Add"/>
                     <SSRefer
@@ -42,6 +54,11 @@ class NativeDemo extends SSPage {
                     <SSTextarea required field="area" value="haha" form={form} label="文本域"/>
                     <SSSwitch showIcon={false} field="switch" value={true} form={form} label="开关" unCheckedText="不通过" checkedText="通过" onChange={this.change}/>
                     <div><input type="number"/><input type="number"/><input type="number"/><input type="number"/><input type="number"/></div>
+                  <SSTree referCode={'schedule_pp'}
+                          referName={'参照'}
+                          searchText={searchText}
+                          multiMode={false}
+                          onChange={this.treeChange}></SSTree>
                 </SSForm>
             </div>
         );
