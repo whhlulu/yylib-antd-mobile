@@ -77,7 +77,9 @@ class SSListBrief extends Component {
        ):null;
    }
     render() {
-        let {text, thumb, extra,extraThumb,desc,descStyle,briefStyle}=this.props;
+        let {text, thumb, extra,extraThumb,desc,descStyle,briefStyle,icon,singLine}=this.props;
+        let clientWith=document.documentElement.clientWidth;
+        let brieWith=icon?clientWith*0.82:clientWith*0.88;
 
 
        /* let styleZ = {
@@ -96,14 +98,14 @@ class SSListBrief extends Component {
             'brief-location':desc||extra?true:false
 
         });
-       /* const decCls=classNames({
-            'listBrief-desc':desc?true:false
-        });*/
+        const singleCls=classNames({
+            'single-line':singLine
+        });
 
         return (
             <div className={cls} style={briefStyle} >
                 {this.renderThumbIcon()}
-                <span style={{verticalAlign: 'middle'}}>{text}</span>
+                <span className={singleCls} style={{verticalAlign: 'middle',width: brieWith+'px'}}>{text}</span>
                 {this.renderExtra()}
                 {/*<div className={decCls}>
                     {this.renderDesc()}

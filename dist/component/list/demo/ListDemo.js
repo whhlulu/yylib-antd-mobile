@@ -148,6 +148,13 @@ class ListDemo extends SSPage{
                         r2="交底日期 2017-03-06"
                         onClick={(e) => this.onClick(e)}
                     />
+                    <SSListItem
+                        type="12"
+                        l1="TSK0986001TSK0986001TSK0986001TSK0986001TSK0986001TSK0986001"
+                        l2="主讲人：万达经理"
+                        r2="交底日期 2017-03-06"
+                        onClick={(e) => this.onClick(e)}
+                    />
                 </SSList>
 
 

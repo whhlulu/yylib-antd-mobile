@@ -182,3 +182,10 @@ body {
 .list-special .am-list{
     width: 100%;
 }
+/*l1独占一行时的样式*/
+.single-line{
+    position:absolute;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}

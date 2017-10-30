@@ -42,9 +42,9 @@ class SSListItem extends Component {
             lineHeight: '0.5rem'
         };
         //针对type为9 l3,type为3 l4和type为4时l2的样式
-        let lastBriefStyle={
+        let lastBriefStyle = {
             color: '#868686',
-            position:'absolute'
+            position: 'absolute'
         }
 
 
@@ -102,8 +102,8 @@ class SSListItem extends Component {
                 r3 = '';
                 l4 = '';
                 r4 = '';
-                child2Icon =l2Icon|| 'icon-Person';
-                child3Icon = l3Icon||'icon-Time';
+                child2Icon = l2Icon || 'icon-Person';
+                child3Icon = l3Icon || 'icon-Time';
                 extraStyle.width = '2.5rem';
                 itemHeight = '2.3rem';
                 if (r1 == '未确认' || r1 == '未同步') {
@@ -129,9 +129,9 @@ class SSListItem extends Component {
                 }
                 break;
             case '3':
-                child2Icon =l2Icon||'icon-Name';
-                child3Icon = l3Icon||'icon-Model';
-                child4Icon = l4Icon||'icon-Number';
+                child2Icon = l2Icon || 'icon-Name';
+                child3Icon = l3Icon || 'icon-Model';
+                child4Icon = l4Icon || 'icon-Number';
                 briefStyle.overflow = 'hidden';
                 extraStyle.width = '2.8rem';
                 itemHeight = '2.95rem';
@@ -157,8 +157,8 @@ class SSListItem extends Component {
             case '4':
                 extraStyle.backgroundColor = '#EFF7FF';
                 extraStyle.color = '#3099FF';
-                child4Icon =l4Icon||'icon-Type';
-                child2Icon =l2Icon||'icon-Time';
+                child4Icon = l4Icon || 'icon-Type';
+                child2Icon = l2Icon || 'icon-Time';
                 briefStyle.height = '0.85rem';
                 briefStyle.lineHeight = '1.2rem';
                 extraStyle.width = '2.6rem';
@@ -178,7 +178,7 @@ class SSListItem extends Component {
                 extraStyle.fontStyle = 'italic';
                 briefStyle.height = '0.85rem';
                 briefStyle.lineHeight = '1.2rem';
-                briefStyle.width='89%';
+                briefStyle.width = '87%';
                 extraStyle.width = '1.8rem';
                 itemHeight = '2rem';
                 l3 = '';
@@ -205,9 +205,9 @@ class SSListItem extends Component {
                 extraStyle.color = '#3099FF';
                 extraStyle.width = '2.5rem';
                 itemHeight = '2.35rem';
-                child2Icon =l2Icon||'';
-                child3Icon = l3Icon||'';
-                extraIcon = r3Icon||'';
+                child2Icon = l2Icon || '';
+                child3Icon = l3Icon || '';
+                extraIcon = r3Icon || '';
                 r2 = '';
                 l4 = '';
                 r4 = '';
@@ -221,8 +221,8 @@ class SSListItem extends Component {
                     extraStyle.color = '#FF9322';
 
                 }
-                child2Icon =l2Icon||'icon-Person';
-                extraIcon = r2Icon||'';
+                child2Icon = l2Icon || 'icon-Person';
+                extraIcon = r2Icon || '';
                 briefStyle.height = '0.7rem';
                 briefStyle.lineHeight = '1rem';
                 extraStyle.width = '2.5rem';
@@ -232,9 +232,9 @@ class SSListItem extends Component {
                 r4 = '';
                 break;
             case '8':
-                child2Icon = l2Icon||'icon-Person';
-                child3Icon = l3Icon||'icon-Time';
-                extraIcon = r3Icon||'';
+                child2Icon = l2Icon || 'icon-Person';
+                child3Icon = l3Icon || 'icon-Time';
+                extraIcon = r3Icon || '';
                 childR1Icon = 'icon-biaoqian';
                 extraStyle.width = '2.3rem';
                 extraStyle.color = '#fff';
@@ -250,11 +250,11 @@ class SSListItem extends Component {
                 }
                 break;
             case '9':
-                child2Icon = l2Icon||'icon-Person';
-                child3Icon=l3Icon||'';
-                extraIcon = r2Icon||'icon-Time';
+                child2Icon = l2Icon || 'icon-Person';
+                child3Icon = l3Icon || '';
+                extraIcon = r2Icon || 'icon-Time';
                 itemHeight = '2.35rem';
-                briefStyle.width='89%';
+                briefStyle.width = '89%';
                 if (r1 == '已同步') {
                     extraStyle.color = '#75BC97';
                     extraStyle.fontStyle = 'italic'
@@ -264,23 +264,47 @@ class SSListItem extends Component {
                 r4 = '';
                 break;
             case '10':
-                child2Icon = l2Icon||'icon-shuji';
-                extraIcon = r2Icon||'icon-Time';
+                child2Icon = l2Icon || 'icon-shuji';
+                extraIcon = r2Icon || 'icon-Time';
                 itemHeight = '1.7rem';
+                briefStyle.width = '87.5%';
                 r3 = '';
                 l3 = '';
                 l4 = '';
                 r4 = '';
                 break;
             case '11':
-                child2Icon =l2Icon|| 'icon-Person';
-                extraIcon = r2Icon||'icon-Time';
+                child2Icon = l2Icon || 'icon-Person';
+                extraIcon = r2Icon || 'icon-Time';
                 childR1Icon = 'icon-biaoqian';
                 extraStyle.color = '#fff';
                 extraStyle.fontStyle = 'italic';
                 briefStyle.height = '0.85rem';
                 briefStyle.lineHeight = '1.2rem';
-                briefStyle.width='89%';
+                briefStyle.width = '89%';
+                extraStyle.width = '1.8rem';
+                itemHeight = '2rem';
+                l3 = '';
+                r3 = '';
+                l4 = '';
+                r4 = '';
+                if (r1 == '0') {
+                    extraIconColor = '#17C06E';
+                    r1 = '自由态';
+                } else if (r1 == '3') {
+                    r1 = '审批完成';
+                    extraIconColor = '#3099FF';
+                }
+            case '12':
+                child2Icon = l2Icon || 'icon-Person';
+                extraIcon = r2Icon || 'icon-Time';
+                /* extraStyle.position='absolute';*/
+                childR1Icon = 'icon-biaoqian';
+                extraStyle.color = '#fff';
+                extraStyle.fontStyle = 'italic';
+                briefStyle.height = '0.7rem';
+                briefStyle.lineHeight = '0.8rem';
+                briefStyle.width = '89%';
                 extraStyle.width = '1.8rem';
                 itemHeight = '2rem';
                 l3 = '';
@@ -302,20 +326,30 @@ class SSListItem extends Component {
         let childR1 = r1 ? (<SSExtraItem text={r1} extraStyle={extraStyle} extraIcon={childR1Icon}
                                          extraIconColor={extraIconColor}/>) : null;
         let child2 = l2 ? (
-            <SSListBrief text={l2} extra={r2 ? r2 : null} briefStyle={type==='4'?lastBriefStyle:briefStyle} icon={child2Icon}
+            <SSListBrief text={l2} extra={r2 ? r2 : null} briefStyle={type === '4' ? lastBriefStyle : briefStyle}
+                         icon={child2Icon}
+                         singLine={r2?false:true}
                          extraIcon={extraIcon} type={type}/>) : null;
         let child3 = l3 ? (
-            <SSListBrief text={l3} extra={r3 ? r3 : null} briefStyle={type==='7'?otherBriefStyle:type==='9'?lastBriefStyle:briefStyle} icon={child3Icon}
-                         type={type}  extraIcon={extraIcon}/>) : null;
+            <SSListBrief text={l3} extra={r3 ? r3 : null}
+                         briefStyle={type === '7' ? otherBriefStyle : type === '9' ? lastBriefStyle : briefStyle}
+                         icon={child3Icon}
+                         singLine={r3?false:true}
+                         type={type} extraIcon={extraIcon}/>) : null;
         let child4 = l4 ? (
-            <SSListBrief text={l4} extra={r4 ? r4 : null} briefStyle={type==='3'?lastBriefStyle:briefStyle} icon={child4Icon}/>) : null;
+            <SSListBrief text={l4} extra={r4 ? r4 : null} briefStyle={type === '3' ? lastBriefStyle : briefStyle}
+                         singLine={r4?false:true}
+                         icon={child4Icon}/>) : null;
 
 
         const cls = classNames({
             'over-brim': childR1Icon == 'icon-biaoqian' ? true : false
 
         });
+        const l1Cls = classNames({
+            'single-line': r1 ? false : true
 
+        });
         return (
             <Item
                 style={{overflow: childR1Icon == 'icon-biaoqian' ? 'visible' : 'hidden', minHeight: itemHeight}}
@@ -330,7 +364,9 @@ class SSListItem extends Component {
                 platform={platform}
                 onClick={(e) => this.onClick(e)}
                 onLongPress={e => this.handleLongPress(e)}>
-                {<span style={{display:'inline-block',height:'0.5rem',marginBottom:'0.1rem'}}>{l1}</span>}
+                {<div style={{height: '0.5rem', marginBottom: '0.1rem'}}><span
+                    className={l1Cls} style={{width: document.documentElement.clientWidth * 0.89 + 'px'}}>{l1}</span>
+                </div>}
                 {child2}
                 {child3}
                 {child4}
@@ -356,7 +392,10 @@ SSListItem.defaultProps = {
 
 SSListItem.propTypes = {
     type: PropTypes.string,//列表类型
-    l1: PropTypes.string,
+    l1: PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.element,
+    ]),
     r1: PropTypes.string,
     l2: PropTypes.string,
     r2: PropTypes.string,
