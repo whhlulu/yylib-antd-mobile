@@ -358,7 +358,7 @@ class SSListItem extends Component {
                 onClick={(e) => this.onClick(e)}
                 onLongPress={e => this.handleLongPress(e)}>
                 {<div style={{height: '0.5rem', marginBottom: '0.15rem'}}><span
-                    className={l1Cls} style={{width: document.documentElement.clientWidth * 0.89 + 'px'}}>{l1}</span>
+                    className={l1Cls} style={{width: document.documentElement.clientWidth * 0.88 + 'px'}}>{l1}</span>
                 </div>}
                 {child2}
                 {child3}
