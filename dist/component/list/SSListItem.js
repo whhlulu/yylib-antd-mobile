@@ -42,10 +42,10 @@ class SSListItem extends Component {
             lineHeight: '0.5rem'
         };
         //针对type为9 l3,type为3 l4和type为4时l2的样式
-        let lastBriefStyle = {
+       /* let lastBriefStyle = {
             color: '#868686',
             position: 'absolute'
-        }
+        }*/
 
 
         /*  let extraIcoBColor = {
@@ -326,18 +326,18 @@ class SSListItem extends Component {
         let childR1 = r1 ? (<SSExtraItem text={r1} extraStyle={extraStyle} extraIcon={childR1Icon}
                                          extraIconColor={extraIconColor}/>) : null;
         let child2 = l2 ? (
-            <SSListBrief text={l2} extra={r2 ? r2 : null} briefStyle={type === '4' ? lastBriefStyle : briefStyle}
+            <SSListBrief text={l2} extra={r2 ? r2 : null} briefStyle={briefStyle}
                          icon={child2Icon}
                          singLine={r2?false:true}
                          extraIcon={extraIcon} type={type}/>) : null;
         let child3 = l3 ? (
             <SSListBrief text={l3} extra={r3 ? r3 : null}
-                         briefStyle={type === '7' ? otherBriefStyle : type === '9' ? lastBriefStyle : briefStyle}
+                         briefStyle={type === '7' ? otherBriefStyle : briefStyle}
                          icon={child3Icon}
                          singLine={r3?false:true}
                          type={type} extraIcon={extraIcon}/>) : null;
         let child4 = l4 ? (
-            <SSListBrief text={l4} extra={r4 ? r4 : null} briefStyle={type === '3' ? lastBriefStyle : briefStyle}
+            <SSListBrief text={l4} extra={r4 ? r4 : null} briefStyle={briefStyle}
                          singLine={r4?false:true}
                          icon={child4Icon}/>) : null;
 
