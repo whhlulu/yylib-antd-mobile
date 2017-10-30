@@ -152,9 +152,16 @@ class ListDemo extends SSPage{
                         onClick={(e) => this.onClick(e)}
                     />
                     <SSListItem
+                        type="11"
+                        l1="TSK0986001TSK0986001TSK0986001TSK0986001TSK0986001TSK0986001TSK0986001TSK0986001"
+                        l2="主讲人：万达经理"
+                        r2="交底日期 2017-03-06"
+                        onClick={(e) => this.onClick(e)}
+                    />
+                    <SSListItem
                         type="12"
                         l1={<span>砌体工程实测实量：<em style={{fontStyle:'normal',color:'red'}}>94.81%</em></span>}
-                        l2="E区-商业街-店面"
+                        l2="E区-商业街-店面E区-商业街-店面E区-商业街-店面E区-商业街-店面E区-商业街-店面E区-商业街-店面E区-商业街-店面"
                         onClick={(e) => this.onClick(e)}
                     />
                 </SSList>
