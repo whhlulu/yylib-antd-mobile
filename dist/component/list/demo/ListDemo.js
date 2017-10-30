@@ -22,6 +22,9 @@ class ListDemo extends SSPage{
             ListData: result
         })
     };
+    onClick = (e) => {
+        console.log('onClick', e)
+    };
     render(){
 
         return(
@@ -136,7 +139,7 @@ class ListDemo extends SSPage{
                         type="10"
                         l1="TSK0986001"
                         r1='已同步'
-                        l2='整改责任人：陈海'
+                        l2='名称：123'
                         r2='复核日期 2017-03-06'
                         onClick={(e) => this.onClick(e)}
                     />
@@ -150,9 +153,8 @@ class ListDemo extends SSPage{
                     />
                     <SSListItem
                         type="12"
-                        l1="TSK0986001TSK0986001TSK0986001TSK0986001TSK0986001TSK0986001"
-                        l2="主讲人：万达经理"
-                        r2="交底日期 2017-03-06"
+                        l1={<span>砌体工程实测实量：<em style={{fontStyle:'normal',color:'red'}}>94.81%</em></span>}
+                        l2="E区-商业街-店面"
                         onClick={(e) => this.onClick(e)}
                     />
                 </SSList>

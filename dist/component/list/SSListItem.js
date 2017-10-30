@@ -279,8 +279,8 @@ class SSListItem extends Component {
                 childR1Icon = 'icon-biaoqian';
                 extraStyle.color = '#fff';
                 extraStyle.fontStyle = 'italic';
-                briefStyle.height = '0.85rem';
-                briefStyle.lineHeight = '1.2rem';
+                briefStyle.height = '0.8rem';
+                briefStyle.lineHeight = '1rem';
                 briefStyle.width = '89%';
                 extraStyle.width = '1.8rem';
                 itemHeight = '2rem';
@@ -295,11 +295,9 @@ class SSListItem extends Component {
                     r1 = '审批完成';
                     extraIconColor = '#3099FF';
                 }
+                break;
             case '12':
-                child2Icon = l2Icon || 'icon-Person';
-                extraIcon = r2Icon || 'icon-Time';
-                /* extraStyle.position='absolute';*/
-                childR1Icon = 'icon-biaoqian';
+                child2Icon = l2Icon || '';
                 extraStyle.color = '#fff';
                 extraStyle.fontStyle = 'italic';
                 briefStyle.height = '0.7rem';
@@ -307,17 +305,12 @@ class SSListItem extends Component {
                 briefStyle.width = '89%';
                 extraStyle.width = '1.8rem';
                 itemHeight = '2rem';
+                r1='';
+                r2='';
                 l3 = '';
                 r3 = '';
                 l4 = '';
                 r4 = '';
-                if (r1 == '0') {
-                    extraIconColor = '#17C06E';
-                    r1 = '自由态';
-                } else if (r1 == '3') {
-                    r1 = '审批完成';
-                    extraIconColor = '#3099FF';
-                }
             default:
                 break
 
@@ -347,7 +340,7 @@ class SSListItem extends Component {
 
         });
         const l1Cls = classNames({
-            'single-line': r1 ? false : true
+            'single-line': (r1||r1=='0') ? false : true
 
         });
         return (
