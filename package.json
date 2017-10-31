@@ -1,6 +1,6 @@
 {
   "name": "sslib-react",
-  "version": "1.0.45",
+  "version": "1.0.46",
   "description": "sslib-react",
   "main": "dist/index.js",
   "dependencies": {
