@@ -58,7 +58,7 @@ class NativeDemo extends SSPage {
                           referName={'参照'}
                           searchText={searchText}
                           multiMode={false}
-                          onChange={this.treeChange}></SSTree>
+                          ></SSTree>
                 </SSForm>
             </div>
         );

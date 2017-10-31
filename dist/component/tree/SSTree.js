@@ -80,13 +80,13 @@ class SSReferTree extends Component {
     e.stopPropagation();
     e.preventDefault();
     if (selectedNode.id === this.state.selectedId) {
-      onChange({})
+      onChange&&onChange({}) || ''
       this.setState({
         selectedId: null,
         selectedNode: {}
       });
     } else {
-      onChange(selectedNode)
+      onChange&&onChange(selectedNode) || ''
       this.setState({
         selectedId: selectedNode.id,
         selectedNode: selectedNode
@@ -104,7 +104,7 @@ class SSReferTree extends Component {
         return item.id === selectedNode.id
       })) {
       selectedNodes.push(selectedNode);
-      onChange(selectedNodes)
+      onChange&&onChange(selectedNodes) || ''
       this.setState({
         selectedNodes: selectedNodes
       });
@@ -116,7 +116,7 @@ class SSReferTree extends Component {
           newNodes.push(item);
         }
       })
-      onChange(newNodes)
+      onChange&&onChange(newNodes) || ''
       this.setState({
         selectedNodes: newNodes
       });
@@ -203,7 +203,7 @@ SSReferTree.propTypes = {
   displayField: PropTypes.string,
   referParams: PropTypes.object,
   multiMode: PropTypes.bool,
-  onChange:PropTypes.func.isRequired,
+  onChange:PropTypes.func,
 };
 
 SSReferTree.defaultProps = {
