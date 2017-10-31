@@ -26,4 +26,4 @@ export { default as SSStepper} from './component/stepper/SSStepper';
 export { default as SSSwitch} from './component/switch/SSSwitch';
 export { default as SSTab} from './component/tab/SSTab';
 export { default as SSTextarea} from './component/textarea/SSTextarea';
-export { default as SSTree} from './component/tree';
+export { default as SSTree} from './component/tree/SSTree';
