@@ -203,6 +203,7 @@ SSReferTree.propTypes = {
   displayField: PropTypes.string,
   referParams: PropTypes.object,
   multiMode: PropTypes.bool,
+  onChange:PropTypes.func.isRequired,
 };
 
 SSReferTree.defaultProps = {
