@@ -10,6 +10,9 @@
 # src
 /src
 
+#dist
+/lib
+
 # scripts
 /scripts
 

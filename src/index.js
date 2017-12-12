@@ -20,7 +20,7 @@ var URL_WORKBENCH = RestUrl.URL_WORKBENCH;
 var URL_HOME_PORTAL = RestUrl.URL_HOME_PORTAL;
 var history = syncHistoryWithStore(hashHistory, store);
 //高清组件显示
-window.document.documentElement.style.fontSize = window.innerWidth * 100 / 750 + 'px';//新增
+// window.document.documentElement.style.fontSize = window.innerWidth * 100 / 750 + 'px';//新增
 
 var portalOptions = {};
 portalOptions.authentication = false;

@@ -9,6 +9,7 @@ const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const pxtorem = require('postcss-pxtorem');
@@ -72,8 +73,7 @@ module.exports = {
         publicPath: publicPath,
         // Point sourcemap entries to original disk location (format as URL on Windows)
         devtoolModuleFilenameTemplate: info =>
-            path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'),
-    },
+            path.resolve(info.absoluteResourcePath).replace(/\\/g, '/'), },
     resolve: {
         // This allows you to set a fallback for where Webpack should look for modules.
         // We placed these paths second because we want `node_modules` to "win"
@@ -153,7 +153,7 @@ module.exports = {
                     // Process JS with Babel.
                     {
                         test: /\.(js|jsx)$/,
-                        include: [paths.appSrc, path.resolve(__dirname, '../dist/')],
+                        include: [paths.appSrc, path.resolve(__dirname, '../lib/')],
                         loader: require.resolve('babel-loader'),
                         options: {
 
@@ -187,19 +187,19 @@ module.exports = {
                                     // Necessary for external CSS imports to work
                                     // https://github.com/facebookincubator/create-react-app/issues/2677
                                     ident: 'postcss',
-                                    plugins: () => [
-                                        require('postcss-flexbugs-fixes'),
-                                        autoprefixer({
-                                            browsers: [
-                                                '>1%',
-                                                'last 4 versions',
-                                                'Firefox ESR',
-                                                'not ie < 9', // React doesn't support IE8 anyway
-                                            ],
-                                            flexbox: 'no-2009',
-                                        }),
-                                        pxtorem({rootValue: 100, propWhiteList: []}) //新增
-                                    ],
+                                    //     plugins: () => [
+                                    //     require('postcss-flexbugs-fixes'),
+                                    //     autoprefixer({
+                                    //         browsers: [
+                                    //             '>1%',
+                                    //             'last 4 versions',
+                                    //             'Firefox ESR',
+                                    //             'not ie < 9', // React doesn't support IE8 anyway
+                                    //         ],
+                                    //         flexbox: 'no-2009',
+                                    //     }),
+                                    //     // pxtorem({rootValue: 100, propWhiteList: []}) //新增
+                                    // ],
                                 },
                             },
                         ],
@@ -228,12 +228,12 @@ module.exports = {
                                 loader: require.resolve('postcss-loader'),
                                 options: {
                                     ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-                                    plugins: () => [
-                                        autoprefixer({
-                                            browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
-                                        }),
-                                        pxtorem({rootValue: 100, propWhiteList: []})
-                                    ],
+                                    // plugins: () => [
+                                    //     autoprefixer({
+                                    //         browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
+                                    //     }),
+                                    //     pxtorem({rootValue: 100, propWhiteList: []})
+                                    // ],
                                 },
                             },
                             {
@@ -311,6 +311,7 @@ module.exports = {
         // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
         // You can remove this if you don't use Moment.js:
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
     ],
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
