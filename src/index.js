@@ -11,8 +11,8 @@ import routes from './routes';
 import configureStore from './store/configureStore';
 
 // 增加页面权限控制
-import RestUrl from '../lib/common/RestUrl';
-import AuthToken from "../lib/utils/AuthToken";
+import RestUrl from '../dist/common/RestUrl';
+import AuthToken from "../dist/utils/AuthToken";
 import { Router, hashHistory } from 'react-router'
 //初始化store
 var store = configureStore()

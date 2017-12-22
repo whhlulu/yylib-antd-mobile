@@ -1,10 +1,10 @@
 {
   "name": "yylib-antd-mobile",
-  "version": "0.1.19",
+  "version": "0.1.23",
   "description": "yylib-react",
   "main": "dist/index.js",
   "dependencies": {
-    "antd-mobile": "^2.1.1",
+    "antd-mobile": "2.1.1",
     "autoprefixer": "7.1.2",
     "babel-cli": "^6.26.0",
     "babel-core": "6.25.0",

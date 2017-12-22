@@ -5,7 +5,9 @@
 .weui-gallery__opr{
     line-height: 1rem;
 }
-
+.am-list-line{
+    height:auto !important;
+}
 .am-modal-wrap{
     z-index: 1001;
 }
