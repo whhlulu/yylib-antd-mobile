@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import {List, WhiteSpace, Modal, ImagePicker} from '../../common/antd-m/index';
 import {Gallery, GalleryDelete} from 'react-weui';
 import '../../../css/SSImagePicker.css';
+import '../../../css/antd-m.css'
 import _ from 'lodash';
 import UploadFileUtils from '../../utils/UploadFileUtils';
 

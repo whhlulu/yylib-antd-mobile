@@ -1,6 +1,6 @@
 import React from 'react'
 import YYListview from '../../list/YYList'
-import {List, Badge} from 'antd-mobile';
+import {List, Badge} from '../../../common/antd-m/index';
 import {Link} from 'react-router'
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -54,6 +54,16 @@ class YYListDemo extends React.Component{
     //下拉刷新数据请求
     onrefresh=function(fun){
         let init = [
+            {headurl:'',name:'张二一',dept:'管理部',company:'用友建筑'},
+            {headurl:'',name:'张二二',dept:'管理部',company:'用友建筑'},
+            {headurl:'',name:'张二三',dept:'管理部',company:'用友建筑'},
+            {headurl:'',name:'张二四',dept:'管理部',company:'用友建筑'},
+            {headurl:'',name:'张二五',dept:'管理部',company:'用友建筑'},
+            {headurl:'',name:'张二一',dept:'管理部',company:'用友建筑'},
+            {headurl:'',name:'张二二',dept:'管理部',company:'用友建筑'},
+            {headurl:'',name:'张二三',dept:'管理部',company:'用友建筑'},
+            {headurl:'',name:'张二四',dept:'管理部',company:'用友建筑'},
+            {headurl:'',name:'张二五',dept:'管理部',company:'用友建筑'},
             {headurl:'',name:'张二一',dept:'管理部',company:'用友建筑'},
             {headurl:'',name:'张二二',dept:'管理部',company:'用友建筑'},
             {headurl:'',name:'张二三',dept:'管理部',company:'用友建筑'},

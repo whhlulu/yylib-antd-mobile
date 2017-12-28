@@ -14,6 +14,7 @@ import YYList from '../../dist/component/list/demo/YYListDemo'
 import Referdemo from '../../dist/component/refer/demo/YYreferDemo'
 import Imagepicker from '../../dist/component/imagepicker/demo/YYImagePickerDemo'
 import Pull from '../../dist/component/list/Pulltorefresh'
+import Input from '../../dist/component/input/demo/YYInputDemo'
 // import Button from '../../dist/component/button/SSButton'
 export default
     <Route path="/" component={App}>
@@ -22,6 +23,7 @@ export default
         <Route path="referdemo" component={Referdemo}/>
         <Route path="imagepicker" component={Imagepicker}/>
         <Route path="pull" component={Pull}/>
+        <Route path="input" component={Input}/>
        {/* <IndexRoute key='001' component={ImagePickerDemo}></IndexRoute>
         <Route path="listDemo" component={ListDemo}/>*/}
     </Route>

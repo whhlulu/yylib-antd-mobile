@@ -2,7 +2,8 @@
  * Created by TJQ on 2017/8/24.
  */
 import React, {Component} from 'react';
-import {Icon} from 'antd-mobile/lib/index';
+import {Icon} from '../../common/antd-m/index';
+import '../../../css/antd-m.css'
 import PropTypes from 'prop-types';
 
 class SSIcon extends Component {

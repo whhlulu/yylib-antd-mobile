@@ -2,7 +2,8 @@ import '../../../css/listview.less'
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import {List, ListView, PullToRefresh} from '../../common/antd-m/index';
-import {PullToRefresh, List, ListView} from "antd-mobile";
+import '../../../css/antd-m.css'
+import {PullToRefresh, List, ListView} from "../../common/antd-m/index";
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -103,6 +104,7 @@ export default class YYListview extends React.Component {
                     _self.rData = _self.props.init;
                     _self.setState({
                         dataSource:_self.state.dataSource.cloneWithRows(_self.rData),
+                        initdata:_self.rData,
                         refreshing:false,
                         isLoading:false,
                     });

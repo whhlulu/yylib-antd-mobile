@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button} from 'antd-mobile/lib/index';
+import {Button} from '../../../common/antd-m/index';
 
 
 class YYreferDemo extends React.Component{
@@ -32,6 +32,10 @@ class YYreferDemo extends React.Component{
                 console.log('实验pulltorefresh')
                 this.props.router.push({pathname:"/pull"});
                 break;
+            case '4':
+                console.log('input')
+                this.props.router.push({pathname:"/input"});
+                break;
 
         }
     }
@@ -49,7 +53,7 @@ class YYreferDemo extends React.Component{
                 <Button onClick={this.openRefer.bind(this,'1')}>查看listDemo</Button>
                 <Button onClick={this.openRefer.bind(this,'2')}>查看refer</Button>
                 <Button onClick={this.openRefer.bind(this,'3')}>查看pulltorefresh</Button>
-
+                <Button onClick={this.openRefer.bind(this,'4')}>查看input输入框</Button>
             </div>
         )
     }

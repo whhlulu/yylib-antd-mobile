@@ -1,6 +1,6 @@
 import React from 'react'
 import YYReferlist from '../YYReferlist'
-import {Button} from 'antd-mobile/lib/index';
+import {Button} from '../../../common/antd-m/index';
 
 
 class YYreferDemo extends React.Component{
@@ -9,40 +9,108 @@ class YYreferDemo extends React.Component{
         this.state={
             init:'',
             open:false,
+            openz:false,
+            openw:false,
         }
     }
-    componentWillMount () {
+     openRefer=(e)=>{
+         if(e=='1'){
+             this.setState({
+                 open:true,
+             })
+
+         }
+         if(e=='2'){
+             this.setState({
+                 openz:true,
+             })
+         }
+         if(e=='3'){
+             this.setState({
+                 openw:true,
+             })
+         }
 
     }
-
-    componentDidMount () {
-
-
-    }
-     openRefer=()=>{
-       this.setState({
-           open:true,
-       })
-    }
-    onOk = (value)=>{
+    onOk = (value,name)=>{
+        //确定界面的事件
         console.log(value);
-       this.setState({
-           open:false,
-       })
+        switch(name){
+            case 'zyl':
+                this.setState({
+                    open:false,
+                });
+                break;
+            case 'lzf':
+                this.setState({
+                    openz:false
+                });
+                break;
+            case 'wyy':
+                this.setState({
+                    openw:false
+                })
+                break;
+        }
+
+    }
+    onClose =(name)=>{
+        switch(name){
+            case 'zyl':
+                this.setState({
+                    open:false,
+                });
+                break;
+            case 'lzf':
+                this.setState({
+                    openz:false
+                });
+                break;
+            case 'wyy':
+                this.setState({
+                    openw:false
+                })
+                break;
+        }
     }
 
 
     render(){
         return(
             <div>
-                <Button onClick={this.openRefer}>点击选择参照</Button>
+                <Button onClick={this.openRefer.bind(this,'1')}>点击选择参照1</Button>
+                <Button onClick={this.openRefer.bind(this,'2')}>点击选择参照2</Button>
+                <Button onClick={this.openRefer.bind(this,'3')}>点击选择参照3</Button>
+
                 <YYReferlist
+                    referName='zyl'
                     onOk={this.onOk}
+                    onClose={this.onClose}
                     multiMode={true}
                     open={this.state.open}
+                    referCode='00026'
+                    referStyle='list'
                 />
-
+                <YYReferlist
+                    referName='lzf'
+                    onOk={this.onOk}
+                    onClose={this.onClose}
+                    multiMode={true}
+                    open={this.state.openz}
+                    referStyle='list'
+                    referCode='bd-009'
+                />
+                <YYReferlist
+                    referName='wyy'
+                    onOk={this.onOk}
+                    onClose={this.onClose}
+                    multiMode={true}
+                    open={this.state.openw}
+                    referCode='00026'
+                    referStyle='list'
+                />
             </div>
+
         )
     }
 }
