@@ -1,9 +1,7 @@
-import '../../../css/listview.less'
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import {List, ListView, PullToRefresh} from '../../common/antd-m/index';
-import '../../../css/antd-m.css'
-import {PullToRefresh, List, ListView} from "../../common/antd-m/index";
+import {PullToRefresh, List, ListView} from "antd-mobile";
+import '../../../css/listview.less'
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -60,40 +58,6 @@ export default class YYListview extends React.Component {
             });
         }, 1000);
     }
-    /*componentWillReceiveProps(nextProps){
-        setTimeout(() => {
-            console.log('组件will')
-            let data = nextProps.init;  //获取列表初始值
-            this.setState({
-                initdata:data,
-            })
-            this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(this.state.initdata),
-                isLoading: false,
-            });
-        }, 0);
-    }*/
-    /* componentDidUpdate(){
-             console.log('组件DidUpdate')
-             let data = this.props.init;  //获取列表初始值
-             this.setState({
-                 initdata:data,
-             })
-             this.setState({
-                 dataSource: this.state.dataSource.cloneWithRows(data),
-                 isLoading: false,
-             });
-
-     }*/
-
-    // If you use redux, the data maybe at props, you need use `componentWillReceiveProps`
-    // componentWillReceiveProps(nextProps) {
-    //   if (nextProps.dataSource !== this.props.dataSource) {
-    //     this.setState({
-    //       dataSource: this.state.dataSource.cloneWithRows(nextProps.dataSource),
-    //     });
-    //   }
-    // }
     onRefresh = () => {
         let _self = this;
         _self.setState({refreshing:true,isLoading:true});
@@ -133,8 +97,6 @@ export default class YYListview extends React.Component {
             return false;
         }
         this.props.reached(function(){
-            // load new data
-            // hasMore: from backend data, indicates whether it is the last page, here is false
             if (_self.state.isLoading && !_self.state.hasMore) {
                 return;
             }

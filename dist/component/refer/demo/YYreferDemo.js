@@ -35,6 +35,7 @@ class YYreferDemo extends React.Component{
     onOk = (value,name)=>{
         //确定界面的事件
         console.log(value);
+        console.log(name);
         switch(name){
             case 'zyl':
                 this.setState({
@@ -49,7 +50,9 @@ class YYreferDemo extends React.Component{
             case 'wyy':
                 this.setState({
                     openw:false
-                })
+                });
+                break;
+            default:
                 break;
         }
 
@@ -88,8 +91,8 @@ class YYreferDemo extends React.Component{
                     onClose={this.onClose}
                     multiMode={true}
                     open={this.state.open}
-                    referCode='00026'
-                    referStyle='list'
+                    referCode='bd-005'
+                    referStyle='tree'
                 />
                 <YYReferlist
                     referName='lzf'
@@ -106,8 +109,8 @@ class YYreferDemo extends React.Component{
                     onClose={this.onClose}
                     multiMode={true}
                     open={this.state.openw}
-                    referCode='00026'
-                    referStyle='list'
+                    referCode='bd-006_test'
+                    referStyle='tree-list'
                 />
             </div>
 

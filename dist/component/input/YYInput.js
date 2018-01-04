@@ -1,9 +1,9 @@
 import React from 'react';
-import {List, InputItem, WhiteSpace, Icon} from 'antd-mobile';
+import {List, InputItem} from 'antd-mobile';
 // import {createForm} from 'rc-form';
 // import PropTypes from 'prop-types';
 import _ from 'lodash'
-import './ManageInput.css'
+import '../../../css/YYInput.css'
 
 const Item = List.Item;
 class SSInput extends React.Component {

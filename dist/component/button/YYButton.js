@@ -2,7 +2,7 @@
  * Created by ByChan on 2017.8.29.
  */
 import React from 'react'
-import { Button, Flex, WingBlank } from '../../common/antd-m/index'
+import { Button, Flex, WingBlank } from 'antd-mobile'
 import PropTypes from 'prop-types'
 import SSIcon from '../icon/SSIcon'
 import '../../../css/SSButton.css'
