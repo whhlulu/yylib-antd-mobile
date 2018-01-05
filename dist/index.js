@@ -12,12 +12,13 @@ export { default as YYTabBar } from './component/TabBar/YYTabBar';
 export { default as YYImagepicker} from './component/imagepicker/YYImagePicker'
 export { default as YYInput} from './component/input/YYInput'
 export { default as YYForm} from './component/form/YYForm'
+export { default as YYSwitch} from './component/switch/YYSwitch'
 
 
 /*Data Display 数据展示-Start*/
 export { default as YYAccordion } from './component/accordion/YYAccordion';
 export { default as YYIcon } from './component/icon/YYIcon';
-export { default as YYListview } from './component/list/YYList';
+export { default as YYListview } from './component/listview/YYListview';
 
 
 /*Feedback 交互组件-Start*/

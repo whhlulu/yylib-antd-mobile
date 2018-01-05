@@ -94,7 +94,6 @@ export default class YYReferlist extends React.Component {
     }
 
     getListData(referUrl, referParams, pageNumber,contentname) {
-        console.log('list')
         let self = this;
         self.setState({
             animating: true
@@ -184,7 +183,6 @@ export default class YYReferlist extends React.Component {
     onTreeChange = (e, selectedNode) => {
         e.stopPropagation();
         e.preventDefault();
-        console.log(selectedNode);
         if (selectedNode.id === this.state.selectedTreeId) {
             this.setState({
                 selectedTreeId: null,
@@ -208,7 +206,6 @@ export default class YYReferlist extends React.Component {
         })
         let referParams = {};
         referParams.condition = this.props.condition;
-        console.log(this.state.searchText)
         if(this.state.searchText!==''){
             referParams.searchText = this.state.searchText
         }
@@ -220,8 +217,7 @@ export default class YYReferlist extends React.Component {
                 this.getListData(referUrl[this.props.referName], referTreeListParams, value ,this.props.referName);
                 break;
             default:
-                console.log('onchange')
-                Toast.fail('请填写正确的referStyle',5);
+                Toast.fail('请填写正确的referStyle',2);
                 break;
         }
 

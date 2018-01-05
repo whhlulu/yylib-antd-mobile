@@ -1,6 +1,6 @@
 import React from 'react'
 import YYReferlist from '../YYReferlist'
-import {Button} from '../../../common/antd-m/index';
+import {Button} from 'antd-mobile';
 
 
 class YYreferDemo extends React.Component{
@@ -93,7 +93,7 @@ class YYreferDemo extends React.Component{
                     open={this.state.open}
                     referCode='bd-005'
                     referStyle='tree'
-                />
+                ><div><span>nihao</span></div></YYReferlist>
                 <YYReferlist
                     referName='lzf'
                     onOk={this.onOk}

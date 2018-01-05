@@ -24,14 +24,15 @@ import YYTabBarDemoThird from '../../dist/component/TabBar/demo/third';
 import Input from '../../dist/component/input/demo/YYInputDemo'
 // import Button from '../../dist/component/button/SSButton'
 import Imagepicker from '../../dist/component/imagepicker/demo/YYImagePickerDemo'
+import Switch from '../../dist/component/switch/demo/YYSwitchDemo'
 
 
 /*Data Display 数据展示-Start*/
 import YYAccordionDemo from '../../dist/component/accordion/demo/basic'
 import YYIconDemo from '../../dist/component/icon/demo/basic'
-import Pull from '../../dist/component/list/Pulltorefresh'
-import index from '../../dist/component/list/demo/demoindex'
-import YYList from '../../dist/component/list/demo/YYListDemo'
+import Pull from '../../dist/component/listview/Pulltorefresh'
+import index from '../../dist/component/listview/demo/demoindex'
+import YYList from '../../dist/component/listview/demo/YYListDemo'
 
 
 /*Feedback 交互组件-Start*/
@@ -68,6 +69,8 @@ export default
         {/*Data Entry 数据录入*/}
         <Route path="imagepicker" component={Imagepicker}/>
         <Route path="input" component={Input}/>
+        <Route path="switch" component={Switch}/>
+
 
         {/*Data Display 数据展示*/}
         <Route path="accordion" component={YYAccordionDemo}/>
