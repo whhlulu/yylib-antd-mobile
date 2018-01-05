@@ -27,8 +27,8 @@ import Imagepicker from '../../dist/component/imagepicker/demo/YYImagePickerDemo
 
 
 /*Data Display 数据展示-Start*/
-import YYAccordionDemo from '../../dist/component/Accordion/demo/basic'
-import YYIconDemo from '../../dist/component/Icon/demo/basic'
+import YYAccordionDemo from '../../dist/component/accordion/demo/basic'
+import YYIconDemo from '../../dist/component/icon/demo/basic'
 import Pull from '../../dist/component/list/Pulltorefresh'
 import index from '../../dist/component/list/demo/demoindex'
 import YYList from '../../dist/component/list/demo/YYListDemo'
@@ -43,6 +43,7 @@ import YYApproveHistoryDemo from '../../dist/component/bpm/demo/YYApproveHistory
 import YYApproveDemo from '../../dist/component/bpm/demo/YYApproveDemo'
 
 //其他以及测试用
+import Test from '../../dist/component/test/test'
 
 
 export default
@@ -81,4 +82,7 @@ export default
         <Route path="referdemo" component={Referdemo}/>
         <Route path="approveHistory" component={YYApproveHistoryDemo}/>
         <Route path="approve" component={YYApproveDemo}/>
+
+        {/*测试页面*/}
+        <Route path="test" component={Test}/>
     </Route>

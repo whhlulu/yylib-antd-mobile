@@ -15,8 +15,8 @@ export { default as YYForm} from './component/form/YYForm'
 
 
 /*Data Display 数据展示-Start*/
-export { default as YYAccordion } from './component/Accordion/YYAccordion';
-export { default as YYIcon } from './component/Icon/YYIcon';
+export { default as YYAccordion } from './component/accordion/YYAccordion';
+export { default as YYIcon } from './component/icon/YYIcon';
 export { default as YYListview } from './component/list/YYList';
 
 
