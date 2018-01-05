@@ -197,6 +197,7 @@ export default class YYReferlist extends React.Component {
 
         referTreeListParams.relyCondition = (relyfield[this.props.referName]  + '=' +  selectedNode.id);
         referTreeListParams.condition = this.props.listCondition;
+        referTreeListParams.pageSize = 10;
         this.getListData(referUrl[this.props.referName], referTreeListParams, 1, this.props.referName);
     }
 
