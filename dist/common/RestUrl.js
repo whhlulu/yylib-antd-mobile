@@ -21,10 +21,16 @@ var GET_REFINFO_BYCODE = '/icop-support-web/refer/findByCode';
 
 // 单据类型（示例）
 var MODULE_URL = {
-  SAMPLE: ADDR + ROOT_PATH + '/sample'
+    SAMPLE: ADDR + ROOT_PATH + '/sample',
+
+    getBpmIds: ADDR + '/icop-bpmcenter-web/bpm/getBpmIds',//bpm 通过业务billid获取流程bpmids
+    getBpmId: ADDR + '/icop-bpmcenter-web/bpm/getBpmId',//bpm 通过业务billid获取流程bpmid
+    querySingleHistoricProcessInfo: ADDR + '/icop-bpmcenter-web/bpm/querySingleHistoricProcessInfo',//bpm 查询审批历史成功
+    beforeReject: ADDR + '/icop-bpmcenter-web/bpm/beforeReject',//bpm 驳回前查询
+
 }
 
-export default {
+module.exports = {
   URL_HOME,
   URL_HOME_PORTAL,
   REF_SERVER_URL,

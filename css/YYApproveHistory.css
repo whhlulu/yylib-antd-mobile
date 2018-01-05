@@ -1,0 +1,29 @@
+.YYApproveHistory{
+    padding: 1rem;
+}
+.YYApproveHistory .approveItem{
+    background-color: #ffffff;
+    border: 1px solid #bbbbbb;
+    padding: 6px 16px;
+    border-radius: 6px;
+}
+.YYApproveHistory .approveItem .left-top{
+    font-size: 16px;
+    color: #000000;
+}
+.YYApproveHistory .approveItem .right-top{
+    float: right;
+}
+.YYApproveHistory .approveItem .left-bottom{
+    font-size: 15px;
+    color: #108ee9;
+}
+.YYApproveHistory .approveItem .right-bottom{
+    float: right;
+    color: #666666;
+    overflow: hidden;
+    width: 66%;
+    text-align: right;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
