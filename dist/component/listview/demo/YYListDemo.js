@@ -1,6 +1,6 @@
 import React from 'react'
-import YYListview from '../../list/YYList'
-import {List, Badge} from '../../../common/antd-m/index';
+import YYListview from '../../listview/YYListview'
+import {List, Badge} from 'antd-mobile';
 import {Link} from 'react-router'
 const Item = List.Item;
 const Brief = Item.Brief;

@@ -10,7 +10,7 @@ import classNames from 'classnames'
 import { hashHistory } from 'react-router'
 
 /*
-* SSButton组件
+* Button组件
 * type
 *   fill :项目里面一整行的绿色图标   可以传递fix 固定在页面底部
 *   center :项目里面两翼留白的绿色图标
@@ -37,19 +37,6 @@ export default class YYButton extends React.Component {
     super(props)
     this.state = {}
   }
-
-  /*static propTypes = {
-    type: PropTypes.string,
-    text: PropTypes.string,
-    onClick: PropTypes.func,
-    rClick: PropTypes.func,
-    lClick: PropTypes.func,
-    rText: PropTypes.string,
-    lText: PropTypes.string,
-    cText: PropTypes.string,
-  }*/
-
-
 
   componentWillMount () {
 

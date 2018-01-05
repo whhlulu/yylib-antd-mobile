@@ -15,9 +15,7 @@ class Test extends React.Component{
     }
     openRefer=(e)=>{
         if(e=='1'){
-            let curUri = hashHistory.getCurrentLocation().pathname;
-            console.log(curUri);
-            hashHistory.push(curUri + '/refer');
+            console.log(this.props);
 
         }
     }
