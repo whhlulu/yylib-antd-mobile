@@ -1,0 +1,6 @@
+.dateLine .am-list-line:after{
+     left:63px !important;
+ }
+.dateLine .am-list-item .am-list-line .am-list-extra {
+    flex-basis: initial;
+}

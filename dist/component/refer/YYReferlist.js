@@ -303,6 +303,7 @@ export default class YYReferlist extends React.Component {
         let referParams = {};
         referParams.searchText = value;
         referTreeListParams.searchText = value;
+        referTreeListParams.pageSize = 10;
         referParams.condition = this.props.condition;
         switch(page.props.referStyle){
             case 'list':

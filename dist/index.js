@@ -13,6 +13,7 @@ export { default as YYImagepicker} from './component/imagepicker/YYImagePicker'
 export { default as YYInput} from './component/input/YYInput'
 export { default as YYForm} from './component/form/YYForm'
 export { default as YYSwitch} from './component/switch/YYSwitch'
+export { default as YYDatePicker} from './component/date-picker/YYDatePicker'
 
 
 /*Data Display 数据展示-Start*/

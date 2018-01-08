@@ -22,7 +22,7 @@ class YYSwitch extends React.Component {
         return (
             <div>
                 <List.Item
-                    extra={<div><div>是</div><Switch
+                    extra={<div><Switch
                         {..._.isFunction(getFieldProps) ? getFieldProps(key,{
                             initialValue:checked,
                             valuePropName:'checked',
@@ -32,7 +32,7 @@ class YYSwitch extends React.Component {
                         color={color}
                         platform={platform}
                         onClick={(checked)=>{this.onChange(checked)}}
-                    /><div>否</div></div>}
+                    /></div>}
                 >{name}</List.Item>
             </div>
         )
