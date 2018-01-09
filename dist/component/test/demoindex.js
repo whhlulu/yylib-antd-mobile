@@ -40,6 +40,10 @@ class YYreferDemo extends React.Component{
                 console.log('switch')
                 this.props.router.push({pathname:"/switch"});
                 break;
+            case '6':
+                console.log('datepicker')
+                this.props.router.push({pathname:'/datepicker'});
+                break;
         }
     }
     onOk = (value)=>{
@@ -58,6 +62,7 @@ class YYreferDemo extends React.Component{
                 <Button onClick={this.openRefer.bind(this,'3')}>查看pulltorefresh</Button>
                 <Button onClick={this.openRefer.bind(this,'4')}>查看input输入框</Button>
                 <Button onClick={this.openRefer.bind(this,'5')}>查看switch滑动开关</Button>
+                <Button onClick={this.openRefer.bind(this,'6')}>查看datepicker</Button>
             </div>
         )
     }

@@ -1,8 +1,7 @@
 import React from 'react'
 import { YYForm,YYDatePicker } from '../../../index'
-import moment from 'moment';
 import 'moment/locale/zh-cn';
-let timeex;
+
 class YYDatePickerDemo extends React.Component{
     constructor(props){
         super(props);
@@ -10,16 +9,7 @@ class YYDatePickerDemo extends React.Component{
 
         }
     }
-    componentWillMount () {
-            const nowtime = Date.now();
-            const now = new Date(nowtime)
-        timeex = moment('2200-12-03 +0800', 'YYYY-MM-DD Z');
 
-    }
-
-    componentDidMount () {
-        console.log(this.props.form);
-    }
     onchang = ()=>{
         this.props.form.validateFields(['date','time','datetime'],(err,value)=>{
             if(!err){
@@ -33,9 +23,9 @@ class YYDatePickerDemo extends React.Component{
         return(
             <div>
                 <YYForm>
-                <YYDatePicker maxDate={timeex._d} field='date' form={form} onChange={this.onchang}/>
-                <YYDatePicker   mode='time' field='time' onChange={this.onchang}  form={form}/>
-                    <YYDatePicker   mode='datetime' field='datetime'onChange={this.onchang}  form={form}/>
+                <YYDatePicker  mode='date' field='date' form={form} onChange={this.onchang}/>
+                <YYDatePicker   mode='time' use12Hours={true} field='time' label='时间' onChange={this.onchang}  form={form}/>
+                    <YYDatePicker   mode='datetime' field='datetime' label='datetime' onChange={this.onchang}  form={form}/>
                 </YYForm>
             </div>
         )

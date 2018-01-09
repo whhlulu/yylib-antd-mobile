@@ -6,7 +6,7 @@ import {Route, IndexRoute} from 'react-router';
 import App from '../App'; //主应用
 // 按照组件分类进行排序
 /*Layout 布局-Start*/
-
+import index from '../../dist/component/test/demoindex'
 
 /*Navigation 导航-Start*/
 import YYNavBarDemo from '../../dist/component/NavBar/demo/basic';//NavBar
@@ -27,13 +27,13 @@ import Imagepicker from '../../dist/component/imagepicker/demo/YYImagePickerDemo
 import Switch from '../../dist/component/switch/demo/YYSwitchDemo'
 import Datepicker from '../../dist/component/date-picker/demo/YYDatePickerDemo'
 import DateDemo from '../../dist/component/date-picker/demo/datepicker'
-
+import Pickerdemo from '../../dist/component/picker/demo/pickerdemo'
+import YYPicker from '../../dist/component/picker/demo/YYPickerdemo'
 
 /*Data Display 数据展示-Start*/
 import YYAccordionDemo from '../../dist/component/accordion/demo/basic'
 import YYIconDemo from '../../dist/component/icon/demo/basic'
 import Pull from '../../dist/component/listview/Pulltorefresh'
-import index from '../../dist/component/listview/demo/demoindex'
 import YYList from '../../dist/component/listview/demo/YYListDemo'
 
 
@@ -72,6 +72,8 @@ export default
         <Route path="switch" component={Switch}/>
         <Route path="datepicker" component={Datepicker}/>
         <Route path="datedemo" component={DateDemo}/>
+        <Route path="pickerdemo" component={Pickerdemo}/>
+        <Route path="picker" component={YYPicker}/>
 
 
         {/*Data Display 数据展示*/}

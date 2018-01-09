@@ -75,7 +75,10 @@
     "weui": "^1.1.2",
     "whatwg-fetch": "2.0.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "antd-mobile-demo-data":"0.2.0",
+    "array-tree-filter":"2.0.0"
+  },
   "repository": {
     "type": "git",
     "url": ""

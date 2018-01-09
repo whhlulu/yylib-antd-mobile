@@ -75,7 +75,7 @@ class YYDatePicker extends Component {
     }
     render() {
         let Item = List.Item;
-        let { maxDate, mode, minDate, maxTime, minTime, value,arrow,
+        let { maxDate, mode, minDate, use12Hours, minTime, value,arrow,
             disabled,label, form, extra, required, trigger, field, format} = this.props;
 
         // let style = {
@@ -90,9 +90,13 @@ class YYDatePicker extends Component {
             marginLeft: '0.3rem'
         }
         if(mode=='time'){
-            format='HH:mm'
+            format='HH:mm';
+            maxDate=''
         } else if(mode=='datetime'){
             format='YYYY-MM-DD HH:mm'
+        } else if(mode=='year'){
+            format="YYYY-MM-DD";
+
         }
 
         let getFieldProps = form ? form.getFieldProps : null;
@@ -118,7 +122,7 @@ class YYDatePicker extends Component {
                     mode={mode}
                     disabled={disabled}
                     onChange={this.onChange}
-                    use12Hours={false}
+                    use12Hours={use12Hours}
                 >
                     <Item arrow={disabled ? "" : arrow}>
                         <span style={titleStyle}>{label}</span>
@@ -132,10 +136,10 @@ class YYDatePicker extends Component {
 };
 
 YYDatePicker.defaultProps = {
-    maxDate: '',
+    maxDate: moment('2200-12-03 +0800', 'YYYY-MM-DD Z')._d,
     minDate: moment('1900-08-06 +0800', 'YYYY-MM-DD Z')._d,
     arrow: 'horizontal',
-    listemValue: '日期',
+    use12Hours:false,
     value:'',
     mode: 'date',
     extra:'',
@@ -146,6 +150,7 @@ YYDatePicker.defaultProps = {
     required: false,
     field: 'default',
     format: "YYYY-MM-DD",
+    trigger:'onChange'
 }
 
 export default YYDatePicker;
