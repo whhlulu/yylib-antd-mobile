@@ -22,7 +22,7 @@ export { default as YYListview } from './component/listview/YYListview';
 
 
 /*Feedback 交互组件-Start*/
-export { default as YYToast } from './component/Toast/YYToast';
+export { default as YYToast } from './component/toast/YYToast';
 
 
 //业务组件

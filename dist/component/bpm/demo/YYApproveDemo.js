@@ -2,17 +2,19 @@
  * Created By whh 2018/1/2
  * */
 import React, {Component} from 'react';
-import {Toast, Button, Popover, NavBar, Icon} from 'antd-mobile'
+import {Toast, Button, Popover, NavBar, Icon,Radio,List} from 'antd-mobile'
+const RadioItem = Radio.RadioItem;
 const Item = Popover.Item;
 import YYApprove from '../YYApprove'
-import YYIcon from '../../Icon/YYIcon'
+import YYIcon from '../../icon/YYIcon'
 
 class YYApproveDemo extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             showApprove: false,
-            visible:false
+            visible:false,
+            value2: 0,
         }
     }
 
@@ -50,10 +52,10 @@ class YYApproveDemo extends React.Component {
                 </NavBar>
                 {this.state.showApprove ? <YYApprove
                 showApprove={this.state.showApprove}
-                userId="33f2ee84-4c32-4296-85da-691fb09c44d7"
-                billId='c731402354b1fdcf65e68d8af4c33452'/>
+                billTypeId='CSM5'
+                userId="5afbe1b5-d718-4654-b915-db4409251854"
+                billId='63c847474148c720dce60042a3f0b52e'/>
                 : null}
-
             </div>
         )
     };

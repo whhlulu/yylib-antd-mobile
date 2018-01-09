@@ -36,7 +36,7 @@ import YYList from '../../dist/component/listview/demo/YYListDemo'
 
 
 /*Feedback 交互组件-Start*/
-import YYToastDemo from '../../dist/component/Toast/demo/basic'
+import YYToastDemo from '../../dist/component/toast/demo/basic'
 
 /*业务组件*/
 import Referdemo from '../../dist/component/refer/demo/YYreferDemo'

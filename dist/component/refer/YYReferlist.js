@@ -113,7 +113,7 @@ export default class YYReferlist extends React.Component {
                     animating: false
                 })
 
-                // Toast.fail(result.msg, 10);
+                // toast.fail(result.msg, 10);
             }
         }, function (err) {
             self.setState({
@@ -277,7 +277,7 @@ export default class YYReferlist extends React.Component {
                 this.getTreeData(treereferUrl[this.props.referName], referParams,this.props.referName);
                 break;
             default:
-                // Toast.fail('请填写正确的referStyle',5);
+                // toast.fail('请填写正确的referStyle',5);
                 break;
         }
         if (this.props.onOk && _.isFunction(this.props.onOk)) {

@@ -109,7 +109,7 @@ class YYreferDemo extends React.Component{
                     onClose={this.onClose}
                     multiMode={true}
                     open={this.state.openw}
-                    referCode='bd-006_test'
+                    referCode='00023'
                     referStyle='tree-list'
                 />
             </div>

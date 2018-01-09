@@ -10,7 +10,7 @@ function showToast() {
 }
 
 function showToastNoMask() {
-    YYToast.info('Toast without mask !!!', 2, null, false);
+    YYToast.info('toast without mask !!!', 2, null, false);
 }
 
 function successToast() {

@@ -27,7 +27,12 @@ var MODULE_URL = {
     getBpmId: ADDR + '/icop-bpmcenter-web/bpm/getBpmId',//bpm 通过业务billid获取流程bpmid
     querySingleHistoricProcessInfo: ADDR + '/icop-bpmcenter-web/bpm/querySingleHistoricProcessInfo',//bpm 查询审批历史成功
     beforeReject: ADDR + '/icop-bpmcenter-web/bpm/beforeReject',//bpm 驳回前查询
-
+    doApprove: ADDR + '/icop-bpmcenter-web/bpm/doApprove',//bpm doApprove
+    delegateTaskCompletely: ADDR + '/icop-bpmcenter-web/bpm/delegateTaskCompletely',//改派
+    disApprove: ADDR + '/icop-bpmcenter-web/bpm/disApprove',//不同意且退回
+    diagramUrl: ADDR + '/icop-bpmcenter-web/pages/diagram-viewer/index.html?processInstanceId=',//不同意且退回
+    queryAssignUser : ADDR + '/icop-bpmcenter-web/bpm/queryAssignUser',//获取审批指派用户
+    queryStartAssignUser : ADDR + '/icop-bpmcenter-web/bpm/queryStartAssignUser',//获取审批指派用户
 }
 
 module.exports = {
