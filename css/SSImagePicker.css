@@ -8,15 +8,16 @@
 .am-list-line{
     height:auto !important;
 }
-.am-modal-wrap{
+/*.am-modal-wrap{
     z-index: 1001;
-}
+}*/
 .none .am-image-picker-list .am-image-picker-item .am-image-picker-item-remove,.none .weui-gallery__opr{
     display: none;
 }
+/*
 .am-modal-mask{
-    z-index: 9999;
+    z-index: 999;
 }
 .am-modal-wrap{
-    z-index: 10000;
-}
+    z-index: 1001;
+}*/
