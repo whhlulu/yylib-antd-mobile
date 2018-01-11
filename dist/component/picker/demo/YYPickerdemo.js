@@ -82,7 +82,11 @@ class YYDatePickerDemo extends React.Component {
                 YYToast.success('提交成功',1)
                 console.log(value);
             } else {
-                YYToast.fail('提交失败',1);
+                let arr=[];
+                for(let i in err){
+                    arr.push(err[i])
+                }
+                YYToast.info(arr[0].errors[0].message,1.5)
                 console.log(err);
             }
         })

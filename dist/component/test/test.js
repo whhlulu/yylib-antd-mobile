@@ -1,6 +1,6 @@
 import React from 'react'
 import {hashHistory} from 'react-router';
-import {Button} from '../../common/antd-m/index';
+import {Button} from 'antd-mobile/lib/index';
 
 
 class Test extends React.Component{

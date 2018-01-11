@@ -2,7 +2,7 @@
  * Created by whh on 2017/12/26.
  */
 import React, {Component} from 'react';
-import {List, WhiteSpace, Modal, ImagePicker} from '../../common/antd-m/index';
+import {List, WhiteSpace, Modal, ImagePicker} from 'antd-mobile';
 import '../../../css/YYNavBar.css';
 import _ from 'lodash';
 

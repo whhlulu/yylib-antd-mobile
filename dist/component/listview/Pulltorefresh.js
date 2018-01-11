@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { PullToRefresh, ListView, Button } from '../../common/antd-m/index';
+import { PullToRefresh, ListView, Button } from 'antd-mobile';
 
 const data = [
     {

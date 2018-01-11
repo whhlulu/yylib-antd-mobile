@@ -1,6 +1,6 @@
 import React from 'react'
 import {YYInput,YYForm} from '../../../index'
-import { Modal, Button, Toast, WhiteSpace} from 'antd-mobile'
+import { Modal, Button, Toast, WhiteSpace} from 'antd-mobile/lib/index'
 const alert = Modal.alert;
 
 
