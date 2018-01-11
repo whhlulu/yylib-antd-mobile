@@ -9,15 +9,15 @@ import App from '../App'; //主应用
 import index from '../../dist/component/test/demoindex'
 
 /*Navigation 导航-Start*/
-import YYNavBarDemo from '../../dist/component/NavBar/demo/basic';//NavBar
-import YYTabsDemo from '../../dist/component/Tabs/demo/basic';//Tabs
-import YYTabsDemoFixedHeight from '../../dist/component/Tabs/demo/fixedHeight';
-import YYTabsDemoVertical from '../../dist/component/Tabs/demo/vertical';
-import YYTabsDemoMutlitabs from '../../dist/component/Tabs/demo/mutlitabs';
-import YYTabBarDemo from '../../dist/component/TabBar/demo/layOut';//TabBar
-import YYTabBarDemoFirst from '../../dist/component/TabBar/demo/first';
-import YYTabBarDemoSecond from '../../dist/component/TabBar/demo/second';
-import YYTabBarDemoThird from '../../dist/component/TabBar/demo/third';
+import YYNavBarDemo from '../../dist/component/navBar/demo/basic';//NavBar
+import YYTabsDemo from '../../dist/component/tabs/demo/basic';//Tabs
+import YYTabsDemoFixedHeight from '../../dist/component/tabs/demo/fixedHeight';
+import YYTabsDemoVertical from '../../dist/component/tabs/demo/vertical';
+import YYTabsDemoMutlitabs from '../../dist/component/tabs/demo/mutlitabs';
+import YYTabBarDemo from '../../dist/component/tabBar/demo/layOut';//TabBar
+import YYTabBarDemoFirst from '../../dist/component/tabBar/demo/first';
+import YYTabBarDemoSecond from '../../dist/component/tabBar/demo/second';
+import YYTabBarDemoThird from '../../dist/component/tabBar/demo/third';
 
 
 /*Data Entry 数据录入-Start*/

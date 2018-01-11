@@ -9,7 +9,7 @@ const Item = List.Item;
 import classnames from 'classnames';
 import YYIcon from "../icon/YYIcon";
 import YYToast from '../toast/YYToast';
-import YYNavBar from '../NavBar/YYNavBar';
+import YYNavBar from '../navBar/YYNavBar';
 import YYReferlist from '../refer/YYReferlist';
 import YYApproveHistory from './YYApproveHistory'
 import PropTypes from 'prop-types';

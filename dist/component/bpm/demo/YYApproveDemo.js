@@ -2,8 +2,7 @@
  * Created By whh 2018/1/2
  * */
 import React, {Component} from 'react';
-import {Toast, Button, Popover, NavBar, Icon,Radio,List} from 'antd-mobile'
-const RadioItem = Radio.RadioItem;
+import {Popover, NavBar, Icon} from 'antd-mobile'
 const Item = Popover.Item;
 import YYApprove from '../YYApprove'
 import YYIcon from '../../icon/YYIcon'
@@ -14,7 +13,6 @@ class YYApproveDemo extends React.Component {
         this.state = {
             showApprove: false,
             visible:false,
-            value2: 0,
         }
     }
 

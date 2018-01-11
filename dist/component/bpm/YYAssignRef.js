@@ -7,7 +7,7 @@ const CheckboxItem = Checkbox.CheckboxItem;
 import {createForm} from 'rc-form';
 import classnames from 'classnames';
 import YYToast from '../toast/YYToast';
-import YYNavBar from '../NavBar/YYNavBar';
+import YYNavBar from '../navBar/YYNavBar';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import {MODULE_URL} from '../../common/RestUrl';
