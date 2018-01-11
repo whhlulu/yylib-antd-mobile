@@ -1,0 +1,35 @@
+.yy-approve-history .yy-bpm-iframe{
+    padding: .5rem 1rem;
+    border-radius: 8px;
+}
+.yy-approve-history .yy-bpm-steps{
+    padding: 1rem;
+    padding-top: 0px;
+    background: #f5f9f5;
+}
+.yy-approve-history .yy-bpm-steps .approveItem{
+    background-color: #ffffff;
+    border: 1px solid #bbbbbb;
+    padding: 6px 16px;
+    border-radius: 6px;
+}
+.yy-approve-history .yy-bpm-steps .approveItem .left-top{
+    font-size: 16px;
+    color: #000000;
+}
+.yy-approve-history .yy-bpm-steps .approveItem .right-top{
+    float: right;
+}
+.yy-approve-history .yy-bpm-steps .approveItem .left-bottom{
+    font-size: 15px;
+    color: #108ee9;
+}
+.yy-approve-history .yy-bpm-steps .approveItem .right-bottom{
+    float: right;
+    color: #666666;
+    overflow: hidden;
+    width: 66%;
+    text-align: right;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

@@ -2,9 +2,9 @@
 
 
 /*Navigation 导航-Start*/
-export { default as YYNavBar } from './component/NavBar/YYNavBar';
-export { default as YYTabs } from './component/Tabs/YYTabs';
-export { default as YYTabBar } from './component/TabBar/YYTabBar';
+export { default as YYNavBar } from './component/navBar/YYNavBar';
+export { default as YYTabs } from './component/tabs/YYTabs';
+export { default as YYTabBar } from './component/tabBar/YYTabBar';
 
 
 /*Data Entry 数据录入-Start*/
@@ -24,11 +24,13 @@ export { default as YYListview } from './component/listview/YYListview';
 
 
 /*Feedback 交互组件-Start*/
-export { default as YYToast } from './component/Toast/YYToast';
+export { default as YYToast } from './component/toast/YYToast';
 
 
 //业务组件
 export { default as YYReferlist} from './component/refer/YYReferlist'
+export { default as YYApprove} from './component/bpm/YYApprove'
+export { default as YYApproveHistory} from './component/bpm/YYApproveHistory'
 
 
 //其他以及测试用

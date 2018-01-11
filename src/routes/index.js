@@ -9,15 +9,15 @@ import App from '../App'; //主应用
 import index from '../../dist/component/test/demoindex'
 
 /*Navigation 导航-Start*/
-import YYNavBarDemo from '../../dist/component/NavBar/demo/basic';//NavBar
-import YYTabsDemo from '../../dist/component/Tabs/demo/basic';//Tabs
-import YYTabsDemoFixedHeight from '../../dist/component/Tabs/demo/fixedHeight';
-import YYTabsDemoVertical from '../../dist/component/Tabs/demo/vertical';
-import YYTabsDemoMutlitabs from '../../dist/component/Tabs/demo/mutlitabs';
-import YYTabBarDemo from '../../dist/component/TabBar/demo/layOut';//TabBar
-import YYTabBarDemoFirst from '../../dist/component/TabBar/demo/first';
-import YYTabBarDemoSecond from '../../dist/component/TabBar/demo/second';
-import YYTabBarDemoThird from '../../dist/component/TabBar/demo/third';
+import YYNavBarDemo from '../../dist/component/navBar/demo/basic';//NavBar
+import YYTabsDemo from '../../dist/component/tabs/demo/basic';//Tabs
+import YYTabsDemoFixedHeight from '../../dist/component/tabs/demo/fixedHeight';
+import YYTabsDemoVertical from '../../dist/component/tabs/demo/vertical';
+import YYTabsDemoMutlitabs from '../../dist/component/tabs/demo/mutlitabs';
+import YYTabBarDemo from '../../dist/component/tabBar/demo/layOut';//TabBar
+import YYTabBarDemoFirst from '../../dist/component/tabBar/demo/first';
+import YYTabBarDemoSecond from '../../dist/component/tabBar/demo/second';
+import YYTabBarDemoThird from '../../dist/component/tabBar/demo/third';
 
 
 /*Data Entry 数据录入-Start*/
@@ -38,10 +38,12 @@ import YYList from '../../dist/component/listview/demo/YYListDemo'
 
 
 /*Feedback 交互组件-Start*/
-import YYToastDemo from '../../dist/component/Toast/demo/basic'
+import YYToastDemo from '../../dist/component/toast/demo/basic'
 
 /*业务组件*/
 import Referdemo from '../../dist/component/refer/demo/YYreferDemo'
+import YYApproveHistoryDemo from '../../dist/component/bpm/demo/YYApproveHistoryDemo'
+import YYApproveDemo from '../../dist/component/bpm/demo/YYApproveDemo'
 
 //其他以及测试用
 import Test from '../../dist/component/test/test'
@@ -87,6 +89,8 @@ export default
 
         {/*业务组件*/}
         <Route path="referdemo" component={Referdemo}/>
+        <Route path="approveHistory" component={YYApproveHistoryDemo}/>
+        <Route path="approve" component={YYApproveDemo}/>
 
         {/*测试页面*/}
         <Route path="test" component={Test}/>
