@@ -110,6 +110,7 @@ class YYImagePicker extends Component {
         ]);
     }
     onAddImageClick = (e) => {
+        let that=this;
         e.preventDefault();//阻止触发onChange事件！
         let params = {
             billType: this.props.source.billType,
@@ -123,7 +124,7 @@ class YYImagePicker extends Component {
             file.gid = result.gid;
             file.name = result.fileName;
             file.url = result.filePath;
-            this.setState({
+            that.setState({
                 files: this.state.files.concat(file),
             });
         });
