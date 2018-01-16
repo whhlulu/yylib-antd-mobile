@@ -1,5 +1,5 @@
 import React from 'react'
-import {List,ImagePicker} from 'antd-mobile'
+import {List, ImagePicker} from 'antd-mobile'
 import YYImagepicker from '../YYImagePicker'
 const data = [{
     url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
@@ -8,15 +8,17 @@ const data = [{
     url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
     id: '2122',
 }];
-class YYImagepickerDemo extends React.Component{
-    constructor(props){
+class YYImagepickerDemo extends React.Component {
+    constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             files: data,
         }
     }
-    componentDidMount () {
+
+    componentDidMount() {
     }
+
     onChange = (files, type, index) => {
         console.log(files, type, index);
         this.setState({
@@ -33,26 +35,21 @@ class YYImagepickerDemo extends React.Component{
             }),
         });
     };
-    render(){
+
+    render() {
         const {form} = this.props;
         let source = {
-            sourceId:'aaa',
-            sourceType: 'aerialDrawing',  //业务类型（可自定义），与PC端保持一致，子表的sourceType: 子表id+ '_' +业务类型
-            billType: 'POV01'  //单据类型
+            sourceId: '22222222222',
+            sourceType: '102345678',  //业务类型（可自定义），与PC端保持一致，子表的sourceType: 子表id+ '_' +业务类型
+            billType: 'M-01'  //单据类型
         }
-        return(
+        return (
             <div>
-                <ImagePicker
-                    files={this.state.files}
-                    onChange={this.onChange}
-                    onImageClick={(index, fs) => console.log(index, fs)}
-                    selectable={this.state.files.length < 5}
-                    onAddImageClick={this.onAddImageClick}
-                />
-                <List>
-                    <List.Item>Title</List.Item>
-                </List>
-                <YYImagepicker label="添加附件" source={source} files={[{id:'1',url:'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg'}]} from={form} multiple={true} disabled={false}/>
+                <List.Item extra={'extra content'}>Title</List.Item>
+                <YYImagepicker label="图片上传" source={source}
+                               files={[{id: '1', url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg'}]}
+                               from={form} multiple={true} disabled={false}/>
+                <List.Item extra={'extra content'}>Title</List.Item>
             </div>
         )
     }

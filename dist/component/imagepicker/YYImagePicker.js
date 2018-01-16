@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {ImagePicker, Modal} from 'antd-mobile';
+import {ImagePicker, Modal,List} from 'antd-mobile';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import UploadFileUtils from '../../utils/UploadFileUtils';
 import AuthToken from '../../utils/AuthToken';
 const alert = Modal.alert
+
 class YYImagePicker extends Component {
     state = {
         files: this.props.files,
@@ -19,7 +20,7 @@ class YYImagePicker extends Component {
     };
     static defaultProps = {
         selectable: true,
-        label: '附件',
+        label: '上传图片',
         maxSize: 5,
         disabled: false,
         source: {
@@ -80,7 +81,7 @@ class YYImagePicker extends Component {
 //删除文件
     deleteFile = (index) => {
         let that = this;
-        const alertInstance = alert('删除', '删除后不可恢复!!!', [
+        const alertInstance = alert('删除', '删除后不可恢复!', [
             {
                 text: '取消', onPress: () => {
                 alertInstance.close();
@@ -135,6 +136,7 @@ class YYImagePicker extends Component {
         const {files} = this.state;
         return (
             <div>
+                <List.Item><div>{label}</div></List.Item>
                 <ImagePicker
                     files={files}
                     onChange={disabled ? null : this.onChange}
