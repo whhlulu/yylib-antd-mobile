@@ -131,10 +131,10 @@ class YYImagePicker extends Component {
             file.name = result.fileName;
             file.url = result.filePath;
             that.setState({
-                files: this.state.files.concat(file),
+                files: that.state.files.concat(file),
             },()=>{
                 if (_.isFunction(that.props.onChange)) {
-                    that.props.onChange(this.state.files);
+                    that.props.onChange(that.state.files);
                 }
             });
         });
