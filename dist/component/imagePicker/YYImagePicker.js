@@ -16,7 +16,7 @@ class YYImagePicker extends Component {
         maxSize: PropTypes.number,
         disabled: PropTypes.bool,
         source: PropTypes.object,
-        files: PropTypes.array
+        files: PropTypes.array,
     };
     static defaultProps = {
         selectable: true,
@@ -28,7 +28,7 @@ class YYImagePicker extends Component {
             billType: '',
             sourceType: '',
         },
-        files: []
+        files: [],
     };
 
     componentDidMount() {
@@ -74,9 +74,6 @@ class YYImagePicker extends Component {
         } else {
             console.log('上传错误！')
         }
-        if (_.isFunction(this.props.onChange)) {
-            this.props.onChange(this.state.files);
-        }
     }
 //删除文件
     deleteFile = (index) => {
@@ -99,11 +96,19 @@ class YYImagePicker extends Component {
                     UploadFileUtils.delAttach(params, () => {
                         that.setState({
                             files: that.state.files.filter((e, i) => i != index)
-                        })
+                        },()=>{
+                            if (_.isFunction(that.props.onChange)) {
+                                that.props.onChange(this.state.files);
+                            }
+                        });
                     });
                 } else {
                     this.setState({
                         files: that.state.files.filter((e, i) => i != 0)
+                    },()=>{
+                        if (_.isFunction(that.props.onChange)) {
+                            that.props.onChange(this.state.files);
+                        }
                     })
                 }
             }
@@ -127,17 +132,28 @@ class YYImagePicker extends Component {
             file.url = result.filePath;
             that.setState({
                 files: this.state.files.concat(file),
+            },()=>{
+                if (_.isFunction(that.props.onChange)) {
+                    that.props.onChange(this.state.files);
+                }
             });
         });
     };
 
     render() {
-        const {disabled, maxSize, iconColor, label, required} = this.props;
+        const {disabled, maxSize, label, form,field,required} = this.props;
+        let getFieldProps = form ? form.getFieldProps : null;
         const {files} = this.state;
         return (
             <div>
                 <List.Item><div>{label}</div></List.Item>
                 <ImagePicker
+                    {..._.isFunction(getFieldProps) ? getFieldProps(field, {
+                        initialValue:  files,
+                        rules: [
+                            { required, message: '请选择图片!' },
+                        ],
+                    }) : null}
                     files={files}
                     onChange={disabled ? null : this.onChange}
                     onImageClick={this.onImageClick}
