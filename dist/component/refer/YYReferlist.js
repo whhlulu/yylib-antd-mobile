@@ -18,6 +18,7 @@ let referTreeListParams={};
 let referParams;
 let data=[];
 let pageCount=[];
+let referstyle='';
 let listcontent='';
 
 export default class YYReferlist extends React.Component {
@@ -46,7 +47,6 @@ export default class YYReferlist extends React.Component {
         })
         let referCode = page.props.referCode;
         let referStyle = page.props.referStyle;
-
         //根据参照编码获取参照信息
         ajax.getJSON(RestUrl.REF_SERVER_URL + RestUrl.GET_REFINFO_BYCODE, {refCode: referCode}, function (result) {
             if (result.success) {
@@ -100,10 +100,13 @@ export default class YYReferlist extends React.Component {
         })
         ajax.getJSON(referUrl, _.assign({}, referParams, {pageNumber: pageNumber}), function (result) {
             if (result.code === 'success') {
-                data[contentname]=result.data.content;
+
+                    data[contentname+'list']=result.data.content;
+
                 pageCount[contentname]=result.data.pageCount;
                 self.setState({
                     // [contentname+'name']: result.data.content,
+                    pageNumber:pageNumber,
                     pageCount: result.data.pageCount,
                     animating: false
                 })
@@ -148,11 +151,13 @@ export default class YYReferlist extends React.Component {
         if (!selectedNodes.some((item) => {
                 return item.id === selectedNode.id
             })) {
+            console.log('1')
             selectedNodes.push(selectedNode);
             this.setState({
                 selectedNodes: selectedNodes
             });
         } else {
+            console.log('2')
             let newNodes = [];
             // eslint-disable-next-line
             selectedNodes.map((item) => {
@@ -184,11 +189,13 @@ export default class YYReferlist extends React.Component {
         e.stopPropagation();
         e.preventDefault();
         if (selectedNode.id === this.state.selectedTreeId) {
+            console.log('1')
             this.setState({
                 selectedTreeId: null,
                 showList: true
             });
         } else {
+            console.log('2')
             this.setState({
                 selectedTreeId: selectedNode.id,
                 showList: true
@@ -202,15 +209,18 @@ export default class YYReferlist extends React.Component {
     }
 
     onChangePageNumber = (value) => {
+        console.log(this.state.searchText)
+        console.log(this.props.referName)
         this.setState({
             pageNumber: value
         })
         let referParams = {};
         referParams.condition = this.props.condition;
         if(this.state.searchText!==''){
-            referParams.searchText = this.state.searchText
+            referParams.searchText = this.state.searchText;
+            referTreeListParams.searchText = this.state.searchText;
         }
-        switch(page.props.referStyle){
+        switch(this.props.referStyle){
             case 'list':
                 this.getListData(referUrl[this.props.referName], referParams, value ,this.props.referName);
                 break;
@@ -318,10 +328,10 @@ export default class YYReferlist extends React.Component {
                 break;
         }
     }
-     listContent = (da,selectedId)=>{
+     listContent = (data,selectedId)=>{
         if(this.props.multiMode){
-            if(data[this.props.referName]){
-                return data[this.props.referName].map(item => (
+            if(data){
+                return data.map(item => (
                     <CheckboxItem key={item.id} onChange={(e) => this.onMultiChange(e,item)}>
                         {item[this.props.displayField]}
                     </CheckboxItem>
@@ -329,8 +339,8 @@ export default class YYReferlist extends React.Component {
             }
 
         } else {
-            if(data[this.props.referName]){
-                return data[this.props.referName].map(item => (
+            if(data){
+                return data.map(item => (
                     <RadioItem key={item.id} checked={selectedId === item.id}
                                onChange={(e) => this.onSingleChange(e,item)}>
                         {item[this.props.displayField]}
@@ -381,7 +391,7 @@ export default class YYReferlist extends React.Component {
     render() {
         let self = this;
         const {value,selectedId,animating,pageNumber,showList} = this.state;
-        const {referlabel,referCode,multiMode,displayField,disabled,referStyle,referName,open} = this.props;
+        const {referlabel,referCode,multiMode,displayField,disabled,referStyle,referName,open,modalHeight} = this.props;
         /*let listContent = (data,selectedId)=>{
             if(this.props.multiMode){
                 if(data[this.props.referName]){
@@ -412,7 +422,7 @@ export default class YYReferlist extends React.Component {
                 maskClosable={false}
                 animationType="slide-up"
             >
-                <div style={{height:'100vh',width:'100vw'}}>
+                <div style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw'}}>
 
 
                     <NavBar leftContent="返回"
@@ -431,7 +441,7 @@ export default class YYReferlist extends React.Component {
                     <WhiteSpace/>
                     <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>
                     <List className="list-content">
-                        {self.listContent(this.state[referName+'name'],selectedId)}
+                        {self.listContent(data[referName+'list'],selectedId)}
                     </List>
                     <Pagination total={pageCount[referName]}
                                 onChange={this.onChangePageNumber}
@@ -450,7 +460,7 @@ export default class YYReferlist extends React.Component {
                 visible={disabled?'':open}
                 maskClosable={false}
                 animationType="slide-up">
-            <div  style={{height:'100vh',width:'100vw'}}>
+            <div  style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw'}}>
                 <NavBar leftContent="返回"
                           key="nav"
                         mode="light"
@@ -477,7 +487,7 @@ export default class YYReferlist extends React.Component {
                 visible={disabled?'':open}
                 maskClosable={false}
                 animationType="slide-up">
-                <div  style={{height:'100vh',width:'100vw'}}>
+                <div  style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw'}}>
                     <NavBar leftContent="返回"
                             key="nav"
                             mode="light"
@@ -499,13 +509,13 @@ export default class YYReferlist extends React.Component {
                         maskClosable={false}
                         animationType="slide-up"
                     >
-                        <div style={{height:'100vh',width:'100vw'}}>
+                        <div style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw'}}>
 
 
                             <NavBar leftContent="返回"
                                     key="nav"
                                     mode="light"
-                                    onLeftClick={this.onClose(referName)}
+                                    onLeftClick={()=>{this.setState({selectedTreeId: null,showList:false})}}
                                     rightContent={[
                                         <a key="nav" onClick={this.onOk(referName)}>确定</a>,
                                     ]}
@@ -518,7 +528,7 @@ export default class YYReferlist extends React.Component {
                             <WhiteSpace/>
                             <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>
                             <List className="list-content">
-                                {self.listContent(this.state[referName+'name'],selectedId)}
+                                {self.listContent(data[referName+'list'],selectedId)}
                             </List>
                             <Pagination total={pageCount[referName]}
                                         onChange={this.onChangePageNumber}
@@ -548,6 +558,7 @@ export default class YYReferlist extends React.Component {
 YYReferlist.defaultProps = {
     referlabel: '参照',
     referCode: '00026',
+    modalHeight:'all',
     displayField: 'name',
     referParams: {},
     multiMode: true,

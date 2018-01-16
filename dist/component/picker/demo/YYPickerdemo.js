@@ -97,8 +97,8 @@ class YYDatePickerDemo extends React.Component {
         return (
             <div>
                 <YYForm>
-                    <YYPicker data={this.state.data1} form={form} cols={3} label="联动选择" field="picker1" onOk={this.onOk}
-                              required={true}/>
+                    <YYPicker data={this.state.data1} value={["340000", "341500", "341502"]} form={form} cols={3} label="联动选择" field="picker1" onOk={this.onOk}
+                              required={true} onPickerChange={(v)=>console.log(v)}/>
                     <YYPicker data={grade} form={form} cols={2} label="无联动多选" cascade={false} field="picker2"
                               onOk={this.onOk} required={true}/>
                     <YYPicker data={this.state.data2} form={form} cols={1} label="单选" field="picker3" onOk={this.onOk}

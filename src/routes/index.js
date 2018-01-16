@@ -24,6 +24,7 @@ import YYTabBarDemoThird from '../../dist/component/tabBar/demo/third';
 import Input from '../../dist/component/input/demo/YYInputDemo'
 // import Button from '../../dist/component/button/SSButton'
 import YYImagePickerDemo from '../../dist/component/imagePicker/demo/YYImagePickerDemo'
+
 import Switch from '../../dist/component/switch/demo/YYSwitchDemo'
 import Datepicker from '../../dist/component/date-picker/demo/YYDatePickerDemo'
 import DateDemo from '../../dist/component/date-picker/demo/datepicker'
@@ -76,6 +77,7 @@ export default
         <Route path="datedemo" component={DateDemo}/>
         <Route path="pickerdemo" component={Pickerdemo}/>
         <Route path="picker" component={YYPicker}/>
+
 
 
         {/*Data Display 数据展示*/}

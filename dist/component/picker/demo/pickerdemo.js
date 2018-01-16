@@ -147,6 +147,7 @@ class Test extends React.Component {
                         cols={4}
                         {...getFieldProps('district', {
                         })}
+                        onPickerChange={(v)=>{console.log(v)}}
                         onOk={e => console.log('ok', e)}
                         onDismiss={e => console.log('dismiss', e)}
                 >

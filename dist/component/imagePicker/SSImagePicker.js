@@ -270,5 +270,19 @@ class SSImagePicker extends Component {
         );
     }
 }
+<<<<<<< HEAD:dist/component/imagePicker/SSImagePicker.js
+=======
+YYImagepicker.defaultProps = {
+    label: '附件',
+    maxSize: 5,
+    disabled: false,
+    files: [],
+    source: {
+        billType: '',
+        sourceType: '',
+        sourceId: ''
+    }
+};
+>>>>>>> lzf:dist/component/imagepicker/YYImagePicker.js
 
 export default SSImagePicker;
