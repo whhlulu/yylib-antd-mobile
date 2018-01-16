@@ -93,7 +93,7 @@ class YYreferDemo extends React.Component{
                     open={this.state.open}
                     referCode='bd-005'
                     referStyle='tree'
-                ><div><span>nihao</span></div></YYReferlist>
+                />
                 <YYReferlist
                     referName='lzf'
                     onOk={this.onOk}
@@ -102,6 +102,7 @@ class YYreferDemo extends React.Component{
                     open={this.state.openz}
                     referStyle='list'
                     referCode='bd-009'
+                    modalHeight='part'
                 />
                 <YYReferlist
                     referName='wyy'

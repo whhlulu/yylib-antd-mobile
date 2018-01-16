@@ -17,13 +17,13 @@ class YYSwitch extends React.Component {
     }
 
     render() {
-        let {key,name,checked,disabled,onClick,color,platform} = this.props;
-        const {getFieldProps} = this.props.form;
+        let {field,name,checked,disabled,onClick,color,platform,form} = this.props;
+        let getFieldProps = form ? form.getFieldProps : null;
         return (
             <div>
                 <List.Item
                     extra={<div><Switch
-                        {..._.isFunction(getFieldProps) ? getFieldProps(key,{
+                        {..._.isFunction(getFieldProps) ? getFieldProps(field,{
                             initialValue:checked,
                             valuePropName:'checked',
                         }):null
@@ -41,7 +41,7 @@ class YYSwitch extends React.Component {
 ;
 
 YYSwitch.defaultProps = {
-    key:'switch1',     //switch的name
+    field:'switch1',     //switch的name
     name:'滑动开关',       //开关名称
     checked:false,      //是否默认被选中
     disabled:false,     //是否不可修改
@@ -51,5 +51,5 @@ YYSwitch.defaultProps = {
     platform:'ios',         //默认样式风格
 
 }
-let switchexample = createForm()(YYSwitch);
-export default switchexample;
+
+export default YYSwitch;

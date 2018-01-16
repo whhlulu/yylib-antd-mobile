@@ -79,6 +79,11 @@ class YYPicker extends Component {
             callback();
         }
     }
+    pickerChange = (value)=>{
+        if (_.isFunction(this.props.onPickerChange)){
+            this.props.onPickerChange(value);
+        }
+    }
 
     render() {
         const {label, field, data, required, errorMsg, disabled, extra, visible,
@@ -94,7 +99,7 @@ class YYPicker extends Component {
                         visible={this.state.visible}
                         disabled={disabled}
                         cascade={cascade}
-                        onChange={v=>console.log(v)}
+                        onPickerChange={this.pickerChange}
                         onOk={this.onOk}
                         onDismiss={this.onDismiss}
                         {..._.isFunction(getFieldProps) ? getFieldProps(field, {
@@ -108,7 +113,7 @@ class YYPicker extends Component {
                         }) : null}
                 >
                     <List.Item arrow={disabled ? "" : "horizontal"}>
-                        <span style={{marginLeft: '0.3rem'}}>{label}</span>
+                        <span style={disabled?{marginLeft:'0.3rem',color:'gray'}:{marginLeft:'0.3rem'}}>{label}</span>
                     </List.Item>
                 </Picker>
                 </List>

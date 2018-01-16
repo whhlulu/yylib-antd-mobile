@@ -122,7 +122,7 @@ export default class YYListview extends React.Component {
                 ref={el => this.lv = el}
                 key={1}
                 dataSource={this.state.dataSource}
-                renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}>
+                renderFooter={() => (<div style={{ padding: 10, textAlign: 'center' }}>
                     {this.state.isLoading ? '正在加载...' : this.state.footer}
                 </div>)}
                 renderRow={children}
@@ -147,5 +147,6 @@ export default class YYListview extends React.Component {
 }
 YYListview.defaultProps={
     onEndReachedhold:400,
-    height:'600px'
+    height:'600px',
+    loadingHeight:30
 }

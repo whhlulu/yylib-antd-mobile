@@ -23,7 +23,7 @@ class YYDatePickerDemo extends React.Component{
         return(
             <div>
                 <YYForm>
-                <YYDatePicker  mode='date' field='date' form={form} onChange={this.onchang}/>
+                <YYDatePicker disabled={true} mode='date' field='date' form={form} onChange={this.onchang}/>
                 <YYDatePicker   mode='time' use12Hours={true} field='time' label='时间' onChange={this.onchang}  form={form}/>
                     <YYDatePicker   mode='datetime' field='datetime' label='datetime' onChange={this.onchang}  form={form}/>
                 </YYForm>

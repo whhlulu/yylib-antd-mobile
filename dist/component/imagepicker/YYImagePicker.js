@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import {List, WhiteSpace, Modal, ImagePicker} from 'antd-mobile';
 import {Gallery, GalleryDelete} from 'react-weui';
-import '../../../css/SSImagePicker.css';
+import '../../../css/YYImagePicker.css';
 import _ from 'lodash';
 import UploadFileUtils from '../../utils/UploadFileUtils';
 
@@ -215,9 +215,6 @@ class YYImagepicker extends Component {
     }
 }
 YYImagepicker.defaultProps = {
-    selectable: true,
-    icon: 'icon-xingzhuang8',
-    iconColor: '',
     label: '附件',
     maxSize: 5,
     disabled: false,

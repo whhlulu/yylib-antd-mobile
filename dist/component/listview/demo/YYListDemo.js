@@ -6,6 +6,7 @@ const Item = List.Item;
 const Brief = Item.Brief;
 
 let page;
+let num=1;
 class YYListDemo extends React.Component{
     constructor(props){
         super(props);
@@ -45,11 +46,16 @@ class YYListDemo extends React.Component{
             {headurl:'',name:'张十九',dept:'管理部',company:'用友建筑'},
             {headurl:'',name:'张二十',dept:'管理部',company:'用友建筑'},
         ];
-        let row = [...this.state.row,...rows];
-        this.setState({
-            row:row
-        });
-        fun();
+
+        if(num<3){
+            let row = [...this.state.row,...rows];
+            this.setState({
+                row:row
+            });
+            fun();
+            num++;
+        }
+
     }
     //下拉刷新数据请求
     onrefresh=function(fun){
@@ -102,7 +108,7 @@ class YYListDemo extends React.Component{
         return(
             <div>
                 <div style={{textAlign:'center'}}>长列表</div>
-                <YYListview init={this.state.init} row={this.state.row} reached={this.onreached} isreached={true} children={row} onrefresh={this.onrefresh}/>
+                <YYListview init={this.state.init} row={this.state.row} reached={this.onreached} isreached={true} children={row} onrefresh={this.onrefresh} />
             </div>
         )
     }
