@@ -5,12 +5,10 @@ import superagent from 'superagent';
 import jsonp from 'superagent-jsonp';
 import {Toast} from 'antd-mobile/lib/index';
 import Cookies from 'js-cookie';
-import BaseHost from './BaseHost';
+import {ADDR,MAURL} from '../common/RestUrl'
 
-// var loginProjectUrl = BaseHost + RestUrl.ROOT_PATH + "/pub/getProjectByOrgId";
-// var loginUserUrl = BaseHost + RestUrl.ROOT_PATH + "/pub/getUserByID";
-var loginContextUrl = BaseHost.MAURL + "/maservlet/ssoLogin/checkToken";
-var esnContextUrl = BaseHost.MAURL + '/maservlet/upesn/checkUpesnToken';
+var loginContextUrl = MAURL + "/maservlet/ssoLogin/checkToken";
+var esnContextUrl = MAURL + '/maservlet/upesn/checkUpesnToken';
 
 function evil(fn) {
     var Fn = Function; //一个变量指向Function，防止有些前端编译工具报错
@@ -111,7 +109,7 @@ function loginContextPost(url, checkParams, _success) {
 
 var AuthToken = {
     CONTEXT_KEY: 'icop_context', //cookie键
-    SERVER_URL: BaseHost + '/icop-workbench/getWorkbenchCookie', //获取上下文的URL
+    SERVER_URL: ADDR + '/icop-workbench/getWorkbenchCookie', //获取上下文的URL
     _cacheContext: null
     /**
      * 初始化上下文信息

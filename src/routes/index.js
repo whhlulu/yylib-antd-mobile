@@ -23,7 +23,7 @@ import YYTabBarDemoThird from '../../dist/component/tabBar/demo/third';
 /*Data Entry 数据录入-Start*/
 import Input from '../../dist/component/input/demo/YYInputDemo'
 // import Button from '../../dist/component/button/SSButton'
-import Imagepicker from '../../dist/component/imagepicker/demo/YYImagePickerDemo'
+import YYImagePickerDemo from '../../dist/component/imagepicker/demo/YYImagePickerDemo'
 import Switch from '../../dist/component/switch/demo/YYSwitchDemo'
 import Datepicker from '../../dist/component/date-picker/demo/YYDatePickerDemo'
 import DateDemo from '../../dist/component/date-picker/demo/datepicker'
@@ -69,7 +69,7 @@ export default
         </Route>
 
         {/*Data Entry 数据录入*/}
-        <Route path="imagepicker" component={Imagepicker}/>
+        <Route path="imagepicker" component={YYImagePickerDemo}/>
         <Route path="input" component={Input}/>
         <Route path="switch" component={Switch}/>
         <Route path="datepicker" component={Datepicker}/>

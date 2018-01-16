@@ -1,52 +1,58 @@
 import React from 'react'
+import {List,ImagePicker} from 'antd-mobile'
 import YYImagepicker from '../YYImagePicker'
-import { Modal, Button} from 'antd-mobile'
-const alert = Modal.alert;
-
-
+const data = [{
+    url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
+    id: '2121',
+}, {
+    url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
+    id: '2122',
+}];
 class YYImagepickerDemo extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            init:'',
-            open:false,
+            files: data,
         }
     }
-    componentWillMount () {
-
-    }
-
     componentDidMount () {
-
-
     }
-    openRefer = ()=>{
+    onChange = (files, type, index) => {
+        console.log(files, type, index);
         this.setState({
-            open:true,
-        })
-    }
-    onOk = (value)=>{
-        console.log(value);
+            files,
+        });
+    };
+    onAddImageClick = (e) => {
+        console.log(e)
+        e.preventDefault();
         this.setState({
-            open:false,
-        })
-    }
-
-
+            files: this.state.files.concat({
+                url: 'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg',
+                id: '3',
+            }),
+        });
+    };
     render(){
+        const {form} = this.props;
         let source = {
-            sourceId: '980474b965bfa7df43fff4208fa7e30',  //主表单据id，子表附件也取主表id
+            sourceId:'aaa',
             sourceType: 'aerialDrawing',  //业务类型（可自定义），与PC端保持一致，子表的sourceType: 子表id+ '_' +业务类型
             billType: 'POV01'  //单据类型
         }
         return(
             <div>
-                {/*<Button onClick={()=> alert('删除','确定删除么？',[*/}
-                    {/*{text:'取消',onPress:()=>console.log('取消')},*/}
-                    {/*{text:'确定',onPress:()=>console.log('确定')}*/}
-                {/*])}>alert</Button>*/}
-                <YYImagepicker label="添加附件" source={source}/>
-
+                <ImagePicker
+                    files={this.state.files}
+                    onChange={this.onChange}
+                    onImageClick={(index, fs) => console.log(index, fs)}
+                    selectable={this.state.files.length < 5}
+                    onAddImageClick={this.onAddImageClick}
+                />
+                <List>
+                    <List.Item>Title</List.Item>
+                </List>
+                <YYImagepicker label="添加附件" source={source} files={[{id:'1',url:'https://zos.alipayobjects.com/rmsportal/hqQWgTXdrlmVVYi.jpeg'}]} from={form} multiple={true} disabled={false}/>
             </div>
         )
     }

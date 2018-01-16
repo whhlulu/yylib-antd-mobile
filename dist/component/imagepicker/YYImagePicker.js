@@ -1,82 +1,44 @@
-/**
- * Created by liulei on 2017/8/24.
- */
 import React, {Component} from 'react';
-import {List, WhiteSpace, Modal, ImagePicker} from 'antd-mobile';
-import {Gallery, GalleryDelete} from 'react-weui';
-import '../../../css/SSImagePicker.css';
+import {ImagePicker, Modal} from 'antd-mobile';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import UploadFileUtils from '../../utils/UploadFileUtils';
-
-const Item = List.Item;
-const alert = Modal.alert;
-
-class YYImagepicker extends Component {
+import AuthToken from '../../utils/AuthToken';
+const alert = Modal.alert
+class YYImagePicker extends Component {
     state = {
         files: this.props.files,
-        showGallery: false
+    };
+    static propTypes = {
+        selectable: PropTypes.bool,
+        label: PropTypes.string,
+        maxSize: PropTypes.number,
+        disabled: PropTypes.bool,
+        source: PropTypes.object,
+        files: PropTypes.array
+    };
+    static defaultProps = {
+        selectable: true,
+        label: '附件',
+        maxSize: 5,
+        disabled: false,
+        source: {
+            sourceId: '',
+            billType: '',
+            sourceType: '',
+        },
+        files: []
     };
 
-    onChange = (files, type, index) => {
-        let that = this;
-        if (type == 'add') {
-            UploadFileUtils.multiFilesUpLoad(files[files.length - 1], this.props.source.billType, {
-                sourceId: this.props.source.sourceId,
-                sourceType: this.props.source.sourceType
-            }, (fileList) => {
-                that.setState({
-                    files: that.state.files.concat(fileList)
-                })
-                if (_.isFunction(this.props.onChange)) {
-                    this.props.onChange(that.state.files);
-                }
-            });
-        } else if (type == 'remove') {
-            const alertInstance = alert('删除', '删除后不可恢复!!!', [
-                { text: '取消', onPress: () => {
-                    alertInstance.close();
-                }, style: 'default' },
-                { text: '确定', onPress: () => {
-                    if (this.props.source.sourceId) {
-                        let params = {
-                            id: this.props.source.sourceId,
-                            billType: this.props.source.billType,
-                            sourceType: this.props.source.sourceType,
-                            attachIds: this.state.files[index].gid
-                        };
-                        UploadFileUtils.delAttach(params, () => {
-                            //删除成功的回调
-                            that.setState({
-                                files: files
-                            })
-                            if (_.isFunction(this.props.onChange)) {
-                                this.props.onChange(files);
-                            }
-                        });
-                    }else{
-                        this.setState({
-                            files: files
-                        })
-                        if (_.isFunction(this.props.onChange)) {
-                            this.props.onChange(files);
-                        }
-                    }
-                } },
-            ]);
+    componentDidMount() {
+        if (this.props.source) {
+            this.loadAttachList(this.props.source);
         }
-    };
-    onImageClick = (index) => {
-        this.setState({
-            showGallery: true,
-            gallery: {
-                index: index
-            }
-        })
-    };
+    }
 
-    componentWillReceiveProps(nextProps){
-        if(this.props.source && this.props.source.sourceId != nextProps.source.sourceId){
-            this.loadAttachList(nextProps.source);
+    componentWillReceiveProps(nextProps) {
+        if (this.props.source && this.props.source.sourceId != nextProps.source.sourceId) {
+            this.loadAttachList(this.props.source);
         }
         if (JSON.stringify(nextProps.files) !== JSON.stringify(this.props.files)) {
             this.setState({
@@ -85,148 +47,103 @@ class YYImagepicker extends Component {
         }
     }
 
-    loadAttachList(source){
+    loadAttachList(source) {
         let params = {
             id: source.sourceId,
             billType: source.billType,
             type: source.sourceType
         };
         let that = this;
-        if(source.sourceId && source.sourceType && source.billType){
-            UploadFileUtils.loadAttachList(params, (fileList) => {
-                that.setState({
-                    files: fileList
-                })
+        if (source.sourceId && source.sourceType && source.billType) {
+            UploadFileUtils.loadAttachList(params, function (data) {
+                if (data.length > 0) {
+                    that.setState({
+                        files: data
+                    })
+                }
             })
         }
     }
 
-    componentDidMount() {
-        if(this.props.source){
-            this.loadAttachList(this.props.source);
+    onChange = (files, type, index) => {
+        if (type == 'add') {
+
+        } else if (type == 'remove') {
+            this.deleteFile(index);
+        } else {
+            console.log('上传错误！')
+        }
+        if (_.isFunction(this.props.onChange)) {
+            this.props.onChange(this.state.files);
         }
     }
-
-    galleryClick = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        //防止Gallery在未unmount时调用setState导致内存泄漏的警告
-        let that = this;
-        setTimeout(() => {
-            that.setState({
-                gallery: that.state.files.length <= 1 ? true : false,
-                showGallery: false
-            })
-        }, 300);
-    }
-
-    galleryDeleteClick = (e, index) => {
-        e.preventDefault();
-        e.stopPropagation();
+//删除文件
+    deleteFile = (index) => {
         let that = this;
         const alertInstance = alert('删除', '删除后不可恢复!!!', [
-            { text: '取消', onPress: () => {
+            {
+                text: '取消', onPress: () => {
                 alertInstance.close();
-            }, style: 'default' },
-            { text: '确定', onPress: () => {
-                if (this.props.source.sourceId) {
+            }, style: 'default'
+            },
+            {
+                text: '确定', onPress: () => {
+                if (this.props.source.sourceType) {
                     let params = {
                         id: this.props.source.sourceId,
                         billType: this.props.source.billType,
                         sourceType: this.props.source.sourceType,
                         attachIds: this.state.files[index].gid
                     };
-                    UploadFileUtils.delAttach(params, ()=> {
+                    UploadFileUtils.delAttach(params, () => {
                         that.setState({
-                            files: that.state.files.filter(( e, i ) => i != index),
-                            gallery: that.state.files.length <= 1 ? true : false,
-                            showGallery: false
+                            files: that.state.files.filter((e, i) => i != index)
                         })
                     });
-                }else{
+                } else {
                     this.setState({
-                        files: that.state.files.filter(( e, i ) => i != index),
-                        gallery: that.state.files.length <= 1 ? true : false,
-                        showGallery: false
+                        files: that.state.files.filter((e, i) => i != 0)
                     })
-                    if (_.isFunction(this.props.onChange)) {
-                        this.props.onChange(that.state.files.filter(( e, i ) => i != index));
-                    }
                 }
-            } },
+            }
+            },
         ]);
     }
-
-    onAddImageClick = () => {
-        let that = this;
-        if(navigator.userAgent.match(/(Android)/i)){
-            navigator.camera.getPicture((imageURI) => {
-                if(imageURI){
-                    imageURI = "data:image/jpeg;base64," + imageURI;//添加信息头，成为完整图片base64
-                    let file = {};
-                    file.fileName = this.props.source && this.props.source.sourceType ? this.props.source.sourceType + '_' + new Date().getTime() + '.jpg' : 'attach_' + new Date().getTime() + '.jpg';
-                    file.fileContent = imageURI.replace('data:image/png;base64,', '').replace('data:image/jpeg;base64,', '');
-                    that.onChange(that.state.files.concat({files: [file]}), 'add');
-                }
-            }, (message) => {
-            })
-        }
-    }
-
-    renderGallery(){
-        if(!this.state.gallery) return false;
-        let srcs = this.state.files.map(file => file.originalUrl);
-
-        return (
-            <Gallery
-                src={srcs}
-                show={this.state.showGallery}
-                defaultIndex={this.state.gallery.index}
-                onClick={this.galleryClick}
-            >
-                <GalleryDelete onClick={this.galleryDeleteClick} />
-            </Gallery>
-        )
-    }
+    onAddImageClick = (e) => {
+        e.preventDefault();//阻止触发onChange事件！
+        let params = {
+            billType: this.props.source.billType,
+            sourceType: this.props.source.sourceType,
+            sourceId: this.props.source.sourceId,
+            userId: AuthToken.getUserId(),
+            userName: AuthToken.getUserName()
+        };
+        var file = {};
+        window.YYPlugin.call("CommonPlugin", "postFile", params, function success(result) {
+            file.gid = result.gid;
+            file.name = result.fileName;
+            file.url = result.filePath;
+            this.setState({
+                files: this.state.files.concat(file),
+            });
+        });
+    };
 
     render() {
+        const {disabled, maxSize, iconColor, label, required} = this.props;
         const {files} = this.state;
-        const {icon, disabled, maxSize, iconColor, label, required} = this.props;
         return (
-            <div className={disabled?'none':''}>
-                <WhiteSpace size="lg"/>
-                { this.renderGallery() }
-                <Item>
-
-                    <span style={{marginLeft: '0.3rem'}}>
-                        {label}
-                    </span>
-
-                    <ImagePicker
-                        files={files}
-                        onChange={disabled ? null : this.onChange}
-                        onImageClick={this.onImageClick}
-                        selectable={!disabled && files.length < maxSize}
-                        onAddImageClick={this.onAddImageClick}
-                    />
-                </Item>
+            <div>
+                <ImagePicker
+                    files={files}
+                    onChange={disabled ? null : this.onChange}
+                    onImageClick={this.onImageClick}
+                    selectable={!disabled && files.length < maxSize}
+                    onAddImageClick={this.onAddImageClick}
+                />
             </div>
         );
     }
 }
-YYImagepicker.defaultProps = {
-    selectable: true,
-    icon: 'icon-xingzhuang8',
-    iconColor: '',
-    label: '附件',
-    maxSize: 5,
-    disabled: false,
-    files: [],
-    source: {
-        billType: '',
-        sourceType: '',
-        sourceId: ''
-    }
-};
 
-export default YYImagepicker;
+export default YYImagePicker;

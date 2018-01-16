@@ -1,5 +1,5 @@
 import ajax from './ajax'
-import BaseHost from './BaseHost'
+import {ADDR} from '../common/RestUrl'
 import AuthToken from './AuthToken'
 import {Toast} from 'antd-mobile/lib/index'
 import _ from 'lodash'
@@ -7,7 +7,6 @@ import _ from 'lodash'
 /**
  * 文件上传工具
  */
-var ADDR = BaseHost.ADDR
 var downloadUrl = '/icop-file/file/download?id='
 //获取附件列表的url
 var listUrl = '/icop-file/file/list'
