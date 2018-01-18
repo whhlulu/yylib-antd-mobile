@@ -130,6 +130,7 @@ class YYImagePicker extends Component {
             file.gid = result.gid;
             file.name = result.fileName;
             file.url = result.filePath;
+            file.backData = result;
             that.setState({
                 files: that.state.files.concat(file),
             },()=>{
@@ -141,19 +142,12 @@ class YYImagePicker extends Component {
     };
 
     render() {
-        const {disabled, maxSize, label, form,field,required} = this.props;
-        let getFieldProps = form ? form.getFieldProps : null;
+        const {disabled, maxSize, label} = this.props;
         const {files} = this.state;
         return (
             <div>
                 <List.Item><div>{label}</div></List.Item>
                 <ImagePicker
-                    {..._.isFunction(getFieldProps) ? getFieldProps(field, {
-                        initialValue:  files,
-                        rules: [
-                            { required, message: '请选择图片!' },
-                        ],
-                    }) : null}
                     files={files}
                     onChange={disabled ? null : this.onChange}
                     onImageClick={this.onImageClick}

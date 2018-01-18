@@ -30,7 +30,9 @@ export { default as YYToast } from './component/toast/YYToast';
 //业务组件
 export { default as YYReferlist} from './component/refer/YYReferlist'
 export { default as YYApprove} from './component/bpm/YYApprove'
+export { default as YYApproveAction} from './component/bpm/YYApproveAction'
 export { default as YYApproveHistory} from './component/bpm/YYApproveHistory'
+export { default as YYAssignRef} from './component/bpm/YYAssignRef'
 
 
 //其他以及测试用

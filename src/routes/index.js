@@ -44,6 +44,7 @@ import YYToastDemo from '../../dist/component/toast/demo/basic'
 import Referdemo from '../../dist/component/refer/demo/YYreferDemo'
 import YYApproveHistoryDemo from '../../dist/component/bpm/demo/YYApproveHistoryDemo'
 import YYApproveDemo from '../../dist/component/bpm/demo/YYApproveDemo'
+import YYApproveActionDemo from '../../dist/component/bpm/demo/YYApproveActionDemo'
 
 //其他以及测试用
 import Test from '../../dist/component/test/test'
@@ -91,6 +92,7 @@ export default
         <Route path="referdemo" component={Referdemo}/>
         <Route path="approveHistory" component={YYApproveHistoryDemo}/>
         <Route path="approve" component={YYApproveDemo}/>
+        <Route path="approveAction" component={YYApproveActionDemo}/>
 
         {/*测试页面*/}
         <Route path="test" component={Test}/>

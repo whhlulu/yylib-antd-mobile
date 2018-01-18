@@ -50,9 +50,9 @@ class YYApproveDemo extends React.Component {
                 </NavBar>
                 {this.state.showApprove ? <YYApprove
                 showApprove={this.state.showApprove}
-                billTypeId='CSM5'
+                billTypeId='IVM3'
                 userId="5afbe1b5-d718-4654-b915-db4409251854"
-                billId='63c847474148c720dce60042a3f0b52e'/>
+                billId="a993d7f47cd53fe7e995873d70572bbe"/>
                 : null}
             </div>
         )

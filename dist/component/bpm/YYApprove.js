@@ -51,6 +51,7 @@ class YYApprove extends React.Component {
                             addsignAble: beforeRejectData.addsignAble,//改派
                             assignAble: beforeRejectData.assignAble,//指派
                             bohuiDate: beforeRejectData.data,
+                            //bohuiDate: [{activityId:'a',activityName:'abb'}],
                         })
                     })
                 } else {
@@ -235,7 +236,7 @@ class YYApprove extends React.Component {
             <RadioItem key="提交人" value="提交人" checked={bohuiValueRadio === '提交人'}
                        onChange={() => this.bohuiOnChange('提交人')}>提交人</RadioItem>
             {bohuiDate && bohuiDate.length > 0 ? bohuiDate.map((item) => {
-                <RadioItem key={item.activityId} value={item.activityId} checked={bohuiValueRadio === item.activityId}
+                return <RadioItem key={item.activityId} value={item.activityId} checked={bohuiValueRadio === item.activityId}
                            onChange={() => this.bohuiOnChange(item.activityId)}>{item.activityName}</RadioItem>
             }) : null}
         </List>;

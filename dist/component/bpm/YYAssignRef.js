@@ -65,6 +65,9 @@ class YYAssignRef extends React.Component {
         this.setState({
             visible: false
         })
+        if (_.isFunction(this.props.onClose)){
+            this.props.onClose();
+        }
     }
     onAssignChange = (selectedNode) => {
         //多选模式

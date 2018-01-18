@@ -28,6 +28,8 @@ var MODULE_URL = {
     diagramUrl: ADDR + '/icop-bpmcenter-web/pages/diagram-viewer/index.html?processInstanceId=',//不同意且退回
     queryAssignUser: ADDR + '/icop-bpmcenter-web/bpm/queryAssignUser',//获取审批指派用户
     queryStartAssignUser: ADDR + '/icop-bpmcenter-web/bpm/queryStartAssignUser',//获取审批指派用户
+    unapprove: ADDR + '/icop-bpmcenter-web/bpm/unapprove',//弃审
+    doCallBack: ADDR + '/icop-bpmcenter-web/bpm/doCallBack',//收回
 }
 
 module.exports = {
