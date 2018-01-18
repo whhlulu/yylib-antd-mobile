@@ -47,12 +47,11 @@ class YYImagepickerDemo extends React.Component{
         const {form} = this.props;
         return(
             <div>
-
                 <YYInput
                     form={form}
                     label="人员姓名"
                     field="name-1"
-                    extra='今天啊'
+                    extra='今天'
                     updatePlaceholder={true}
                     onExtraClick={this.onOk}
                     required={true}
