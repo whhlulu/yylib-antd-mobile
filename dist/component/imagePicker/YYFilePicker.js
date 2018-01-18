@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import {List, WhiteSpace, Modal,Toast} from 'antd-mobile';
 import {Gallery, GalleryDelete} from 'react-weui';
 import PropTypes from 'prop-types';
-import './css/SSImagePicker.css';
 import SSIcon from '../common/SSIcon'
 import _ from 'lodash';
 import UploadFileUtils from '../utils/UploadFileUtils';
