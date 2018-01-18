@@ -1,5 +1,5 @@
 import React from 'react'
-import YYReferlist from '../YYReferlist'
+import YYRefer from '../YYRefer'
 import {Button} from 'antd-mobile';
 
 
@@ -85,7 +85,7 @@ class YYreferDemo extends React.Component{
                 <Button onClick={this.openRefer.bind(this,'2')}>点击选择参照2</Button>
                 <Button onClick={this.openRefer.bind(this,'3')}>点击选择参照3</Button>
 
-                <YYReferlist
+                <YYRefer
                     referName='zyl'
                     onOk={this.onOk}
                     onClose={this.onClose}
@@ -94,7 +94,7 @@ class YYreferDemo extends React.Component{
                     referCode='bd-005'
                     referStyle='tree'
                 />
-                <YYReferlist
+                <YYRefer
                     referName='lzf'
                     onOk={this.onOk}
                     onClose={this.onClose}
@@ -104,7 +104,7 @@ class YYreferDemo extends React.Component{
                     referCode='bd-009'
                     modalHeight='part'
                 />
-                <YYReferlist
+                <YYRefer
                     referName='wyy'
                     onOk={this.onOk}
                     onClose={this.onClose}

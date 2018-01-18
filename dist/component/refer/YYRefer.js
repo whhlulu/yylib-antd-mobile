@@ -21,7 +21,7 @@ let pageCount=[];
 let referstyle='';
 let listcontent='';
 
-export default class YYReferlist extends React.Component {
+export default class YYRefer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -555,7 +555,7 @@ export default class YYReferlist extends React.Component {
         );
     }
 }
-YYReferlist.defaultProps = {
+YYRefer.defaultProps = {
     referlabel: '参照',
     referCode: '00026',
     modalHeight:'all',

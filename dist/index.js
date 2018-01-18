@@ -9,7 +9,7 @@ export { default as YYTabBar } from './component/tabBar/YYTabBar';
 
 /*Data Entry 数据录入-Start*/
 // export { default as YYButton } from './component/button/YYButton';
-export { default as YYImagePicker} from './component/imagePicker/YYImagePicker'
+export { default as YYImagePicker} from './component/imagepicker/YYImagePicker'
 export { default as YYInput} from './component/input/YYInput'
 export { default as YYForm} from './component/form/YYForm'
 export { default as YYSwitch} from './component/switch/YYSwitch'
@@ -28,7 +28,7 @@ export { default as YYToast } from './component/toast/YYToast';
 
 
 //业务组件
-export { default as YYReferlist} from './component/refer/YYReferlist'
+export { default as YYRefer} from './component/refer/YYRefer'
 export { default as YYApprove} from './component/bpm/YYApprove'
 export { default as YYApproveHistory} from './component/bpm/YYApproveHistory'
 
