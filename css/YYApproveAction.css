@@ -1,0 +1,45 @@
+.yy-approve-action{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    height: 48px;
+    line-height: 49px;
+    width: 100vw;
+    background-color: #fff;
+    font-size: 14px;
+    text-align: center;
+    border-top: 1px solid #d7dce6;
+}
+.yy-approve-action .action-btn{
+    display: inline-block;
+    width: 25%;
+}
+.yy-approve-action .action-btn .action-icon{
+    position: relative;
+    top: 2px;
+    right: 4px;
+}
+.yy-approve-action .action-btn.disabled{
+    color: #aaafb9!important;
+    background-color: #D7DCDE!important;
+}
+.yy-approve-action .action-btn.bohui{
+     color: #FF6161;
+ }
+.yy-approve-action .action-btn.gaipai{
+    color: #0091FA;
+}
+.yy-approve-action .action-btn.shenhe{
+    color: #0091FA;
+}
+.yy-approve-action .action-btn.tongyi{
+    color: #ffffff;
+    background-color: #0091FA;
+}
+.yy-approve-action .block{
+    font-size: 1rem;
+    display: inline-block;
+    width: 100%;
+    color: #ffffff;
+    background-color: #0091FA;
+}

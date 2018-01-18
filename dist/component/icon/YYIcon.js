@@ -33,7 +33,7 @@ class YYIcon extends Component {
 
 YYIcon.defaultProps = {
     type: '',
-    color: '#333', //图标的颜色
+    color: '', //图标的颜色
     size: 'md',
 }
 
