@@ -1,6 +1,6 @@
 import React from 'react'
 import {YYInput,YYForm} from '../../../index'
-import { Modal, Button, Toast, WhiteSpace} from 'antd-mobile/lib/index'
+import { Modal, Button, Toast, WhiteSpace,List} from 'antd-mobile/lib/index'
 const alert = Modal.alert;
 
 
@@ -21,16 +21,11 @@ class YYImagepickerDemo extends React.Component{
 
 
     }
-    openRefer = ()=>{
-        this.setState({
-            open:true,
-        })
-    }
+
     onOk = (value)=>{
         console.log(value);
-        this.setState({
-            open:false,
-        })
+        console.log('1')
+
     }
     submit = () => {
         this.props.form.validateFields(['name-1','name-2'], (err, values) => {
@@ -52,10 +47,14 @@ class YYImagepickerDemo extends React.Component{
         const {form} = this.props;
         return(
             <div>
+
                 <YYInput
                     form={form}
                     label="人员姓名"
                     field="name-1"
+                    extra='今天啊'
+                    updatePlaceholder={true}
+                    onExtraClick={this.onOk}
                     required={true}
                     value={this.state.name}
                 />
@@ -66,6 +65,7 @@ class YYImagepickerDemo extends React.Component{
                     required={true}
                     value={this.state.name}
                 />
+
                     <WhiteSpace/>
                     <Button type="ghost"  onClick={this.submit} >提交验证</Button>
             </div>

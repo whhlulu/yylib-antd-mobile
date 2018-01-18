@@ -7,7 +7,7 @@
     text-overflow: ellipsis;
 }
 
-.am-list-item.am-input-item{
+  .am-list-item .am-input-item{
     padding-left: 0 !important;
     padding-right: 0 !important;
 }

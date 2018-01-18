@@ -29,6 +29,9 @@ class SSInput extends React.Component {
     onBlur = (value) => {
         if (_.isFunction(this.props.onBlur)) this.props.onBlur(value);
     }
+    onExtraClick = () => {
+        if (_.isFunction(this.props.onExtraClick)) this.props.onExtraClick();
+    }
    /* onClick = (value) => {
         if (_.isFunction(this.props.onClick)&&this.props.disabled) this.props.onClick(value);
     }*/
@@ -50,7 +53,7 @@ class SSInput extends React.Component {
     }
     render() {
         const {name, field, required, hasError, editable, disabled, extra, placeholder,
-            maxLength, visible, type, label, trigger, clear, form, value, iconColor, icon, showIcon} = this.props;
+            maxLength, visible, type, label, trigger, clear, form, value,labelNumber, updatePlaceholder,iconColor, icon, showIcon} = this.props;
         let getFieldProps = form.getFieldProps;
         let errorMsg='必填项'+ label+'未填写';
         return (
@@ -73,13 +76,16 @@ class SSInput extends React.Component {
                     clear={clear}
                     error={hasError}
                     onErrorClick={this.onErrorClick}
+                    onExtraClick={this.onExtraClick}
                     onBlur={this.onBlur}
                     onFocus={this.onFocus}
                     placeholder={disabled?'':placeholder}
                     maxLength={maxLength}
                     onChange={this.onChange}
+                    updatePlaceholder={updatePlaceholder}
+                    labelNumber={labelNumber}
                 >{showIcon ? '': <span style={{marginLeft: '0.3rem'}}></span>}
-                    <span style={{marginLeft: '0.3rem'}}>{label}</span>
+                    <span style={disabled?{marginLeft: '0.3rem',color:'gray'}:{marginLeft: '0.3rem'}}>{label}</span>
                 </InputItem>
             </Item>
         );
@@ -99,6 +105,7 @@ SSInput.defaultProps = {
     disabled: false,
     value: null,
     extra: "",
+    labelNumber:5,
     maxLength: 99999999,
     visible: true,
     clear: true,
