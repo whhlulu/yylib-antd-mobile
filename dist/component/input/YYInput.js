@@ -80,7 +80,6 @@ class SSInput extends React.Component {
                     onChange={this.onChange}
                 >{showIcon ? '': <span style={{marginLeft: '0.3rem'}}></span>}
                     <span style={{marginLeft: '0.3rem'}}>{label}</span>
-                   {/* <span style={{display: required ? '' : 'none'}}><SSIcon icon="icon-bixutian" color="red"/></span>*/}
                 </InputItem>
             </Item>
         );

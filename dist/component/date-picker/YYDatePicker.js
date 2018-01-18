@@ -104,7 +104,7 @@ class YYDatePicker extends Component {
             <div className="dateLine" onClick={() => disabled ? null : this.setState({visible: true})}>
                 <DatePicker
                     {..._.isFunction(getFieldProps) ? getFieldProps(field, {
-                        initialValue:  this.state.dpValue,
+                        initialValue:  value,
                         rules: [
                             { required, message: errorMsg },
                             { validator: this.validateCallBack },
@@ -125,7 +125,7 @@ class YYDatePicker extends Component {
                     use12Hours={use12Hours}
                 >
                     <Item arrow={disabled ? "" : arrow}>
-                        <span style={titleStyle}>{label}</span>
+                        <span style={disabled?{marginLeft:'0.3rem',color:'gray'}:titleStyle}>{label}</span>
                         <span style={{display: required ? '' : 'none'}}></span>
                     </Item>
                 </DatePicker>
@@ -140,7 +140,7 @@ YYDatePicker.defaultProps = {
     minDate: moment('1900-08-06 +0800', 'YYYY-MM-DD Z')._d,
     arrow: 'horizontal',
     use12Hours:false,
-    value:'',
+    value:now,
     mode: 'date',
     extra:'',
     label: '日期',

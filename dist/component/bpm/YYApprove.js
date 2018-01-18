@@ -10,7 +10,7 @@ import classnames from 'classnames';
 import YYIcon from "../icon/YYIcon";
 import YYToast from '../toast/YYToast';
 import YYNavBar from '../navBar/YYNavBar';
-import YYReferlist from '../refer/YYReferlist';
+import YYRefer from '../refer/YYRefer';
 import YYApproveHistory from './YYApproveHistory'
 import PropTypes from 'prop-types';
 import _ from 'lodash';
@@ -247,7 +247,7 @@ class YYApprove extends React.Component {
             <List renderHeader={() => '请选择流程改派处:'}>
                 <Item className="yy-item" arrow="horizontal" onClick={this.showAddsign}
                       extra={this.state.addsingUser ? this.state.addsingUser.name : null}>改派到：</Item></List>
-            <YYReferlist
+            <YYRefer
                 referName='Addsign'
                 onOk={this.checkedAddsign}
                 onClose={this.closeAddsign}

@@ -3,9 +3,7 @@
  */
 import React from 'react'
 import { Button, Flex, WingBlank } from 'antd-mobile'
-import PropTypes from 'prop-types'
-import SSIcon from '../icon/SSIcon'
-import '../../../css/SSButton.css'
+import '../../../css/YYButton.css'
 import classNames from 'classnames'
 import { hashHistory } from 'react-router'
 
@@ -86,7 +84,6 @@ export default class YYButton extends React.Component {
         break
       case 'add':
         children = <div className='fix_center_btn' onClick={onClick}>
-          <SSIcon icon='icon-Add' color='#ffffff'></SSIcon>
         </div>
         break
       case 'left-right':
@@ -120,16 +117,11 @@ export default class YYButton extends React.Component {
           <div>
             <span onClick={ldisabled?'':lClick}
                   className={classNames({'disabledStyle2': ldisabled})}>
-              <SSIcon
-                icon={'icon-bohui'}
-                color={ldisabled ? '#808080' : '#19AF19'}></SSIcon>
               <span style={{marginLeft:'5px'}}>{lText}</span>
               </span>
             <span onClick={cdisabled?'':cClick}
                   className={classNames({'disabledStyle2': cdisabled})}>
-              <SSIcon
-                icon={'icon-shanchu1'}
-                color={cdisabled ? '#808080' : '#FA503C'}></SSIcon>
+
               <span style={{marginLeft:'5px'}}>{cText}</span>
               </span>
           </div>
