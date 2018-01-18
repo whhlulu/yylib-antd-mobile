@@ -23,7 +23,7 @@ import YYTabBarDemoThird from '../../dist/component/tabBar/demo/third';
 /*Data Entry 数据录入-Start*/
 import Input from '../../dist/component/input/demo/YYInputDemo'
 // import Button from '../../dist/component/button/SSButton'
-import YYImagePickerDemo from '../../dist/component/imagePicker/demo/YYImagePickerDemo'
+import YYImagePickerDemo from '../../dist/component/image-picker/demo/YYImagePickerDemo'
 
 import Switch from '../../dist/component/switch/demo/YYSwitchDemo'
 import Datepicker from '../../dist/component/date-picker/demo/YYDatePickerDemo'
