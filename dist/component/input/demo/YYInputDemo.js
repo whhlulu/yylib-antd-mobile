@@ -49,7 +49,7 @@ class YYImagepickerDemo extends React.Component{
             <div>
                 <YYInput
                     form={form}
-                    label="人员姓名"
+                    label="人员薪金"
                     field="name-1"
                     extra='今天'
                     updatePlaceholder={true}
@@ -59,8 +59,11 @@ class YYImagepickerDemo extends React.Component{
                 />
                 <YYInput
                     form={form}
-                    label="人员性别"
+                    label="人员手机"
                     field="name-2"
+                    showIcon={true}
+                    type='phone'
+                    icon='phone'
                     required={true}
                     value={this.state.name}
                 />

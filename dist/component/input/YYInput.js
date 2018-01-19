@@ -1,5 +1,6 @@
 import React from 'react';
 import {List, InputItem} from 'antd-mobile';
+import {YYIcon} from '../../index'
 // import {createForm} from 'rc-form';
 // import PropTypes from 'prop-types';
 import _ from 'lodash'
@@ -84,7 +85,7 @@ class SSInput extends React.Component {
                     onChange={this.onChange}
                     updatePlaceholder={updatePlaceholder}
                     labelNumber={labelNumber}
-                >{showIcon ? '': <span style={{marginLeft: '0.3rem'}}></span>}
+                >{showIcon ? <YYIcon type={icon} color={iconColor}/>: <span></span>}
                     <span style={disabled?{marginLeft: '0.3rem',color:'gray'}:{marginLeft: '0.3rem'}}>{label}</span>
                 </InputItem>
             </Item>
@@ -105,14 +106,14 @@ SSInput.defaultProps = {
     disabled: false,
     value: null,
     extra: "",
-    labelNumber:5,
+    labelNumber:7,
     maxLength: 99999999,
     visible: true,
     clear: true,
     trigger: "onChange",
     iconColor: "red",
-    icon: "icon-xingzhuang7",
+    icon: "wage",
     placeholder: "请输入",
-    showIcon: true
+    showIcon: false
 }
 export default SSInput;
