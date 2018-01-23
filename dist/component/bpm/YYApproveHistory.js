@@ -109,7 +109,7 @@ class YYApproveHistory extends React.Component {
     render() {
         const {getFieldProps} = this.props.form;
         let {bpmProcessInfo, loading, bpmId} = this.state;
-        let {userId, billId, className, ...rest} = this.props;
+        let {userId, billId, className, ...restProps} = this.props;
         const basicCls = classnames('yy-bpm-steps', className);
         return (
             <div className="yy-approve-history">
@@ -133,7 +133,7 @@ class YYApproveHistory extends React.Component {
                         src={MODULE_URL.diagramUrl + bpmId}
                     />
                 </div>
-                <Steps {...rest} className={basicCls} size="small" current={bpmProcessInfo.length}>
+                <Steps {...restProps} className={basicCls} size="small" current={bpmProcessInfo.length}>
                     {
                         bpmProcessInfo && bpmProcessInfo.length > 0 ? bpmProcessInfo.map((item, index) => {
                             return <Step
