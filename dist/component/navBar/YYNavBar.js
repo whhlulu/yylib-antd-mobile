@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import {NavBar} from 'antd-mobile';
 import '../../../css/YYNavBar.css';
 import _ from 'lodash';
+import classnames from 'classnames';
 import {backOrClose} from '../../utils/lfwUtil'
 
 class YYNavBar extends Component {
@@ -21,9 +22,12 @@ class YYNavBar extends Component {
         }
     }
     render() {
-        const { mode, leftContent, rightContent, children} = this.props;
+
+        let { mode, leftContent, rightContent, children,className, ...restProps} = this.props;
+        let wrapClz = classnames('yy-navBar', className);
         return (
-            <NavBar {...this.props}
+            <NavBar {...restProps}
+                className={wrapClz}
                     mode={mode}
                     leftContent={leftContent}
                     onLeftClick={this.onLeftClick}

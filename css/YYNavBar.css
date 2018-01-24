@@ -1,3 +1,7 @@
-.am-navbar.am-navbar-dark {
+.yy-navBar.am-navbar.am-navbar-dark {
     background-color: #302f35
+}
+.yy-navBar.am-navbar.am-navbar-light {
+    box-sizing: border-box;
+    border-bottom: 1px solid #ddd;
 }
