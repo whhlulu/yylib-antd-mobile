@@ -32,6 +32,7 @@ export default class YYReferTree extends React.Component {
             searchText:'',
             showList:false, //tree-list的modal
             row:[],             //标题导航栏
+            changeOrNext:true,         //点击选择或者onclick事件
         };
     }
 
@@ -58,10 +59,11 @@ export default class YYReferTree extends React.Component {
                             treereferUrl[name] = result.data.treerelyurl;
                             relyfield[name] = result.data.relyfield;
                             referParams = {};
-
+                            let rows = [{id:'001',name:'首页',url:referUrl[name],referParams:referParams}]
                             page.setState({
                                 referName: result.data.refName,
-                                referUrl: referUrl
+                                referUrl: referUrl,
+                                row:rows
                             })
                             referParams.condition = page.props.condition;
                             page.getTreeData(referUrl[name], referParams,name);
@@ -91,9 +93,7 @@ export default class YYReferTree extends React.Component {
         ajax.getText(referUrl, referParams, function (result) {
             result = JSON.parse(result);
             data[contentname]=result;
-            let rows = [{id:'001',name:'首页',url:referUrl,referParams:referParams}]
             _self.setState({
-                row: rows,
                 animating: false
             })
         }, function (err) {
@@ -110,13 +110,19 @@ export default class YYReferTree extends React.Component {
         if (!selectedNodes.some((item) => {
                 return item.id === selectedNode.id
             })) {
-            console.log('onchange');
+            // console.log('onchange');
             selectedNodes.push(selectedNode);
             this.setState({
+                changeOrNext:false,
                 selectedNodes: selectedNodes,
             });
+            setTimeout(()=>{
+                this.setState({
+                    changeOrNext:true,
+                })
+            },10)
         } else {
-          console.log('2')
+          // console.log('2')
             let newNodes = [];
             // eslint-disable-next-line
             selectedNodes.map((item) => {
@@ -125,8 +131,14 @@ export default class YYReferTree extends React.Component {
                 }
             })
             this.setState({
+                changeOrNext:false,
                 selectedNodes: newNodes
             });
+            setTimeout(()=>{
+                this.setState({
+                    changeOrNext:true,
+                })
+            },10)
         }
     }
 
@@ -233,17 +245,44 @@ export default class YYReferTree extends React.Component {
         }
     }
     nextRefer = (value)=>{
-        console.log('nextRefer')
+            setTimeout(()=>{
+                if(this.state.changeOrNext){
+                    referParams.pid = value.id;
+                    if(!value.isLeaf){
+                        this.setState({
+                            row:[...this.state.row,value]
+                        })
+                        this.getTreeData(referUrl[this.props.referName], referParams,this.props.referName);
+                    }
+                }
+
+            },10)
 
 
-            this.setState({
-                row:[...this.state.row,value]
-            })
 
 
     }
     handleClick = (value) =>{
-        console.log(value);
+        //点击导航栏所做的处理
+        if(value.name == '首页'){
+            this.setState({
+                row:[value]
+            })
+            this.getTreeData(value.url, {},this.props.referName);
+        } else {
+            this.state.row.some((item,index)=>{
+                if(item.id == value.id){
+                    let name = this.props.referName;
+                    let oldRow = this.state.row;
+                    let newRow = [];
+                    newRow = oldRow.splice(0,index+1);
+                   this.setState({
+                       row:newRow
+                   })
+                    this.getTreeData(referUrl[name], {pid:value.id},this.props.referName);
+                }
+            })
+        }
     }
 
     render() {
