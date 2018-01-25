@@ -47,6 +47,7 @@ import Refernew from '../../dist/component/refer/demo/YYReferNewDemo'
 import YYApproveHistoryDemo from '../../dist/component/bpm/demo/YYApproveHistoryDemo'
 import YYApproveDemo from '../../dist/component/bpm/demo/YYApproveDemo'
 import YYApproveActionDemo from '../../dist/component/bpm/demo/YYApproveActionDemo'
+import YYResultDemo from '../../dist/component/result/demo/YYResultDemo'
 
 //其他以及测试用
 import Test from '../../dist/component/test/test'
@@ -99,6 +100,7 @@ export default
         <Route path="approveHistory" component={YYApproveHistoryDemo}/>
         <Route path="approve" component={YYApproveDemo}/>
         <Route path="approveAction" component={YYApproveActionDemo}/>
+        <Route path="result" component={YYResultDemo}/>
 
         {/*测试页面*/}
         <Route path="test" component={Test}/>

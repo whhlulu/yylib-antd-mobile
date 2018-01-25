@@ -1,0 +1,12 @@
+.yy-result{
+    width: 100%;
+    height: 100%;
+    color: #b7b7b8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.yy-result img{
+    height: 8rem;
+}

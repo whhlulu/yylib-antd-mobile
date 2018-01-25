@@ -33,6 +33,7 @@ export { default as YYApprove} from './component/bpm/YYApprove'
 export { default as YYApproveAction} from './component/bpm/YYApproveAction'
 export { default as YYApproveHistory} from './component/bpm/YYApproveHistory'
 export { default as YYAssignRef} from './component/bpm/YYAssignRef'
+export { default as YYResult} from './component/result/YYResult'
 
 
 //其他以及测试用
