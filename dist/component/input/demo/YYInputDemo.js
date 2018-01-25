@@ -46,12 +46,13 @@ class YYImagepickerDemo extends React.Component{
     render(){
         const {form} = this.props;
         return(
-            <div>
+            <div className='YYInput'>
                 <YYInput
                     form={form}
-                    label="人员薪金"
+                    label="人员薪金加一二"
                     field="name-1"
                     extra='今天'
+                    clear={true}
                     updatePlaceholder={true}
                     onExtraClick={this.onOk}
                     required={true}
@@ -62,6 +63,7 @@ class YYImagepickerDemo extends React.Component{
                     label="人员手机"
                     field="name-2"
                     showIcon={true}
+                    clear={false}
                     type='phone'
                     icon='phone'
                     required={true}

@@ -51,82 +51,12 @@ export default class YYButton extends React.Component {
     switch (type) {
       case 'fill':
         children = <Button
-          className={classNames({'pjtGreenBtn': 1, 'no_radius': 1, 'fix_btn': fix, 'disabledStyle': disabled})}
-          activeStyle={false}
+           className={classNames({'no_radius': false, 'fix_btn': fix, 'disabledStyle': disabled})}
+          activeStyle={!disabled}
           type="primary"
-          style={this.props.style}
           onClick={disabled ? '' : onClick}>
           {text}
         </Button>
-        break
-      case 'center':
-        children = <WingBlank size='sm'>
-          <Button
-            className={classNames({'pjtGreenBtn': 1, 'disabledStyle': disabled})}
-            activeStyle={false}
-            type="primary"
-            onClick={disabled ? '' : onClick}>
-            {text}
-          </Button>
-        </WingBlank>
-        break
-      case 'dashed':
-        children = <WingBlank size={'lg'}>
-          <Button
-            className={'dottedBtn'}
-            style={this.props.style}
-            activeStyle={false}
-            type="ghost"
-            onClick={onClick}>
-            {text}
-          </Button>
-        </WingBlank>
-        break
-      case 'add':
-        children = <div className='fix_center_btn' onClick={onClick}>
-        </div>
-        break
-      case 'left-right':
-        children = <WingBlank size={'lg'}>
-          <Flex>
-            <Flex.Item>
-              <Button
-                className={classNames({'pjtPompadourBtn': 1, 'disabledStyle': ldisabled})}
-                activeStyle={false}
-                type="primary"
-                style={this.props.lStyle}
-                onClick={ldisabled ? '' : lClick}>
-                {lText}
-              </Button>
-            </Flex.Item>
-            <Flex.Item>
-              <Button
-                style={this.props.rStyle}
-                className={classNames({'pjtGreenBtn': 1, 'disabledStyle': rdisabled})}
-                activeStyle={false}
-                type="primary"
-                onClick={rdisabled ? '' : rClick}>
-                {rText}
-              </Button>
-            </Flex.Item>
-          </Flex>
-        </WingBlank>
-        break
-      case 'footer':
-        children = <div className={classNames({'footer_btn': 1, 'fix_btn': 1})}>
-          <div>
-            <span onClick={ldisabled?'':lClick}
-                  className={classNames({'disabledStyle2': ldisabled})}>
-              <span style={{marginLeft:'5px'}}>{lText}</span>
-              </span>
-            <span onClick={cdisabled?'':cClick}
-                  className={classNames({'disabledStyle2': cdisabled})}>
-
-              <span style={{marginLeft:'5px'}}>{cText}</span>
-              </span>
-          </div>
-          <span className={classNames({'right_btn': 1, 'disabledStyle': rdisabled})} onClick={rdisabled ? '' : rClick}>{rText}</span>
-        </div>
         break
       default:
         break
@@ -151,7 +81,7 @@ export default class YYButton extends React.Component {
     lText: '取消',
     cText: '删除',
     fix: 0,
-    disabled: 0,
+    disabled: false,
     ldisabled: 0,
     cdisabled: 0,
     rdisabled: 0,

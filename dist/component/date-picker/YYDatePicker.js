@@ -4,8 +4,6 @@
 import React, {Component} from 'react';
 import {DatePicker, List} from 'antd-mobile';
 import 'moment/locale/zh-cn';
-// import enUs from 'antd-mobile/lib/date-picker/locale/en_US';
-// import PropTypes from 'prop-types';
 import _ from 'lodash';
 import '../../../css/YYDatePicker.css'
 const nowTimeStamp = Date.now();

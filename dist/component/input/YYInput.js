@@ -7,7 +7,7 @@ import _ from 'lodash'
 import '../../../css/YYInput.css'
 
 const Item = List.Item;
-class SSInput extends React.Component {
+class YYInput extends React.Component {
     state = {
     }
 
@@ -93,7 +93,7 @@ class SSInput extends React.Component {
     }
 }
 
-SSInput.defaultProps = {
+YYInput.defaultProps = {
     form: {},
     label: "",
     name: "",
@@ -116,4 +116,4 @@ SSInput.defaultProps = {
     placeholder: "请输入",
     showIcon: false
 }
-export default SSInput;
+export default YYInput;
