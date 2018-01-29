@@ -3,10 +3,7 @@
  */
 import React, {Component} from 'react';
 import {DatePicker, List} from 'antd-mobile';
-import moment from 'moment';
 import 'moment/locale/zh-cn';
-// import enUs from 'antd-mobile/lib/date-picker/locale/en_US';
-// import PropTypes from 'prop-types';
 import _ from 'lodash';
 import '../../../css/YYDatePicker.css'
 const nowTimeStamp = Date.now();
@@ -136,8 +133,8 @@ class YYDatePicker extends Component {
 };
 
 YYDatePicker.defaultProps = {
-    maxDate: moment('2200-12-03 +0800', 'YYYY-MM-DD Z')._d,
-    minDate: moment('1900-08-06 +0800', 'YYYY-MM-DD Z')._d,
+    maxDate: new Date('2200-1-18'),
+    minDate: new Date('1900-1-18'),
     arrow: 'horizontal',
     use12Hours:false,
     value:now,

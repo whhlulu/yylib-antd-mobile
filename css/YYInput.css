@@ -1,23 +1,23 @@
-.am-list-item .am-input-label.am-input-label-5{
+.borderBottom.am-list-item .am-input-label.am-input-label-7{
     text-overflow: ellipsis;
 }
-.am-list-item .am-input-control input{
+.borderBottom.am-list-item .am-input-control input{
     text-align: right;
     color: #888;
     text-overflow: ellipsis;
 }
 
-  .am-list-item .am-input-item{
+.borderBottom.am-list-item .am-input-item{
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
 
-.am-list-item .am-list-line .am-list-content{
+.borderBottom.am-list-item .am-list-line .am-list-content{
     padding-top: 0;
     padding-bottom:0 ;
 }
 
-.am-list-item.am-input-disabled .am-input-label{
+.borderBottom.am-list-item.am-input-disabled .am-input-label{
     color: #000;
 }
 .borderBottom .am-list-line:after{

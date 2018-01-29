@@ -1,9 +1,10 @@
 import React from 'react'
 import YYButton from '../YYButton'
+import {Button} from 'antd-mobile'
 
 
 
- class SS extends React.Component{
+ class YYButtonDemo extends React.Component{
     constructor(props){
         super(props);
         this.state={
@@ -22,10 +23,11 @@ import YYButton from '../YYButton'
     render(){
         return(
             <div>
-                <YYButton type='center' text='测试一下'/>
+                <YYButton type='fill' text='测试一下' disabled={false} onClick={()=>console.log('1')}/>
+                <Button type="primary" >测试一下</Button>
             </div>
         )
     }
 }
 
-export default SS;
+export default YYButtonDemo;

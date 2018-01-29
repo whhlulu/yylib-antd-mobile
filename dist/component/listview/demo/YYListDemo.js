@@ -38,7 +38,7 @@ class YYListDemo extends React.Component{
     }
 
     //上拉加载的数据请求
-     onreached=(fun)=>{
+     onreached=()=>{
         let rows = [
             {headurl:'',name:'张十六',dept:'管理部',company:'用友建筑'},
             {headurl:'',name:'张十七',dept:'管理部',company:'用友建筑'},
@@ -52,13 +52,12 @@ class YYListDemo extends React.Component{
             this.setState({
                 row:row
             });
-            fun();
             num++;
         }
 
     }
     //下拉刷新数据请求
-    onrefresh=function(fun){
+    onrefresh=function(){
         let init = [
             {headurl:'',name:'张二一',dept:'管理部',company:'用友建筑'},
             {headurl:'',name:'张二二',dept:'管理部',company:'用友建筑'},
@@ -80,7 +79,11 @@ class YYListDemo extends React.Component{
             init:init
         });
         console.log(page.state.init);
-        fun();
+    }
+    deleteinit = () =>{
+        this.setState({
+            init:[]
+        })
     }
 
     render(){
@@ -96,7 +99,7 @@ class YYListDemo extends React.Component{
         const row = (rowData, sectionID, rowID) => {
             return (
                 <div key={rowID}>
-                    <List className="my-list">
+                    <List className="my-list" >
                         <Link to={"/personInfo/"+rowID} key={rowID}><Item thumb={head(rowData.headUrl,rowData.name,rowID)} onClick={()=>{{/*将详情信息存在全局*/}}} multipleLine extra={rowData.dept}>
                             {rowData.name}
                             {rowData.isUser == '1'?'':<Badge text="未激活" style={{ marginLeft: 12, padding: '0 3px', backgroundColor: '#A8A8A8', borderRadius: 2 }} />}
@@ -107,7 +110,7 @@ class YYListDemo extends React.Component{
         };
         return(
             <div>
-                <div style={{textAlign:'center'}}>长列表</div>
+                <div style={{textAlign:'center'}} onClick={this.deleteinit}>长列表</div>
                 <YYListview init={this.state.init} row={this.state.row} reached={this.onreached} isreached={true} children={row} onrefresh={this.onrefresh} />
             </div>
         )

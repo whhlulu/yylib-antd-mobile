@@ -1,0 +1,41 @@
+#mySwipeNavBar{
+    background-color: #ffffff;
+    font-size: 0px;
+    overflow: hidden;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+}
+#mySwipeNavBar div{
+    height: 54px;
+    line-height: 54px;
+    display: inline-block;
+}
+#mySwipeNavBar div a{
+    font-size: 17px;
+    color: #333333;
+    display: inline-block;
+    height: 54px;
+    line-height: 54px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#mySwipeNavBar div:last-child a{
+    color: #227CCF;
+}
+#mySwipeNavBar div:after {
+    font-size: 20px;
+    line-height: 0;
+    position: relative;
+    top: 0;
+    right: 0px;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    color: #333333;
+    content: '>';
+}
+#mySwipeNavBar div:last-child:after{
+    content: '';
+}

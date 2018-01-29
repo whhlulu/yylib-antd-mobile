@@ -58,23 +58,52 @@ export default class YYListview extends React.Component {
             });
         }, 1000);
     }
+    componentWillReceiveProps(nextprops){
+        let _self = this;
+        if(nextprops.init!==this.props.init){
+            console.log('111')
+            const hei = this.state.height - ReactDOM.findDOMNode(this.lv).offsetTop;
+            setTimeout(() => {
+                let data = this.props.init;  //获取列表初始值
+                if(this.props.isreached){
+                    this.setState({
+                        footer:'加载完成',
+                    })
+                } else {
+                    this.setState({
+                        footer:'',
+                    })
+                }
+                this.setState({
+                    initdata:data,
+                    height:hei,
+                    dataSource: this.state.dataSource.cloneWithRows(data),
+                    isLoading: false,
+                    refreshing:false,
+                });
+            }, 600);
+        } else if(nextprops.row!==this.props.row){
+                if (_self.state.isLoading && !_self.state.hasMore) {
+                    return;
+                }
+                _self.setState({ isLoading: true });
+                setTimeout(() => {
+                    _self.rData = [..._self.state.initdata,..._self.props.row];
+                    _self.setState({
+                        dataSource: _self.state.dataSource.cloneWithRows(_self.rData),
+                        isLoading: false,
+                    });
+                }, 1000);
+
+
+        }
+    }
     onRefresh = () => {
         let _self = this;
         _self.setState({refreshing:true,isLoading:true});
         if(this.props.onrefresh){
             console.log('xx')
-            this.props.onrefresh(function(){
-                setTimeout(()=>{
-                    _self.rData = _self.props.init;
-                    _self.setState({
-                        dataSource:_self.state.dataSource.cloneWithRows(_self.rData),
-                        initdata:_self.rData,
-                        refreshing:false,
-                        isLoading:false,
-                    });
-                    console.log('----> refresh')
-                },600)
-            });
+            this.props.onrefresh();
         }else{
             setTimeout(()=>{
                 _self.rData = _self.props.init;
@@ -96,21 +125,7 @@ export default class YYListview extends React.Component {
         if(!_self.props.isreached){
             return false;
         }
-        this.props.reached(function(){
-            if (_self.state.isLoading && !_self.state.hasMore) {
-                return;
-            }
-            console.log('reach end', event);
-            _self.setState({ isLoading: true });
-            setTimeout(() => {
-                _self.rData = [..._self.state.initdata,..._self.props.row];
-                _self.setState({
-                    dataSource: _self.state.dataSource.cloneWithRows(_self.rData),
-                    isLoading: false,
-                });
-            }, 1000);
-
-        });
+        this.props.reached();
 
     }
 

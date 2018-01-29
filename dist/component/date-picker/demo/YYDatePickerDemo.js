@@ -25,7 +25,7 @@ class YYDatePickerDemo extends React.Component{
                 <YYForm>
                 <YYDatePicker disabled={true} mode='date' field='date' form={form} onChange={this.onchang}/>
                 <YYDatePicker   mode='time' use12Hours={true} field='time' label='时间' onChange={this.onchang}  form={form}/>
-                    <YYDatePicker   mode='datetime' field='datetime' label='datetime' onChange={this.onchang}  form={form}/>
+                    <YYDatePicker   mode='datetime' field='datetime' label='datetime' onChange={this.onchang} maxDate={new Date('2040-1-18')} form={form}/>
                 </YYForm>
             </div>
         )

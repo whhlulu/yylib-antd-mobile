@@ -22,7 +22,7 @@ import YYTabBarDemoThird from '../../dist/component/tabBar/demo/third';
 
 /*Data Entry 数据录入-Start*/
 import Input from '../../dist/component/input/demo/YYInputDemo'
-// import Button from '../../dist/component/button/SSButton'
+import YYButton from '../../dist/component/button/demo/YYButtonDemo'
 import YYImagePickerDemo from '../../dist/component/image-picker/demo/YYImagePickerDemo'
 
 import Switch from '../../dist/component/switch/demo/YYSwitchDemo'
@@ -43,6 +43,7 @@ import YYToastDemo from '../../dist/component/toast/demo/basic'
 
 /*业务组件*/
 import Referdemo from '../../dist/component/refer/demo/YYreferDemo'
+import Refernew from '../../dist/component/refer/demo/YYReferNewDemo'
 import YYApproveHistoryDemo from '../../dist/component/bpm/demo/YYApproveHistoryDemo'
 import YYApproveDemo from '../../dist/component/bpm/demo/YYApproveDemo'
 import YYApproveActionDemo from '../../dist/component/bpm/demo/YYApproveActionDemo'
@@ -50,6 +51,7 @@ import YYResultDemo from '../../dist/component/result/demo/YYResultDemo'
 
 //其他以及测试用
 import Test from '../../dist/component/test/test'
+// import YYButton from "../../dist/component/button/YYButton";
 
 
 export default
@@ -73,6 +75,7 @@ export default
 
         {/*Data Entry 数据录入*/}
         <Route path="imagePicker" component={YYImagePickerDemo}/>
+        <Route path="button" component={YYButton}/>
         <Route path="input" component={Input}/>
         <Route path="switch" component={Switch}/>
         <Route path="datepicker" component={Datepicker}/>
@@ -93,6 +96,7 @@ export default
 
         {/*业务组件*/}
         <Route path="referdemo" component={Referdemo}/>
+        <Route path="refernew" component={Refernew}/>
         <Route path="approveHistory" component={YYApproveHistoryDemo}/>
         <Route path="approve" component={YYApproveDemo}/>
         <Route path="approveAction" component={YYApproveActionDemo}/>
