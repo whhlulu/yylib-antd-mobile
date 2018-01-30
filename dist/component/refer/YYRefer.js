@@ -5,6 +5,7 @@ import YYReferList from './YYReferList';
 import YYReferTree from './YYReferTree';
 import YYReferTreeList from './YYReferTreeList'
 import YYReferLazyTree from './YYReferLazyTree'
+import YYReferLazyTreeList from './YYReferLazyTreeList'
 import {YYInput} from '../../index'
 
 export default class YYRefer extends React.Component {
@@ -54,19 +55,32 @@ export default class YYRefer extends React.Component {
     render(){
         const {from,referlabel,referCode,multiMode,displayField,disabled,referStyle,referName,open,modalHeight,referParams,condition,listCondition} = this.props;
         let modalStyle;
+        let referprops = {
+            referlabel:referlabel,
+            referName:referName,
+            referStyle:referStyle,
+            referCode:referCode,
+            modalHeight:modalHeight,
+            displayField:displayField,
+            referParams:referParams,
+            multiMode:multiMode,
+            disabled:disabled,
+            open:open,
+            condition:condition,
+            listCondition:listCondition,
+            onOk:this.onOk,
+            onClose:this.onClose,
+        }
         if(referStyle == 'list'){
-            modalStyle = <YYReferList referlabel={referlabel} referName={referName} referStyle={referStyle} referCode={referCode} modalHeight={modalHeight}  displayField={displayField} referParams={referParams} multiMode={multiMode}
-                                      disabled={disabled} open={open} condition={condition} listCondition={listCondition} onOk={this.onOk} onClose={this.onClose}
-            />
+            modalStyle = <YYReferList {...referprops}/>
         } else if(referStyle == 'tree'){
-            modalStyle = <YYReferTree referlabel={referlabel} referName={referName} referStyle={referStyle} referCode={referCode} modalHeight={modalHeight}  displayField={displayField} referParams={referParams} multiMode={multiMode}
-                                      disabled={disabled} open={open} condition={condition} listCondition={listCondition} onOk={this.onOk} onClose={this.onClose}/>
+            modalStyle = <YYReferTree {...referprops}/>
         } else if(referStyle == 'tree-list'){
-            modalStyle = <YYReferTreeList referlabel={referlabel} referName={referName} referStyle={referStyle} referCode={referCode} modalHeight={modalHeight}  displayField={displayField} referParams={referParams} multiMode={multiMode}
-                                      disabled={disabled} open={open} condition={condition} listCondition={listCondition} onOk={this.onOk} onClose={this.onClose}/>
+            modalStyle = <YYReferTreeList {...referprops}/>
         } else if(referStyle == 'lazy-tree'){
-            modalStyle = <YYReferLazyTree referlabel={referlabel} referName={referName} referStyle={referStyle} referCode={referCode} modalHeight={modalHeight}  displayField={displayField} referParams={referParams} multiMode={multiMode}
-                                          disabled={disabled} open={open} condition={condition} listCondition={listCondition} onOk={this.onOk} onClose={this.onClose}/>
+            modalStyle = <YYReferLazyTree {...referprops}/>
+        } else if(referStyle == 'lazy-tree-list'){
+            modalStyle = <YYReferLazyTreeList {...referprops}/>
         }
         return(
             <div style={{display:'none'}}>

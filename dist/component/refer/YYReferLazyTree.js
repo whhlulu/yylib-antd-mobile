@@ -147,13 +147,25 @@ export default class YYReferTree extends React.Component {
         if (selectedNode.id === this.state.selectedId) {
             this.setState({
                 selectedId: null,
-                selectedNode: {}
+                selectedNode: {},
+                changeOrNext:false,
             });
+            setTimeout(()=>{
+                this.setState({
+                    changeOrNext:true,
+                })
+            },10)
         } else {
             this.setState({
                 selectedId: selectedNode.id,
-                selectedNode: selectedNode
+                selectedNode: selectedNode,
+                changeOrNext:false
             });
+            setTimeout(()=>{
+                this.setState({
+                    changeOrNext:true,
+                })
+            },10)
         };
     }
 
@@ -224,11 +236,9 @@ export default class YYReferTree extends React.Component {
             if(treeData){
                 return treeData.map((item) => {
                     if (item.children && item.children.length > 0) {
-                        item.isLeaf = false;
                         return <Accordion onChange={this.onChange} className="refer-accordion" key={item.id}><Accordion.Panel className="refer-pad" key={item.id} header={<CheckboxItem  checked={selectedId === item.id} onChange={(e) => this.onSingleChange(e, item)} key={item.id}>{item[this.props.displayField]}</CheckboxItem>}>{this.treeContent(item.children, selectedId)}</Accordion.Panel></Accordion>;
                     }else{
-                        item.isLeaf = true;
-                        return <CheckboxItem checked={selectedId === item.id} className="refer-check-box" onChange={(e) => this.onSingleChange(e,item)} key={item.id}>{item[this.props.displayField]}</CheckboxItem>;
+                        return <CheckboxItem checked={selectedId === item.id} className="refer-check-box" onChange={(e) => this.onSingleChange(e,item)} onClick={this.nextRefer.bind(this,item)} key={item.id}>{item[this.props.displayField]}</CheckboxItem>;
                     }
                 });
             }
@@ -247,6 +257,7 @@ export default class YYReferTree extends React.Component {
     nextRefer = (value)=>{
             setTimeout(()=>{
                 if(this.state.changeOrNext){
+                    console.log('next')
                     referParams.pid = value.id;
                     if(!value.isLeaf){
                         this.setState({
@@ -257,9 +268,6 @@ export default class YYReferTree extends React.Component {
                 }
 
             },10)
-
-
-
 
     }
     handleClick = (value) =>{
@@ -349,7 +357,7 @@ export default class YYReferTree extends React.Component {
 }
 YYReferTree.defaultProps = {
     referlabel: '参照',
-    referCode: '00026',
+    referCode: '',
     modalHeight:'all',
     displayField: 'name',
     referParams: {},
@@ -358,7 +366,7 @@ YYReferTree.defaultProps = {
     open:false,
     onOk:{},
     referName:'key',
-    referStyle:'list',
+    referStyle:'lazy-tree',
     condition:{},
     listCondition:{},
 };
