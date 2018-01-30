@@ -34,6 +34,7 @@ import YYPicker from '../../dist/component/picker/demo/YYPickerdemo'
 /*Data Display 数据展示-Start*/
 import YYAccordionDemo from '../../dist/component/accordion/demo/basic'
 import YYIconDemo from '../../dist/component/icon/demo/basic'
+import YYLocateStepsDemo from '../../dist/component/locate-steps/demo/basic'
 import Pull from '../../dist/component/listview/Pulltorefresh'
 import YYList from '../../dist/component/listview/demo/YYListDemo'
 
@@ -88,6 +89,7 @@ export default
         {/*Data Display 数据展示*/}
         <Route path="accordion" component={YYAccordionDemo}/>
         <Route path="icon" component={YYIconDemo}/>
+        <Route path="locateSteps" component={YYLocateStepsDemo}/>
         <Route path="listview" component={YYList}/>
         <Route path="pull" component={Pull}/>
 

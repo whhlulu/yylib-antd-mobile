@@ -91,7 +91,6 @@ class YYPicker extends Component {
         let getFieldProps = form ? form.getFieldProps : null;
         return (
             <div onClick={() => disabled ? null : this.setState({visible: true})}>
-                <List className="picker-list">
                 <Picker style={{display: visible ? '' : 'none'}} data={data}
                         extra={extra}
                         title={<a style={{color: '#108ee9'}} onClick={this.clearDate}>清除</a>}
@@ -116,7 +115,6 @@ class YYPicker extends Component {
                         <span style={disabled?{marginLeft:'0.3rem',color:'gray'}:{marginLeft:'0.3rem'}}>{label}</span>
                     </List.Item>
                 </Picker>
-                </List>
             </div>
         );
     }
