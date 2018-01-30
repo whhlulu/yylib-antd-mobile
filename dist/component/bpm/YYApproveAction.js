@@ -8,7 +8,7 @@ const RadioItem = Radio.RadioItem;
 const Item = List.Item;
 const prompt = Modal.prompt;
 import PropTypes from 'prop-types';
-import {YYIcon, YYToast, YYReferlist, YYApproveHistory, YYAssignRef} from "../../index";
+import {YYIcon, YYToast, YYRefer, YYApproveHistory, YYAssignRef,YYForm} from "../../index";
 import {MODULE_URL} from '../../common/RestUrl';
 import ajax from '../../utils/ajax';
 import '../../../css/YYApproveAction.css';
@@ -37,6 +37,9 @@ class YYApproveAction extends React.Component {
     };
 
     componentDidMount() {
+        this.getInfo();
+    }
+    getInfo=()=>{
         let {billTypeId, userId, billId, approveType} = this.props;
         if(approveType!=='审批')return false;
         ajax.getText(MODULE_URL.getBpmId, {'billId': billId}, (getBpmIdTextData) => {
@@ -54,7 +57,7 @@ class YYApproveAction extends React.Component {
                             rejectAble: beforeRejectData.rejectAble,//审核
                             addsignAble: beforeRejectData.addsignAble,//改派
                             assignAble: beforeRejectData.assignAble,//指派
-                            bohuiDate: beforeRejectData.data,
+                            bohuiDate: beforeRejectData.data.array?beforeRejectData.data.array:null,
                         })
                     })
                 } else {
@@ -139,6 +142,7 @@ class YYApproveAction extends React.Component {
             prompt(
                 '改派',
                 <GaipaiRefer
+                    {...this.props}
                     showAddsignRef={showAddsignRef}
                     addsingUser={addsingUser}
                     onClose={() => {
@@ -214,6 +218,7 @@ class YYApproveAction extends React.Component {
             var data = JSON.parse(text);
             if (data.success && data.success === true) {
                 YYToast.success(data.msg, 2)
+                this.getInfo();
             } else {
                 YYToast.fail(data.msg, 2)
             }
@@ -301,11 +306,13 @@ class BohuiPicker extends React.Component {
     render() {
         let {bohuiDate} = this.props;
         let pickerDate = [{label: '提交人', value: '提交人'}];
-        for (let i = 0; i < bohuiDate.length; i++) {
-            pickerDate.push({
-                label: bohuiDate[i].activityName,
-                value: bohuiDate[i].activityId
-            })
+        if(bohuiDate&&bohuiDate.length>0){
+            for (let i = 0; i < bohuiDate.length; i++) {
+                pickerDate.push({
+                    label: bohuiDate[i].activityName,
+                    value: bohuiDate[i].activityId
+                })
+            }
         }
         let {bohuiValueRadio} = this.state;
         return (
@@ -322,7 +329,7 @@ class BohuiPicker extends React.Component {
     }
 }
 
-class GaipaiRefer extends React.Component {
+class GaipaiReferCom extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -348,13 +355,14 @@ class GaipaiRefer extends React.Component {
     }
 
     render() {
-        let {} = this.props;
+        let {form} = this.props;
         let {showAddsignRef, addsingUser} = this.state;
         return (
             <div>
                 <Item arrow="horizontal" onClick={this.showAddsign}
                       extra={addsingUser ? addsingUser.name : '请选择'}>流程改派至</Item>
-                <YYReferlist
+                <YYRefer
+                    form={form}
                     referName='Addsign'
                     onOk={this.onOk}
                     onClose={this.onClose}
@@ -367,3 +375,4 @@ class GaipaiRefer extends React.Component {
         )
     }
 }
+const GaipaiRefer = YYForm.create()(GaipaiReferCom)

@@ -2,22 +2,17 @@
  * Created By whh 2018/1/2
  * */
 import React, {Component} from 'react';
-import {Button, Modal, NavBar, Icon, List, TextareaItem, Radio,Checkbox, Flex} from 'antd-mobile';
+import {Button, Modal, NavBar, Icon, List, TextareaItem, Radio,Checkbox, Flex,WhiteSpace} from 'antd-mobile';
 const CheckboxItem = Checkbox.CheckboxItem;
 const RadioItem = Radio.RadioItem;
 const Item = List.Item;
-import classnames from 'classnames';
-import YYIcon from "../icon/YYIcon";
-import YYToast from '../toast/YYToast';
-import YYNavBar from '../navBar/YYNavBar';
-import YYRefer from '../refer/YYRefer';
-import YYApproveHistory from './YYApproveHistory'
+import {YYForm, YYPicker,YYIcon,YYToast,YYNavBar,YYRefer,YYApproveHistory,YYAssignRef} from '../../index'
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import _ from 'lodash';
 import {MODULE_URL} from '../../common/RestUrl';
 import ajax from '../../utils/ajax';
 import '../../../css/YYApprove.css';
-import YYAssignRef from "./YYAssignRef";
 
 class YYApprove extends React.Component {
     constructor(props) {
@@ -29,7 +24,8 @@ class YYApprove extends React.Component {
             bohuiValueRadio: '提交人',//驳回选择项
             showAssignRef: false,//是否显示指派参照
             showAddsignRef: false,//是否显示改派参照
-            customTip: '同意！'
+            customTip: '同意！',
+            PickerData:[],//审批动作
         }
     }
 
@@ -44,14 +40,33 @@ class YYApprove extends React.Component {
                         'userId': userId
                     }, (beforeRejectTextData) => {
                         var beforeRejectData = JSON.parse(beforeRejectTextData);
+                        let PickerData = [];
+                        if(beforeRejectData.rejectAble){
+                            PickerData.push({label: '同意', value: 0},{label: '不同意且退回', value: 1})
+                        }
+                        if(beforeRejectData.inPower && !beforeRejectData.rejectAble){
+                            PickerData.push({label: '审核', value: 2})
+                        }
+                        if(beforeRejectData.addsignAble){
+                            PickerData.push({label: '改派', value: 3})
+                        }
+                        let bohuiDate = [{label:'提交人',value:'提交人'}];
+                        if(beforeRejectData.data&&beforeRejectData.data.array.length>0){
+                            for(let i=0;i<beforeRejectData.data.array.length;i++){
+                                bohuiDate.push({
+                                    value:beforeRejectData.data.array[i].activityId,
+                                    label:beforeRejectData.data.array[i].activityName,
+                                })
+                            }
+                        }
                         this.setState({
                             bpmId: getBpmIdData.bpmId,
+                            PickerData:PickerData,
                             inPower: beforeRejectData.inPower,
                             rejectAble: beforeRejectData.rejectAble,//审核
                             addsignAble: beforeRejectData.addsignAble,//改派
                             assignAble: beforeRejectData.assignAble,//指派
-                            bohuiDate: beforeRejectData.data,
-                            //bohuiDate: [{activityId:'a',activityName:'abb'}],
+                            bohuiDate: bohuiDate,
                         })
                     })
                 } else {
@@ -157,12 +172,14 @@ class YYApprove extends React.Component {
             showApproveHistory: false
         })
     }
-    bohuiOnChange = (value) => {
+    bohuiOnChange = (valueList) => {
+        let value = valueList[0];
         this.setState({
             bohuiValueRadio: value,
         });
     }
-    approveActionOnChange = (value) => {
+    approveActionOnChange = (valueList) => {
+        let value = valueList[0];
         switch (value) {
             case 0:
                 this.setState({customTip: '同意！'});
@@ -177,7 +194,7 @@ class YYApprove extends React.Component {
                 this.setState({customTip: '改派！'});
                 break;
             default:
-                this.setState({customTip: valueRadio});
+                this.setState({customTip: '错误！'});
                 break;
         }
         this.setState({
@@ -226,27 +243,22 @@ class YYApprove extends React.Component {
     }
 
     render() {
-        let {showApprove, showApproveHistory, valueRadio, inPower, rejectAble, addsignAble, assignAble, bohuiValueRadio, bohuiDate, showAssignRef, customTip} = this.state;
-        let {userId, billId, billTypeId,orgId} = this.props;
+        let {showApprove, showApproveHistory, PickerData,valueRadio, inPower, rejectAble, addsignAble, assignAble, bohuiValueRadio, bohuiDate, showAssignRef, customTip} = this.state;
+        let {userId, billId, billTypeId,orgId,form} = this.props;
         let radioText = null;
-        let radioText0 = <List renderHeader={() => '审批说明:'}>
-            <div className="yy-radioText">流程将继续</div>
-        </List>;
-        let radioText1 = <List renderHeader={() => '请选择流程退回处:'}>
-            <RadioItem key="提交人" value="提交人" checked={bohuiValueRadio === '提交人'}
-                       onChange={() => this.bohuiOnChange('提交人')}>提交人</RadioItem>
-            {bohuiDate && bohuiDate.length > 0 ? bohuiDate.map((item) => {
-                return <RadioItem key={item.activityId} value={item.activityId} checked={bohuiValueRadio === item.activityId}
-                           onChange={() => this.bohuiOnChange(item.activityId)}>{item.activityName}</RadioItem>
-            }) : null}
-        </List>;
-        let radioText2 = <List renderHeader={() => '审批说明:'}>
-            <div className="yy-radioText">流程继续流转,本项一般在会签时使用</div>
-        </List>;
+        let radioText0 = <Item disabled={true}>流程将继续</Item>;
+        let radioText1 = <YYPicker value={[bohuiValueRadio]}
+                                   data={bohuiDate}
+                                   form={form}
+                                   cols={1}
+                                   label="流程将退回到"
+                                   field="bohuiValueRadio"
+                                   required={true}
+                                   onOk={this.bohuiOnChange}/>;
+        let radioText2 = <Item disabled={true}>流程继续流转,本项一般在会签时使用</Item>;
         let radioText3 = <div>
-            <List renderHeader={() => '请选择流程改派处:'}>
                 <Item className="yy-item" arrow="horizontal" onClick={this.showAddsign}
-                      extra={this.state.addsingUser ? this.state.addsingUser.name : null}>改派到：</Item></List>
+                      extra={this.state.addsingUser ? this.state.addsingUser.name : null}>当前任务改在</Item>
             <YYRefer
                 referName='Addsign'
                 onOk={this.checkedAddsign}
@@ -255,6 +267,7 @@ class YYApprove extends React.Component {
                 open={this.state.showAddsignRef}
                 referCode='00023'
                 referStyle='tree-list'
+                form={form}
             /></div>;
         switch (valueRadio) {
             case 0:radioText = radioText0;break;
@@ -271,6 +284,7 @@ class YYApprove extends React.Component {
             >
                 <div className="yy-bpm-modal-body">
                     <YYNavBar
+                        className="no-border-navbar"
                         mode="light"
                         leftContent={<Icon type="left"/>}
                         onLeftClick={this.showApproveHistoryModal}>
@@ -300,32 +314,36 @@ class YYApprove extends React.Component {
                 >
                     <div className="yy-bpm-modal-body">
                         <YYNavBar
+                            className="no-border-navbar"
                             mode="light"
                             leftContent={<Icon type="left"/>}
                             onLeftClick={this.showApproveModal}
                             rightContent={<Button type="ghost" size="small" inline disabled={!inPower}
                                                   onClick={this.clickApproveHistory}>查看审批历史</Button>}>
                             审批</YYNavBar>
-                        <List renderHeader={() => '审批意见:'}>
-                            <RadioItem key={0} disabled={!rejectAble} checked={valueRadio === 0}
-                                       onChange={() => this.approveActionOnChange(0)}>同意</RadioItem>
-                            <RadioItem key={1} disabled={!rejectAble} checked={valueRadio === 1}
-                                       onChange={() => this.approveActionOnChange(1)}>不同意且退回</RadioItem>
-                            <RadioItem key={2} disabled={!(inPower && !rejectAble)} checked={valueRadio === 2}
-                                       onChange={() => this.approveActionOnChange(2)}>审核</RadioItem>
-                            <RadioItem key={3} disabled={!addsignAble} checked={valueRadio === 3}
-                                       onChange={() => this.approveActionOnChange(3)}>改派</RadioItem>
-                        </List>
+                        <List>
+                        <YYPicker value={[valueRadio]}
+                                  data={PickerData}
+                                  form={form}
+                                  cols={1}
+                                  label="审批意见"
+                                  field="valueRadio"
+                                  required={true}
+                                  disabled={PickerData.length<1}
+                                  onOk={this.approveActionOnChange}/>
                         {radioText}
-                        <List renderHeader={() => '审批语:'}>
+                        </List>
+                        <WhiteSpace />
+                        <List>
                             <TextareaItem
+                                title="审批语"
                                 placeholder={'请输入审批语'}
                                 value={customTip}
                                 onChange={this.customTipOnChange.bind(this)}
                                 rows={3}
                             />
                         </List>
-                        <Button className="yy-button-bottom" disabled={!inPower} type="primary"
+                        <Button className="yy-button-bottom-in" disabled={!inPower} type="primary"
                                 onClick={this.beforeApprove}>确定</Button>
                     </div>
                 </Modal>
@@ -339,4 +357,4 @@ YYApprove.defaultProps = {
     userId: '',
     billId: ''
 }
-export default YYApprove;
+export default YYForm.create()(YYApprove);

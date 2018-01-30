@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import {MODULE_URL} from '../../common/RestUrl';
 import ajax from '../../utils/ajax';
-import '../../../css/YYAssignRef.css';
+import '../../../css/YYApprove.css';
 
 class YYAssignRef extends React.Component {
     constructor(props) {
@@ -130,7 +130,6 @@ class YYAssignRef extends React.Component {
             </div>
         )
     }
-    ;
 }
 
 YYAssignRef.defaultProps = {
