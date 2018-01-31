@@ -2,6 +2,7 @@ import React from 'react';
 import { Radio, Checkbox, Modal, List, WhiteSpace, WingBlank,  Toast, ActivityIndicator, NavBar, SearchBar, Pagination, Accordion} from 'antd-mobile';
 import '../../../css/refer.less'
 import '../../../css/YYReferTree.css'
+import DeleteTap from '../delete-tap/deleteTap'
 import ajax from '../../utils/ajax';
 import RestUrl from "../../common/RestUrl";
 import _ from 'lodash';
@@ -30,10 +31,11 @@ export default class YYReferTree extends React.Component {
             pageCount:'',
             searchText:'',
             showList:false, //tree-list的modal
+            row:[],     //选中的数组
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
     }
     componentWillReceiveProps(nextprops){
@@ -112,7 +114,8 @@ export default class YYReferTree extends React.Component {
             // console.log('1')
             selectedNodes.push(selectedNode);
             this.setState({
-                selectedNodes: selectedNodes
+                selectedNodes: selectedNodes,
+                row:selectedNodes
             });
         } else {
             // console.log('2')
@@ -124,7 +127,8 @@ export default class YYReferTree extends React.Component {
                 }
             })
             this.setState({
-                selectedNodes: newNodes
+                selectedNodes: newNodes,
+                row:newNodes
             });
         }
     }
@@ -231,8 +235,12 @@ export default class YYReferTree extends React.Component {
             }
         }
     }
+    handleClick = (item)=>{
+        console.log(item)
+    }
 
     render() {
+
         const {value,selectedId,animating,pageNumber,showList} = this.state;
         const {referlabel,referCode,multiMode,displayField,disabled,referStyle,referName,open,modalHeight} = this.props;
         /*let listContent = (data,selectedId)=>{
@@ -284,9 +292,16 @@ export default class YYReferTree extends React.Component {
                         />
                         <WhiteSpace/>
                         <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>
-                        <div className="refer-tree-content">
+                        <div className="refer-tree-content" ref={(c)=>{this.referTree=c;console.log(c)}}>
                             {this.treeContent(data[referName], selectedId)}
                         </div>
+                        <div style={{visibility:'hidden',height:'13vw'}}>fdfd</div>
+                        <div  style={{position:'fixed',top:'93vh',zIndex:'99',width:'100vw',height:'50px',backgroundColor:'white'}}>
+                            <div style={{width:'auto'}}>
+                                <DeleteTap rows={this.state.row} displayField={displayField} handleClick={this.handleClick}/>
+                            </div>
+                        </div>
+
                     </div>
                 </Modal>
             </WingBlank>

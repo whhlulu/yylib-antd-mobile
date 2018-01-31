@@ -343,7 +343,6 @@ export default class YYReferList extends React.Component {
     handleClick = (item)=>{
         let fulldata = data[this.props.referName+'selectlist'];
         let selectdata = this.state.selectedNodes;
-        console.log(selectdata);
         for(let i = 0;i < selectdata.length; i++){
             if(item === selectdata[i]){
                 if(i==0){
@@ -355,16 +354,13 @@ export default class YYReferList extends React.Component {
                     selectNodes:selectdata,
                     row:selectdata
                 })
-                console.log(selectdata)
             }
         }
         for(let i = 0; i < fulldata.length;i++){
             if(item.id == fulldata[i].id){
                 fulldata[i].checked = false;
             }
-
         }
-
     }
 
     render() {
@@ -436,8 +432,12 @@ export default class YYReferList extends React.Component {
                                             nextText: (<span className="arrow-align">下一页</span>),
                                         }}
                             />
+                            <div  style={{position:'fixed',top:'93vh',zIndex:'99',width:'100vw',height:'50px',backgroundColor:'white'}}>
+                                <div style={{width:'auto'}}>
                             <DeleteTap rows={this.state.row} displayField={displayField} handleClick={this.handleClick}/>
-                        </div>
+                                </div>
+                            </div>
+                                </div>
                     </div>
                 </Modal>
             </WingBlank>

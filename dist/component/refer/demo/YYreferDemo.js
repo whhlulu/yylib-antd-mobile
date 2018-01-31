@@ -173,7 +173,8 @@ class YYreferDemo extends React.Component{
                     multiMode={true}
                     form={form}
                     open={this.state.openw}
-                    referCode='00023'
+                    // referCode='00023'
+                    referCode='bd-006_test'
                     referStyle='tree-list'
                 />
                 <YYRefer

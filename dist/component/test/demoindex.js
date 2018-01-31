@@ -15,8 +15,8 @@ class YYreferDemo extends React.Component{
     }
 
     componentDidMount () {
-
-
+        window.addEventListener('scroll', ()=>{console.log(document.documentElement.scrollLeft)});
+        window.addEventListener('resize', ()=>console.log('2'));
     }
     openRefer=(value)=>{
         switch (value){
@@ -46,6 +46,7 @@ class YYreferDemo extends React.Component{
                 break;
         }
     }
+
     onOk = (value)=>{
         console.log(value);
         this.setState({
@@ -58,6 +59,33 @@ class YYreferDemo extends React.Component{
         return(
             <div>
                 <Button onClick={this.openRefer.bind(this,'1')}>查看listDemo</Button>
+                <Button onClick={this.openRefer.bind(this,'2')}>查看refer</Button>
+                <Button onClick={this.openRefer.bind(this,'3')}>查看pulltorefresh</Button>
+                <Button onClick={this.openRefer.bind(this,'4')}>查看input输入框</Button>
+                <Button onClick={this.openRefer.bind(this,'5')}>查看switch滑动开关</Button>
+                <Button onClick={this.openRefer.bind(this,'6')}>查看datepicker</Button>
+
+                <Button onClick={this.openRefer.bind(this,'1')}>查看listDemo</Button>
+                <Button onClick={this.openRefer.bind(this,'2')}>查看refer</Button>
+                <Button onClick={this.openRefer.bind(this,'3')}>查看pulltorefresh</Button>
+                <Button onClick={this.openRefer.bind(this,'4')}>查看input输入框</Button>
+                <Button onClick={this.openRefer.bind(this,'5')}>查看switch滑动开关</Button>
+                <Button onClick={this.openRefer.bind(this,'6')}>查看datepicker</Button><Button onClick={this.openRefer.bind(this,'1')}>查看listDemo</Button>
+                <Button onClick={this.openRefer.bind(this,'2')}>查看refer</Button>
+                <Button onClick={this.openRefer.bind(this,'3')}>查看pulltorefresh</Button>
+                <Button onClick={this.openRefer.bind(this,'4')}>查看input输入框</Button>
+                <Button onClick={this.openRefer.bind(this,'5')}>查看switch滑动开关</Button>
+                <Button onClick={this.openRefer.bind(this,'6')}>查看datepicker</Button><Button onClick={this.openRefer.bind(this,'1')}>查看listDemo</Button>
+                <Button onClick={this.openRefer.bind(this,'2')}>查看refer</Button>
+                <Button onClick={this.openRefer.bind(this,'3')}>查看pulltorefresh</Button>
+                <Button onClick={this.openRefer.bind(this,'4')}>查看input输入框</Button>
+                <Button onClick={this.openRefer.bind(this,'5')}>查看switch滑动开关</Button>
+                <Button onClick={this.openRefer.bind(this,'6')}>查看datepicker</Button><Button onClick={this.openRefer.bind(this,'1')}>查看listDemo</Button>
+                <Button onClick={this.openRefer.bind(this,'2')}>查看refer</Button>
+                <Button onClick={this.openRefer.bind(this,'3')}>查看pulltorefresh</Button>
+                <Button onClick={this.openRefer.bind(this,'4')}>查看input输入框</Button>
+                <Button onClick={this.openRefer.bind(this,'5')}>查看switch滑动开关</Button>
+                <Button onClick={this.openRefer.bind(this,'6')}>查看datepicker</Button><Button onClick={this.openRefer.bind(this,'1')}>查看listDemo</Button>
                 <Button onClick={this.openRefer.bind(this,'2')}>查看refer</Button>
                 <Button onClick={this.openRefer.bind(this,'3')}>查看pulltorefresh</Button>
                 <Button onClick={this.openRefer.bind(this,'4')}>查看input输入框</Button>

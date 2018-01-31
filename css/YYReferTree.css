@@ -9,3 +9,12 @@
 .YYRefer-list .custom-pagination-with-icon{
   margin-top: 2vh;
 }
+
+.refer-tree-content .am-accordion-header{
+    white-space: inherit !important;
+    height:auto !important;
+}
+
+.refer-tree-content .am-list-content{
+    white-space: inherit !important;
+}
