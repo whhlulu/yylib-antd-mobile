@@ -20,6 +20,7 @@ export { default as YYPicker} from './component/picker/YYPicker'
 /*Data Display 数据展示-Start*/
 export { default as YYAccordion } from './component/accordion/YYAccordion';
 export { default as YYIcon } from './component/icon/YYIcon';
+export { default as YYLocateSteps } from './component/locate-steps/YYLocateSteps';
 export { default as YYListview } from './component/listview/YYListview';
 
 

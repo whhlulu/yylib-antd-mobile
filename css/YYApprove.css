@@ -4,14 +4,23 @@
     text-align: left;
     background-color: #f5f5f9
 }
+.yy-bpm-modal-body .no-border-navbar.yy-navBar.am-navbar.am-navbar-light{
+    border: none;
+}
 .yy-bpm-modal-body .yy-radioText{
     padding: 10px 15px;
 }
 .yy-bpm-modal-body .yy-item.am-list-item .am-list-line .am-list-extra{
-    flex-basis: 70%;
+    flex-basis: 60%;
 }
 .yy-bpm-modal-body .am-button.yy-button-bottom{
     position: fixed;
     bottom: 0px;
     width: 100%;
+}
+.yy-bpm-modal-body .am-button.yy-button-bottom-in{
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    width: calc(100% - 2rem);
 }

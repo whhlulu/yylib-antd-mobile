@@ -39,9 +39,9 @@ class YYApproveActionDemo extends React.Component {
                 />
                 <YYApproveAction
                     approveType="审批"
-                    billTypeId='PCM2'
-                    userId="5afbe1b5-d718-4654-b915-db4409251854"
-                    billId="f5e2266ac832f719cef42d78f4abff2a"
+                    billTypeId='CTM3'
+                    userId="5db93165-c97e-4929-b865-b355355c108b"
+                    billId="531af9ad4ee84a74c5491bf6b1e0a83a"
                     onOk={(v)=>console.log(v)}
                 />
             </div>
