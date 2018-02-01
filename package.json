@@ -1,6 +1,6 @@
 {
   "name": "yylib-antd-mobile",
-  "version": "0.2.5",
+  "version": "0.2.6-0",
   "description": "yylib-react",
   "main": "dist/index.js",
   "dependencies": {
@@ -47,7 +47,7 @@
     "postcss-pxtorem": "^4.0.1",
     "promise": "8.0.1",
     "rc-form": "^1.5.0",
-    "prop-types":"^15.6.0",
+    "prop-types": "^15.6.0",
     "react": "^15.6.1",
     "react-dev-utils": "^3.1.0",
     "react-dom": "^15.6.1",
@@ -76,8 +76,8 @@
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
-    "antd-mobile-demo-data":"0.2.0",
-    "array-tree-filter":"2.0.0"
+    "antd-mobile-demo-data": "0.2.0",
+    "array-tree-filter": "2.0.0"
   },
   "repository": {
     "type": "git",
@@ -86,8 +86,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "babel":"babel lib -d dist",
-    "build":"webpack -p --progress --colors"
+    "babel": "babel lib -d dist",
+    "build": "webpack -p --progress --colors"
   },
   "keywords": [
     "yylib-react"
