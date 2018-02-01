@@ -362,6 +362,7 @@ class GaipaiReferCom extends React.Component {
                 <Item arrow="horizontal" onClick={this.showAddsign}
                       extra={addsingUser ? addsingUser.name : '请选择'}>流程改派至</Item>
                 <YYRefer
+                    referlabel="流程改派至"
                     form={form}
                     referName='Addsign'
                     onOk={this.onOk}
