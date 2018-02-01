@@ -260,6 +260,7 @@ class YYApprove extends React.Component {
                 <Item className="yy-item" arrow="horizontal" onClick={this.showAddsign}
                       extra={this.state.addsingUser ? this.state.addsingUser.name : null}>当前任务改在</Item>
             <YYRefer
+                referlabel="流程改派至"
                 referName='Addsign'
                 onOk={this.checkedAddsign}
                 onClose={this.closeAddsign}

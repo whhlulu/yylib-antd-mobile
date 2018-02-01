@@ -8,6 +8,7 @@
     right: 0px;
     text-align: center;
     color: #0091FA;
+    z-index: 100;
 }
 
 .yy-locate-steps .yy-locate-steps-body .yy-locate-step.active {
@@ -52,4 +53,12 @@
     transition: background .3s;
     position: relative;
     left: -1px;
+}
+.yy-locate-steps .yy-locate-steps-mask{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
