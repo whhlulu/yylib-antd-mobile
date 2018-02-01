@@ -113,6 +113,7 @@ export default class YYReferTree extends React.Component {
             })) {
             // console.log('1')
             selectedNodes.push(selectedNode);
+            selectedNode.checked=true;
             this.setState({
                 selectedNodes: selectedNodes,
                 row:selectedNodes
@@ -126,6 +127,7 @@ export default class YYReferTree extends React.Component {
                     newNodes.push(item);
                 }
             })
+            selectedNode.checked=false;
             this.setState({
                 selectedNodes: newNodes,
                 row:newNodes
@@ -210,6 +212,7 @@ export default class YYReferTree extends React.Component {
         this.getListData(referUrl[this.props.referName], referParams, 1,this.props.referName);
 
     }
+
     treeContent = (treeData, selectedId) => {
         if(!this.props.multiMode){
             if(treeData){
@@ -227,16 +230,37 @@ export default class YYReferTree extends React.Component {
             if(treeData){
                 return treeData.map((item) => {
                     if (item.children && item.children.length > 0) {
-                        return <Accordion onChange={this.onChange} className="refer-accordion"  key={item.id}><Accordion.Panel className="refer-pad" key={item.id} header={<CheckboxItem onChange={(e) => this.onMultiChange(e, item)} key={item.id}>{item[this.props.displayField]}</CheckboxItem>}>{this.treeContent(item.children, selectedId)}</Accordion.Panel></Accordion>;
+                        return <Accordion onChange={this.onChange} className="refer-accordion"  key={item.id}><Accordion.Panel className="refer-pad" key={item.id} header={<CheckboxItem onChange={(e) => this.onMultiChange(e, item)} key={item.id} checked={item.checked} >{item[this.props.displayField]}</CheckboxItem>}>{this.treeContent(item.children, selectedId)}</Accordion.Panel></Accordion>;
                     }else{
-                        return <CheckboxItem className="refer-check-box" onChange={(e) => this.onMultiChange(e, item)} key={item.id}>{item[this.props.displayField]}</CheckboxItem>;
+                        return <CheckboxItem className="refer-check-box" onChange={(e) => this.onMultiChange(e, item)} key={item.id} checked={item.checked}>{item[this.props.displayField]}</CheckboxItem>;
                     }
                 });
             }
         }
     }
     handleClick = (item)=>{
-        console.log(item)
+        let fulldata = data[this.props.referName];
+        let selectdata = this.state.selectedNodes;
+        for(let i = 0;i < selectdata.length; i++){
+            if(item === selectdata[i]){
+                if(i==0){
+                    selectdata.splice(0,1);
+                } else {
+                    selectdata.splice(i,1);
+                }
+                this.setState({
+                    selectNodes:selectdata,
+                    row:selectdata
+                })
+            }
+        }
+        for(let i = 0; i < fulldata.length;i++){
+            if(item.id == fulldata[i].id){
+                fulldata[i].checked = false;
+            } else{
+
+            }
+        }
     }
 
     render() {
@@ -290,9 +314,8 @@ export default class YYReferTree extends React.Component {
                             text="加载中..."
                             animating={animating}
                         />
-                        <WhiteSpace/>
-                        <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>
-                        <div className="refer-tree-content" ref={(c)=>{this.referTree=c;console.log(c)}}>
+                        {/*<SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>*/}
+                        <div className="refer-tree-content">
                             {this.treeContent(data[referName], selectedId)}
                         </div>
                         <div style={{visibility:'hidden',height:'13vw'}}>fdfd</div>

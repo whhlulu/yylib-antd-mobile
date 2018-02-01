@@ -343,8 +343,7 @@ export default class YYReferTree extends React.Component {
                             text="加载中..."
                             animating={animating}
                         />
-                        <WhiteSpace/>
-                        <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>
+                        {/*<SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>*/}
                         <SwipeNavBar rows={this.state.row} handleClick={this.handleClick}/>
                         <div className="refer-tree-content">
                             {this.treeContent(data[referName], selectedId)}

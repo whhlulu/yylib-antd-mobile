@@ -447,8 +447,7 @@ export default class YYReferTreeList extends React.Component {
                             text="加载中..."
                             animating={animating}
                         />
-                        <WhiteSpace/>
-                        <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>
+                        {/*<SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>*/}
                         <div className="refer-tree-content">
                             {this.treeListContent(data[referName], selectedId)}
                         </div>
