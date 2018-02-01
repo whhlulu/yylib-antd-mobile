@@ -170,7 +170,7 @@ class YYreferDemo extends React.Component{
                     referName='whh'
                     onOk={this.onOk}
                     onClose={this.onClose}
-                    multiMode={true}
+                    multiMode={false}
                     form={form}
                     open={this.state.openw}
                     // referCode='00023'

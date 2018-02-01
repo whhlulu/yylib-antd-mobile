@@ -506,20 +506,20 @@ export default class YYReferTreeList extends React.Component {
                                     text="加载中..."
                                     animating={animating}
                                 />
-                                <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>
+                                <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit} onCancel={()=>console.log('cancel')}/>
                                 <List className="list-content">
                                     {this.listContent(data[referName + 'list'], selectedId)}
                                 </List>
                                 <Pagination total={pageCount[referName]}
                                             onChange={this.onChangePageNumber}
                                             className="custom-pagination-with-icon"
-                                            current={pageCount[referName] > 0 ? pageNumber : -1}
+                                            current={pageCount[referName] > 0 ? pageNumber : 0}
                                             locale={{
                                                 prevText: (<span className="arrow-align">上一页</span>),
                                                 nextText: (<span className="arrow-align">下一页</span>),
                                             }}
                                 />
-                                <div style={{
+                                {multiMode?<div style={{
                                     position: 'fixed',
                                     top: '93vh',
                                     zIndex: '99',
@@ -531,7 +531,7 @@ export default class YYReferTreeList extends React.Component {
                                         <DeleteTap rows={this.state.row} displayField={displayField}
                                                    handleClick={this.handleClick}/>
                                     </div>
-                                </div>
+                                </div>:''}
                             </div>
                         </Modal>
                     </div>

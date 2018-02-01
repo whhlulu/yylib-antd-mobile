@@ -61,7 +61,8 @@ export default class YYReferTree extends React.Component {
 
                             page.setState({
                                 referName: result.data.refName,
-                                referUrl: referUrl
+                                referUrl: referUrl,
+                                row:[],
                             })
                             referParams.condition = page.props.condition;
 
@@ -254,13 +255,26 @@ export default class YYReferTree extends React.Component {
                 })
             }
         }
-        for(let i = 0; i < fulldata.length;i++){
+        let checkedfalse = (data)=>{
+            for(let i = 0;i<data.length;i++){
+                if(item.id == data[i].id){
+                    data[i].checked = false;
+                    return;
+                } else {
+                    if(data[i].children!==null){
+                        checkedfalse(data[i].children)
+                    }
+                }
+            }
+        }
+        checkedfalse(fulldata);
+        /*for(let i = 0; i < fulldata.length;i++){
             if(item.id == fulldata[i].id){
                 fulldata[i].checked = false;
             } else{
 
             }
-        }
+        }*/
     }
 
     render() {
@@ -319,12 +333,11 @@ export default class YYReferTree extends React.Component {
                             {this.treeContent(data[referName], selectedId)}
                         </div>
                         <div style={{visibility:'hidden',height:'13vw'}}>fdfd</div>
-                        <div  style={{position:'fixed',top:'93vh',zIndex:'99',width:'100vw',height:'50px',backgroundColor:'white'}}>
+                        {multiMode? <div  style={{position:'fixed',top:'93vh',zIndex:'99',width:'100vw',height:'50px',backgroundColor:'white'}}>
                             <div style={{width:'auto'}}>
                                 <DeleteTap rows={this.state.row} displayField={displayField} handleClick={this.handleClick}/>
                             </div>
-                        </div>
-
+                        </div>:''}
                     </div>
                 </Modal>
             </WingBlank>

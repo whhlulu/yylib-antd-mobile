@@ -432,11 +432,11 @@ export default class YYReferList extends React.Component {
                                             nextText: (<span className="arrow-align">下一页</span>),
                                         }}
                             />
-                            <div  style={{position:'fixed',top:'93vh',zIndex:'99',width:'100vw',height:'50px',backgroundColor:'white'}}>
+                            {multiMode?<div  style={{position:'fixed',top:'93vh',zIndex:'99',width:'100vw',height:'50px',backgroundColor:'white'}}>
                                 <div style={{width:'auto'}}>
-                            <DeleteTap rows={this.state.row} displayField={displayField} handleClick={this.handleClick}/>
+                                    <DeleteTap rows={this.state.row} displayField={displayField} handleClick={this.handleClick}/>
                                 </div>
-                            </div>
+                            </div>:''}
                                 </div>
                     </div>
                 </Modal>
