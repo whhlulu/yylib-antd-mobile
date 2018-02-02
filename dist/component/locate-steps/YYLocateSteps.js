@@ -15,17 +15,20 @@ class YYLocateSteps extends React.Component {
     static propTypes = {
         data: PropTypes.array,//{id,title,icon}
         defaultHeight: PropTypes.number,
+        scrollId:PropTypes.string
     };
     static defaultProps = {
         data: [],
         defaultHeight: 0,
+        scrollId:document.documentElement
     };
     onChange = (index, item, e) => {
         e.preventDefault();
         e.stopPropagation();
         let curDom = document.getElementById(item["id"]);//获取点击代表元素
-        let parentDom = curDom.parentNode;//获取点击代表元素
-        parentDom.scrollTop = 200;
+        let scrollDom = document.getElementById(this.props.scrollId);//获取点击代表元素
+        scrollDom.scrollTop = curDom.offsetTop - this.props.defaultHeight;
+        //TODO 添加滚动效果
         //document.documentElement.scrollTop = curDom.offsetTop - this.props.defaultHeight;
         //document.body.scrollTop = curDom.offsetTop - this.props.defaultHeight;
         /*let duration = 500, interval = 10, target = curDom.offsetTop;
@@ -59,7 +62,7 @@ class YYLocateSteps extends React.Component {
     }
 
     render() {
-        let {data, defaultHeight, onChange, children, className, ...restProps} = this.props;
+        let {data, defaultHeight,scrollId, onChange, children, className, ...restProps} = this.props;
         const {activeIndex} = this.state;
         let wrapClz = classnames('yy-locate-steps', className);
         let wrapStepClz = (index) => classnames('yy-locate-step', activeIndex === index ? 'active' : null);
