@@ -377,7 +377,7 @@ export default class YYReferList extends React.Component {
                     maskClosable={false}
                     animationType="slide-up"
                 >
-                    <div style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw'}}>
+                    <div style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw',display:'flex',flexDirection:'column'}}>
 
                         <div className='Nav'>
                             <NavBar leftContent="返回"

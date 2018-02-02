@@ -94,9 +94,16 @@ export default class YYReferTree extends React.Component {
             animating: true
         })
         ajax.getText(referUrl, referParams, function (result) {
-            console.log(referParams);
             result = JSON.parse(result);
-            data[contentname]=result;
+            //首页和非首页的数据分别处理
+            if(referParams.pid){
+                data[contentname+referParams.pid]=result;
+                data[contentname]=data[contentname+referParams.pid];
+            } else {
+                data[contentname+'001']=result;
+                data[contentname]=data[contentname+'001'];
+            }
+
             _self.setState({
                 animating: false
             })
@@ -306,31 +313,6 @@ export default class YYReferTree extends React.Component {
     render() {
         const {value,selectedId,animating,pageNumber,showList} = this.state;
         const {referlabel,referCode,multiMode,displayField,disabled,referStyle,referName,open,modalHeight} = this.props;
-        /*let listContent = (data,selectedId)=>{
-            if(this.props.multiMode){
-                if(data[this.props.referName]){
-                    return data[this.props.referName].map(item => (
-                        <CheckboxItem key={item.id} onChange={() => this.onMultiChange(item)}>
-                            {item[this.props.displayField]}
-                        </CheckboxItem>
-                    ))
-                }
-
-            } else {
-                if(data[this.props.referName]){
-                    data[this.props.referName].map(item => (
-                        <RadioItem key={item.id} checked={selectedId === item.id}
-                                   onChange={() => this.onSingleChange(item)}>
-                            {item[this.props.displayField]}
-                        </RadioItem>
-                    ))
-                }
-
-            }
-        }*/
-
-
-
         return (
             <WingBlank>
                 <WhiteSpace />
@@ -339,7 +321,7 @@ export default class YYReferTree extends React.Component {
                     visible={disabled?'':open}
                     maskClosable={false}
                     animationType="slide-up">
-                    <div style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw'}}>
+                    <div style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw',display:'flex',flexDirection:'column'}}>
                         <div className='Nav'>
                             <NavBar leftContent="返回"
                                     key="nav"
@@ -357,11 +339,12 @@ export default class YYReferTree extends React.Component {
                             animating={animating}
                         />
                         {/*<SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>*/}
-                        <div className='refer-swipe'>
-                            <SwipeNavBar rows={this.state.swiperow} handleClick={this.handleClick}/>
-                        </div>
+
 
                         <div className="refer-lazytree-content">
+                            <div className='refer-swipe'>
+                                <SwipeNavBar rows={this.state.swiperow} handleClick={this.handleClick}/>
+                            </div>
                             {this.treeContent(data[referName], selectedId)}
                         </div>
                         {multiMode? <div className='yyrefer-tap'>

@@ -407,7 +407,7 @@ export default class YYReferTreeList extends React.Component {
                     visible={disabled?'':open}
                     maskClosable={false}
                     animationType="slide-up">
-                    <div  style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw'}}>
+                    <div  style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw',display:'flex',flexDirection:'column'}}>
                         <div className='Nav'>
                             <NavBar leftContent="返回"
                                     key="nav"
@@ -422,10 +422,11 @@ export default class YYReferTreeList extends React.Component {
                             animating={animating}
                         />
                         {/*<SearchBar placeholder="搜索" onSubmit={this.onTreeSearchSubmit}/>*/}
-                        <div className='refer-swipe'>
-                            <SwipeNavBar rows={this.state.row} handleClick={this.handleClick}/>
-                        </div>
+
                         <div className="refer-lazytree-content">
+                            <div className='refer-swipe'>
+                                <SwipeNavBar rows={this.state.row} handleClick={this.handleClick}/>
+                            </div>
                             {this.treeListContent(data[referName], selectedId)}
                         </div>
                         <Modal
@@ -434,7 +435,7 @@ export default class YYReferTreeList extends React.Component {
                             maskClosable={false}
                             animationType="slide-up"
                         >
-                            <div style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw'}}>
+                            <div style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw',display:'flex',flexDirection:'column'}}>
 
 
                                 <NavBar leftContent="返回"

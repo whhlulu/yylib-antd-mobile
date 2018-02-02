@@ -462,7 +462,7 @@ export default class YYReferTreeList extends React.Component {
                     animationType="slide-up">
                     <div style={modalHeight == 'part' ? {height: '93vh', width: '100vw'} : {
                         height: '100vh',
-                        width: '100vw'
+                        width: '100vw',display:'flex',flexDirection:'column'
                     }}>
                         <div className='Nav'>
                             <NavBar leftContent="返回"
@@ -489,7 +489,7 @@ export default class YYReferTreeList extends React.Component {
                         >
                             <div style={modalHeight == 'part' ? {height: '93vh', width: '100vw'} : {
                                 height: '100vh',
-                                width: '100vw'
+                                width: '100vw',display:'flex',flexDirection:'column'
                             }}>
                                 <div className='Nav'>
                                     <NavBar leftContent="返回"
