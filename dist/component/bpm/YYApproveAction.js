@@ -2,13 +2,15 @@
  * Created By whh 2018/1/2
  * */
 import React, {Component} from 'react';
+import {createForm} from 'rc-form';
 import {Button, Modal, NavBar, Icon, List, TextareaItem, Radio, Checkbox, Flex, Picker} from 'antd-mobile';
 const CheckboxItem = Checkbox.CheckboxItem;
 const RadioItem = Radio.RadioItem;
 const Item = List.Item;
 const prompt = Modal.prompt;
+const alert = Modal.alert;
 import PropTypes from 'prop-types';
-import {YYIcon, YYToast, YYRefer, YYApproveHistory, YYAssignRef,YYForm} from "../../index";
+import {YYIcon, YYToast, YYRefer, YYApproveHistory, YYAssignRef, YYForm} from "../../index";
 import {MODULE_URL} from '../../common/RestUrl';
 import ajax from '../../utils/ajax';
 import '../../../css/YYApproveAction.css';
@@ -39,9 +41,10 @@ class YYApproveAction extends React.Component {
     componentDidMount() {
         this.getInfo();
     }
-    getInfo=()=>{
+
+    getInfo = () => {
         let {billTypeId, userId, billId, approveType} = this.props;
-        if(approveType!=='审批')return false;
+        if (approveType !== '审批')return false;
         ajax.getText(MODULE_URL.getBpmId, {'billId': billId}, (getBpmIdTextData) => {
             var getBpmIdData = JSON.parse(getBpmIdTextData);
             if (getBpmIdData.success && getBpmIdData.success == true) {
@@ -57,7 +60,7 @@ class YYApproveAction extends React.Component {
                             rejectAble: beforeRejectData.rejectAble,//审核
                             addsignAble: beforeRejectData.addsignAble,//改派
                             assignAble: beforeRejectData.assignAble,//指派
-                            bohuiDate: beforeRejectData.data.array?beforeRejectData.data.array:null,
+                            bohuiDate: beforeRejectData.data.array ? beforeRejectData.data.array : null,
                         })
                     })
                 } else {
@@ -68,101 +71,123 @@ class YYApproveAction extends React.Component {
             }
         })
     }
-    otherHandleClick=(type)=>{
-        let {billTypeId, userId, billId, approveType,onOk} = this.props;
+    otherHandleClick = (type) => {
+        let {billTypeId, userId, billId, approveType, onOk} = this.props;
         let url = null;
-        if(type==='弃审'){
+        if (type === '弃审') {
             url = MODULE_URL.unapprove
-        }else if(type==='收回'){
+        } else if (type === '收回') {
             url = MODULE_URL.doCallBack
-        }else{
+        } else {
             YYToast.fail("approveType错误！", 2);
             return false;
         }
-        if(!billId){
+        if (!billId) {
             YYToast.fail("找不到对应的表单！", 2);
-        }else if(!billTypeId){
+        } else if (!billTypeId) {
             YYToast.fail("找不到对应的单据类型！", 2);
-        }else{
+        } else {
             YYToast.loading('Loading...', 0, null, false);
-            ajax.postJSON(url, {userId:userId,billId:billId,billTypeId:billTypeId}, null,function(error){
-            },function (data) {
-                if (data!=null && data.status==200) {
+            ajax.postJSON(url, {userId: userId, billId: billId, billTypeId: billTypeId}, null, function (error) {
+            }, function (data) {
+                if (data != null && data.status == 200) {
                     let param = eval("(" + data.text + ")");
-                    if(param!=null){
-                        if(param.success == true && param.msg){
+                    if (param != null) {
+                        if (param.success == true && param.msg) {
                             YYToast.success(param.msg, 2)
-                        }else{
+                        } else {
                             YYToast.fail(param.msg, 2);
                         }
                     }
                 }
-                if(onOk && typeof(onOk)=="function"){
-                    onOk(JSON.parse( data.text ));
+                if (onOk && typeof(onOk) == "function") {
+                    onOk(JSON.parse(data.text));
                 }
             });
         }
     }
-    shouhuiClick=()=>{
+    shouhuiClick = () => {
 
     }
     //点击审批动作判断
     actionBtnClick = (type) => {
         let {bohuiValueRadio, bohuiDate, showAddsignRef, addsingUser} = this.state;
-        this.setState({actionType: type})
         if (type === 'tongyi') {
-            prompt(
-                '同意',
-                '流程将继续',
-                (comment) => this.beforeApprove(type, comment),
-                'default',
-                '同意！',
-            )
+            this.setState({actionType: type, comment: '同意!'}, () => {
+                alert(
+                    '同意',
+                    <ActionModal
+                        actionType={this.state.actionType}
+                        comment={this.state.comment}
+                        onChangeComment={v => this.setState({comment: v})}/>,
+                    [
+                        {text: '取消', onPress: () => console.log('取消')},
+                        {text: '确定', onPress: () => {this.beforeApprove()}}
+                    ]
+                )
+            })
         } else if (type === 'bohui') {
-            prompt(
-                '驳回',
-                <BohuiPicker
-                    bohuiDate={bohuiDate}
-                    bohuiValueRadio={bohuiValueRadio}
-                    onChange={v => this.setState({bohuiValueRadio: v})}
-                    onOk={v => this.setState({bohuiValueRadio: v})}/>,
-                (comment) => this.beforeApprove('bohui', comment),
-                'default',
-                '不同意且退回！',
-            )
+            this.setState({actionType: type, comment: '驳回!'}, () => {
+                alert(
+                    '驳回',
+                    <ActionModal
+                        actionType={this.state.actionType}
+                        comment={this.state.comment}
+                        onChangeComment={v => this.setState({comment: v})}
+                        bohuiDate={bohuiDate}
+                        bohuiValueRadio={bohuiValueRadio}
+                        onChange={v => this.setState({bohuiValueRadio: v})}
+                        onOk={v => this.setState({bohuiValueRadio: v})}/>,
+                    [
+                        {text: '取消', onPress: () => console.log('取消')},
+                        {text: '确定', onPress: () => {this.beforeApprove()}}
+                    ]
+                )
+            })
+
         } else if (type === 'shenhe') {
-            prompt(
-                '审核',
-                '流程继续流转,本项一般在会签时使用',
-                (comment) => this.beforeApprove(type, comment),
-                'default',
-                '已审核！',
-            )
+            this.setState({actionType: type, comment: '已审核!'}, () => {
+                alert(
+                    '审核',
+                    <ActionModal
+                        actionType={this.state.actionType}
+                        comment={this.state.comment}
+                        onChangeComment={v => this.setState({comment: v})}/>,
+                    [
+                        {text: '取消', onPress: () => console.log('取消')},
+                        {text: '确定', onPress: () => {this.beforeApprove()}}
+                    ]
+                )
+            })
         } else if (type === 'gaipai') {
-            prompt(
-                '改派',
-                <GaipaiRefer
-                    {...this.props}
-                    showAddsignRef={showAddsignRef}
-                    addsingUser={addsingUser}
-                    onClose={() => {
-                    }}
-                    onOk={(user) => {
-                        this.setState({addsingUser: user})
-                    }}/>,
-                (comment) => this.beforeApprove('gaipai', comment),
-                'default',
-                '改派！',
-            )
+            this.setState({actionType: type, comment: '改派!'}, () => {
+                alert(
+                    '改派',
+                    <GaipAction
+                        {...this.props}
+                        comment={this.state.comment}
+                        onChangeComment={v => this.setState({comment: v})}
+                        showAddsignRef={showAddsignRef}
+                        addsingUser={addsingUser}
+                        onClose={() => {
+                        }}
+                        onOk={user => this.setState({addsingUser: user})}/>,
+                    [
+                        {text: '取消', onPress: () => console.log('取消')},
+                        {text: '确定', onPress: () => {this.beforeApprove()}}
+                    ]
+                )
+            })
         } else {
             console.log('审批动作代码错误！')
         }
     }
     //审批前判断
-    beforeApprove = (type, comment) => {
-        let {assignAble} = this.state;//指派
+    beforeApprove = () => {
+        let {actionType, comment, assignAble} = this.state;//指派
+        console.log(actionType, comment)
         this.setState({comment}, () => {
-            if (assignAble !== null && assignAble === true && (type === 'tongyi' || type === 'shenhe')) {
+            if (assignAble !== null && assignAble === true && (actionType === 'tongyi' || actionType === 'shenhe')) {
                 //assignAble指派为true,并且同意或者审核，判断显示指派情况
                 this.showAssign();
             } else {
@@ -222,7 +247,7 @@ class YYApproveAction extends React.Component {
             } else {
                 YYToast.fail(data.msg, 2)
             }
-            if(this.props.onOk && typeof(this.props.onOk)=="function"){
+            if (this.props.onOk && typeof(this.props.onOk) == "function") {
                 this.props.onOk(data);
             }
         })
@@ -243,7 +268,7 @@ class YYApproveAction extends React.Component {
     }
 
     render() {
-        let {billTypeId, userId, approveType,billId,onOk,className,...restProps} = this.props;
+        let {billTypeId, userId, approveType, billId, onOk, className, ...restProps} = this.props;
         let {bpmId, inPower, rejectAble, addsignAble, assignAble, bohuiDate, bohuiValueRadio, showAssignRef} = this.state;
         let yyApproveActionCls = classnames('yy-approve-action', className);
         let bohuiCls = classnames('action-btn bohui', rejectAble ? '' : 'disabled');
@@ -275,7 +300,8 @@ class YYApproveAction extends React.Component {
                     <span className={tongyiCls}
                           onClick={rejectAble ? this.actionBtnClick.bind(this, 'tongyi') : null}><YYIcon
                         className="action-icon" type="upload" size='xxs'/>同意</span>
-                </div> : <span className="block" onClick={this.otherHandleClick.bind(this,approveType)}>{approveType}</span>}
+                </div> : <span className="block"
+                               onClick={this.otherHandleClick.bind(this, approveType)}>{approveType}</span>}
             </div>
 
         )
@@ -284,14 +310,21 @@ class YYApproveAction extends React.Component {
 }
 export default YYApproveAction;
 
-class BohuiPicker extends React.Component {
+class ActionModal extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            actionType: this.props.actionType,
+            comment: this.props.comment,
             bohuiValueRadio: this.props.bohuiValueRadio
         }
     }
 
+    onChangeComment = (v) => {
+        this.setState({comment: v}, () => {
+            this.props.onChangeComment(v);
+        })
+    }
     onChange = (v) => {
         this.setState({bohuiValueRadio: v}, () => {
             this.props.onChange(v);
@@ -306,7 +339,7 @@ class BohuiPicker extends React.Component {
     render() {
         let {bohuiDate} = this.props;
         let pickerDate = [{label: '提交人', value: '提交人'}];
-        if(bohuiDate&&bohuiDate.length>0){
+        if (bohuiDate && bohuiDate.length > 0) {
             for (let i = 0; i < bohuiDate.length; i++) {
                 pickerDate.push({
                     label: bohuiDate[i].activityName,
@@ -314,30 +347,46 @@ class BohuiPicker extends React.Component {
                 })
             }
         }
-        let {bohuiValueRadio} = this.state;
+        let {actionType, comment, bohuiValueRadio} = this.state;
         return (
-            <Picker
-                data={pickerDate}
-                title="选择驳回处"
-                cols={1}
-                value={bohuiValueRadio}
-                onChange={this.onChange}
-                onOk={this.onOk}>
-                <Item arrow="horizontal">流程退回至</Item>
-            </Picker>
+            <div>
+                {actionType === 'bohui' ? <Picker
+                    data={pickerDate}
+                    title="选择驳回处"
+                    cols={1}
+                    value={bohuiValueRadio}
+                    onChange={this.onChange}
+                    onOk={this.onOk}>
+                    <Item arrow="horizontal">流程退回至</Item>
+                </Picker> : <div>{actionType==='tongyi'?'流程将继续':'流程继续流转,一般在会签时使用'}</div>}
+                <TextareaItem
+                    style={{border: '1px solid #f4f4f4', borderRadius: '2px', marginLeft: '-4px', padding: '1px'}}
+                    placeholder="请输入审批语..."
+                    value={comment}
+                    onChange={this.onChangeComment}
+                    rows={2}
+                />
+            </div>
+
         )
     }
 }
 
-class GaipaiReferCom extends React.Component {
+class GaipActionForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            comment: this.props.comment,
             showAddsignRef: this.props.showAddsignRef,
             addsingUser: this.props.addsingUser,
         }
     }
 
+    onChangeComment = (v) => {
+        this.setState({comment: v}, () => {
+            this.props.onChangeComment(v);
+        })
+    }
     showAddsign = () => {
         this.setState({
             showAddsignRef: true,
@@ -356,7 +405,7 @@ class GaipaiReferCom extends React.Component {
 
     render() {
         let {form} = this.props;
-        let {showAddsignRef, addsingUser} = this.state;
+        let {comment, showAddsignRef, addsingUser} = this.state;
         return (
             <div>
                 <Item arrow="horizontal" onClick={this.showAddsign}
@@ -372,8 +421,15 @@ class GaipaiReferCom extends React.Component {
                     referCode='00023'
                     referStyle='tree-list'
                 />
+                <TextareaItem
+                    style={{border: '1px solid #f4f4f4', borderRadius: '2px', marginLeft: '-4px', padding: '1px'}}
+                    placeholder="请输入审批语..."
+                    value={comment}
+                    onChange={this.onChangeComment}
+                    rows={2}
+                />
             </div>
         )
     }
 }
-const GaipaiRefer = YYForm.create()(GaipaiReferCom)
+const GaipAction = YYForm.create()(GaipActionForm)

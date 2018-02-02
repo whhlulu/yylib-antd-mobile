@@ -1,5 +1,5 @@
 import React from 'react'
-import {Icon, WhiteSpace,Button} from 'antd-mobile'
+import {Icon, WhiteSpace, Button} from 'antd-mobile'
 import {YYLocateSteps} from '../../../index'
 
 class YYLocateStepsDemo extends React.Component {
@@ -12,63 +12,25 @@ class YYLocateStepsDemo extends React.Component {
 
     render() {
         return (
-            <div style={{height:"100%",width:"100%",position:"relative"}}>
-                <Button onClick={()=>{this.refSwipe.scrollTop = 200}}>test</Button>
-                <YYLocateSteps data={this.state.data} defaultHeight={44}>
+            <div style={{height: "100%", width: "100%", position: "relative"}}>
+                <YYLocateSteps data={this.state.data} defaultHeight={44} scrollId="testsc">
                     <Icon type="check" style={{position: 'fixed', bottom: '60px', right: '60px'}}/>
                 </YYLocateSteps>
-                <div style={{height:"450px",width:"100%",position:"absolute",top:"100px",overflow: 'scroll'}}>
-                    <div style={{overflow:'scroll'}} ref={ node => this.refSwipe =node } onClick={() => {console.log(this,document.getElementById("tq").scrollTop);}}>
-                        <p id="test1" style={{color: 'blue'}}>sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p id="test2" style={{color: 'blue'}}>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p id="test3" style={{color: 'blue'}}>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-                        <p>sssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-
+                <div id="testsc" style={{
+                    height: "450px",
+                    width: "100%",
+                    position: "absolute",
+                    top: "100px",
+                    overflowY: 'scroll',
+                    backgroundColor: '#ccc'
+                }}>
+                    <div style={{overflowY: 'scroll'}}>
+                        <p id="test1" style={{color: 'blue'}}>第一个节点</p>
+                        <div style={{height: '300px'}}></div>
+                        <p id="test2" style={{color: 'blue'}}>第二个节点</p>
+                        <div style={{height: '600px'}}></div>
+                        <p id="test3" style={{color: 'blue'}}>第三个节点</p>
+                        <div style={{height: '400px'}}></div>
                     </div>
                 </div>
 
