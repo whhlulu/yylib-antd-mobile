@@ -1,6 +1,6 @@
 {
   "name": "yylib-antd-mobile",
-  "version": "0.2.6-2",
+  "version": "0.2.6-3",
   "description": "yylib-react",
   "main": "dist/index.js",
   "dependencies": {
