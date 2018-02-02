@@ -315,14 +315,17 @@ export default class YYReferTree extends React.Component {
                     maskClosable={false}
                     animationType="slide-up">
                     <div style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw'}}>
-                        <NavBar leftContent="返回"
-                                key="nav"
-                                mode="light"
-                                onLeftClick={this.onClose(referName)}
-                                rightContent={[
-                                    <a key="nav" onClick={this.onOk(referName)}>确定</a>,
-                                ]}
-                        >{referlabel}</NavBar>
+                        <div className='Nav'>
+                            <NavBar leftContent="返回"
+                                    key="nav"
+                                    mode="light"
+                                    onLeftClick={this.onClose(referName)}
+                                    rightContent={[
+                                        <a key="nav" onClick={this.onOk(referName)}>确定</a>,
+                                    ]}
+                            >{referlabel}</NavBar>
+                        </div>
+
                         <ActivityIndicator
                             toast
                             text="加载中..."
@@ -332,8 +335,7 @@ export default class YYReferTree extends React.Component {
                         <div className="refer-tree-content">
                             {this.treeContent(data[referName], selectedId)}
                         </div>
-                        <div style={{visibility:'hidden',height:'13vw'}}>fdfd</div>
-                        {multiMode? <div  style={{position:'fixed',top:'93vh',zIndex:'99',width:'100vw',height:'50px',backgroundColor:'white'}}>
+                        {multiMode? <div className='yyrefer-tap'>
                             <div style={{width:'auto'}}>
                                 <DeleteTap rows={this.state.row} displayField={displayField} handleClick={this.handleClick}/>
                             </div>

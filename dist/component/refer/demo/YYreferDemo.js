@@ -170,7 +170,7 @@ class YYreferDemo extends React.Component{
                     referName='whh'
                     onOk={this.onOk}
                     onClose={this.onClose}
-                    multiMode={false}
+                    multiMode={true}
                     form={form}
                     open={this.state.openw}
                     // referCode='00023'
@@ -181,7 +181,7 @@ class YYreferDemo extends React.Component{
                     referName='lzftree'
                     onOk={this.onOk}
                     onClose={this.onClose}
-                    multiMode={false}
+                    multiMode={true}
                     form={form}
                     open={this.state.openl}
                     referCode='bd-005_lazytree'

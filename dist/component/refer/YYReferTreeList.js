@@ -464,11 +464,14 @@ export default class YYReferTreeList extends React.Component {
                         height: '100vh',
                         width: '100vw'
                     }}>
-                        <NavBar leftContent="返回"
-                                key="nav"
-                                mode="light"
-                                onLeftClick={this.onClose(referName)}
-                        >{referlabel}</NavBar>
+                        <div className='Nav'>
+                            <NavBar leftContent="返回"
+                                    key="nav"
+                                    mode="light"
+                                    onLeftClick={this.onClose(referName)}
+                            >{referlabel}</NavBar>
+                        </div>
+
                         <ActivityIndicator
                             toast
                             text="加载中..."
@@ -488,6 +491,7 @@ export default class YYReferTreeList extends React.Component {
                                 height: '100vh',
                                 width: '100vw'
                             }}>
+                                <div className='Nav'>
                                     <NavBar leftContent="返回"
                                             key="nav"
                                             mode="light"
@@ -499,34 +503,29 @@ export default class YYReferTreeList extends React.Component {
                                                 <a key="nav" onClick={this.onOk(referName)}>确定</a>,
                                             ]}
                                     >{referlabel}</NavBar>
-
+                                </div>
 
                                 <ActivityIndicator
                                     toast
                                     text="加载中..."
                                     animating={animating}
                                 />
-                                <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit} onCancel={()=>console.log('cancel')}/>
-                                <List className="list-content">
-                                    {this.listContent(data[referName + 'list'], selectedId)}
-                                </List>
-                                <Pagination total={pageCount[referName]}
-                                            onChange={this.onChangePageNumber}
-                                            className="custom-pagination-with-icon"
-                                            current={pageCount[referName] > 0 ? pageNumber : 0}
-                                            locale={{
-                                                prevText: (<span className="arrow-align">上一页</span>),
-                                                nextText: (<span className="arrow-align">下一页</span>),
-                                            }}
-                                />
-                                {multiMode?<div style={{
-                                    position: 'fixed',
-                                    top: '93vh',
-                                    zIndex: '99',
-                                    width: '100vw',
-                                    height: '50px',
-                                    backgroundColor: 'white'
-                                }}>
+                                <div className='refer-tree-content'>
+                                    <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit} onCancel={()=>console.log('cancel')}/>
+                                    <List className="list-content">
+                                        {this.listContent(data[referName + 'list'], selectedId)}
+                                    </List>
+                                    <Pagination total={pageCount[referName]}
+                                                onChange={this.onChangePageNumber}
+                                                className="custom-pagination-with-icon"
+                                                current={pageCount[referName] > 0 ? pageNumber : 0}
+                                                locale={{
+                                                    prevText: (<span className="arrow-align">上一页</span>),
+                                                    nextText: (<span className="arrow-align">下一页</span>),
+                                                }}
+                                    />
+                                </div>
+                                {multiMode?<div className='yyrefer-tap'>
                                     <div style={{width: 'auto'}}>
                                         <DeleteTap rows={this.state.row} displayField={displayField}
                                                    handleClick={this.handleClick}/>

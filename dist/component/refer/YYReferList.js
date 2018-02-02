@@ -367,30 +367,6 @@ export default class YYReferList extends React.Component {
         let self = this;
         const {value,selectedId,animating,pageNumber,showList} = this.state;
         const {referlabel,referCode,multiMode,displayField,disabled,referStyle,referName,open,modalHeight} = this.props;
-        /*let listContent = (data,selectedId)=>{
-            if(this.props.multiMode){
-                if(data[this.props.referName]){
-                    return data[this.props.referName].map(item => (
-                        <CheckboxItem key={item.id} onChange={() => this.onMultiChange(item)}>
-                            {item[this.props.displayField]}
-                        </CheckboxItem>
-                    ))
-                }
-
-            } else {
-                if(data[this.props.referName]){
-                    data[this.props.referName].map(item => (
-                        <RadioItem key={item.id} checked={selectedId === item.id}
-                                   onChange={() => this.onSingleChange(item)}>
-                            {item[this.props.displayField]}
-                        </RadioItem>
-                    ))
-                }
-
-            }
-        }*/
-
-
 
         return (
             <WingBlank>
@@ -403,41 +379,45 @@ export default class YYReferList extends React.Component {
                 >
                     <div style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw'}}>
 
-
-                        <NavBar leftContent="返回"
-                                key="nav"
-                                mode="light"
-                                onLeftClick={this.onClose(referName)}
-                                rightContent={[
-                                    <a key="nav" onClick={this.onOk(referName)}>确定</a>,
-                                ]}
-                        >{referlabel}</NavBar>
-                        <ActivityIndicator
-                            toast
-                            text="加载中..."
-                            animating={animating}
-                        />
-                        <WhiteSpace/>
-                        <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>
-                        <List className="list-content">
-                            {self.listContent(data[referName+'list'],selectedId)}
-                        </List>
-                        <div className='YYRefer-list'>
-                            <Pagination total={pageCount[referName]}
-                                        onChange={this.onChangePageNumber}
-                                        className="custom-pagination-with-icon"
-                                        current={pageCount[referName] > 0 ? pageNumber : -1}
-                                        locale={{
-                                            prevText: (<span className="arrow-align">上一页</span>),
-                                            nextText: (<span className="arrow-align">下一页</span>),
-                                        }}
+                        <div className='Nav'>
+                            <NavBar leftContent="返回"
+                                    key="nav"
+                                    mode="light"
+                                    onLeftClick={this.onClose(referName)}
+                                    rightContent={[
+                                        <a key="nav" onClick={this.onOk(referName)}>确定</a>,
+                                    ]}
+                            >{referlabel}</NavBar>
+                        </div>
+                        <div className='yyreferlist-content'>
+                            <ActivityIndicator
+                                toast
+                                text="加载中..."
+                                animating={animating}
                             />
-                            {multiMode?<div  style={{position:'fixed',top:'93vh',zIndex:'99',width:'100vw',height:'50px',backgroundColor:'white'}}>
+                            <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>
+                            <List className="list-content">
+                                {self.listContent(data[referName+'list'],selectedId)}
+                            </List>
+                            <div className='YYRefer-list'>
+                                <Pagination total={pageCount[referName]}
+                                            onChange={this.onChangePageNumber}
+                                            className="custom-pagination-with-icon"
+                                            current={pageCount[referName] > 0 ? pageNumber : -1}
+                                            locale={{
+                                                prevText: (<span className="arrow-align">上一页</span>),
+                                                nextText: (<span className="arrow-align">下一页</span>),
+                                            }}
+                                />
+                            </div>
+                        </div>
+
+                            {multiMode?<div className='yyrefer-tap'>
                                 <div style={{width:'auto'}}>
                                     <DeleteTap rows={this.state.row} displayField={displayField} handleClick={this.handleClick}/>
                                 </div>
                             </div>:''}
-                                </div>
+
                     </div>
                 </Modal>
             </WingBlank>

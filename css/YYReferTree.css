@@ -18,3 +18,30 @@
 .refer-tree-content .am-list-content{
     white-space: inherit !important;
 }
+.refer-tree-content{
+    padding-bottom: 45px;
+    padding-top: 45px;
+}
+.yyreferlist-content{
+    padding-bottom: 45px;
+    padding-top: 45px;
+}
+.Nav{
+    position: fixed;
+    width: 100vw;
+    z-index:100;
+}
+.yyrefer-tap{
+    position:fixed;
+    bottom:0;
+    z-index: 99;
+    width:100vw;
+    height: 48px;
+    background-color: white;
+}
+.refer-swipe{
+    padding-top:45px;
+}
+.refer-lazytree-content{
+    padding-bottom: 45px;
+}

@@ -19,7 +19,7 @@ class SwipeNavBar extends React.Component {
     render() {
         const rows = this.props.rows;
         return (
-            <div style={{padding:'0px 10px',backgroundColor:'white',textAlign:'left'}}>
+            <div style={{backgroundColor:'white',textAlign:'left'}}>
                 <div id="mySwipeNavBar" style={this.props.style}  ref={ node => this.refSwipe =node }>
                     {rows&&rows.length>0?
                         rows.map((item) => {

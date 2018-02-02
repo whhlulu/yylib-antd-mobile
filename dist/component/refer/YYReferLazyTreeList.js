@@ -1,5 +1,5 @@
 import React from 'react';
-import { Radio, Checkbox, Modal, List, WhiteSpace, WingBlank,  Toast, ActivityIndicator, NavBar, SearchBar, Pagination, Accordion} from 'antd-mobile';
+import { Radio, Checkbox, Modal, List, WhiteSpace, WingBlank,  Toast, ActivityIndicator, NavBar, SearchBar, Pagination, Accordion,Icon} from 'antd-mobile';
 import '../../../css/refer.less'
 import '../../../css/YYReferTree.css'
 import SwipeNavBar from '../swipeNavBar/SwipeNavBar'
@@ -286,7 +286,12 @@ export default class YYReferTreeList extends React.Component {
                 if (item.children && item.children.length > 0) {
                     return <Accordion onChange={this.onChange} className="refer-accordion" key={item.id}><Accordion.Panel className="refer-pad" key={item.id} header={<CheckboxItem onChange={(e) => this.onTreeChange(e, item)} checked={false} key={item.id}>{item[this.props.displayField]}</CheckboxItem>}>{this.treeListContent(item.children, selectedId)}</Accordion.Panel></Accordion>;
                 }else{
-                    return <CheckboxItem className="refer-check-box" checked={false} onChange={(e) => this.onTreeChange(e, item)} onClick={this.nextRefer.bind(this,item)} key={item.id}>{item[this.props.displayField]}</CheckboxItem>;
+                    if(item.isLeaf){
+                        return <CheckboxItem className="refer-check-box" checked={false} onChange={(e) => this.onTreeChange(e, item)} onClick={this.nextRefer.bind(this,item)} key={item.id}>{item[this.props.displayField]}</CheckboxItem>;
+                    } else {
+                        return <CheckboxItem className="refer-check-box" checked={false} onChange={(e) => this.onTreeChange(e, item)} onClick={this.nextRefer.bind(this,item)} key={item.id}>{item[this.props.displayField]}<div style={{float:'right',color:'RGB(189,189,194)'}} ><Icon type='right'/></div></CheckboxItem>
+                    }
+
                 }
             });
         }
@@ -403,20 +408,24 @@ export default class YYReferTreeList extends React.Component {
                     maskClosable={false}
                     animationType="slide-up">
                     <div  style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw'}}>
-                        <NavBar leftContent="返回"
-                                key="nav"
-                                mode="light"
-                                onLeftClick={this.onClose(referName)}
-                        >{referlabel}</NavBar>
+                        <div className='Nav'>
+                            <NavBar leftContent="返回"
+                                    key="nav"
+                                    mode="light"
+                                    onLeftClick={this.onClose(referName)}
+                            >{referlabel}</NavBar>
+                        </div>
+
                         <ActivityIndicator
                             toast
                             text="加载中..."
                             animating={animating}
                         />
-                        <WhiteSpace/>
-                        <SearchBar placeholder="搜索" onSubmit={this.onTreeSearchSubmit}/>
-                        <SwipeNavBar rows={this.state.row} handleClick={this.handleClick}/>
-                        <div className="refer-tree-content">
+                        {/*<SearchBar placeholder="搜索" onSubmit={this.onTreeSearchSubmit}/>*/}
+                        <div className='refer-swipe'>
+                            <SwipeNavBar rows={this.state.row} handleClick={this.handleClick}/>
+                        </div>
+                        <div className="refer-lazytree-content">
                             {this.treeListContent(data[referName], selectedId)}
                         </div>
                         <Modal
@@ -441,7 +450,7 @@ export default class YYReferTreeList extends React.Component {
                                     text="加载中..."
                                     animating={animating}
                                 />
-                                {/*<SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>*/}
+                                <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>
                                 <List className="list-content">
                                     {this.listContent(data[referName+'list'],selectedId)}
                                 </List>
