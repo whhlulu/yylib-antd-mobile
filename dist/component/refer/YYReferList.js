@@ -1,7 +1,8 @@
 import React from 'react';
-import { Radio, Checkbox, Modal, List, WhiteSpace, WingBlank,  Toast, ActivityIndicator, NavBar, SearchBar, Pagination, Accordion} from 'antd-mobile';
+import { Radio, Checkbox, Modal, List, WhiteSpace, WingBlank,  Toast, ActivityIndicator, NavBar, SearchBar, Pagination} from 'antd-mobile';
 import '../../../css/refer.less'
 import '../../../css/YYReferTree.css'
+import DeleteTap from '../delete-tap/deleteTap'
 import ajax from '../../utils/ajax';
 import RestUrl from "../../common/RestUrl";
 import _ from 'lodash';
@@ -20,6 +21,9 @@ let data=[];
 let pageCount=[];
 let referstyle='';
 let listcontent='';
+let NUM = 1;       //切换页码时的最大页数
+let onsearch = false;       //是否在搜索状态
+let searchNUM = 1;      //搜索状态最大页数
 
 export default class YYReferList extends React.Component {
     constructor(props) {
@@ -35,6 +39,8 @@ export default class YYReferList extends React.Component {
             pageCount:'',
             searchText:'',
             showList:false, //tree-list的modal
+            visible:false,       //气泡显示
+            row:[],
         };
     }
 
@@ -57,14 +63,17 @@ export default class YYReferList extends React.Component {
                     if (result.success) {
                         // console.log(result.data);
                         if(result.data !== null){
+                            //全部参照内容
+                            data[page.props.referName+'selectlist']=[];
                             referUrl[name] = result.data.dataurl;
                             treereferUrl[name] = result.data.treerelyurl;
                             relyfield[name] = result.data.relyfield;
                             referParams = {};
-
                             page.setState({
                                 referName: result.data.refName,
-                                referUrl: referUrl
+                                referUrl: referUrl,
+                                row:[],
+                                selectedNodes:[],       //清空上次已选择
                             })
                             referParams.condition = page.props.condition;
                             referParams.pageSize = 10;
@@ -95,16 +104,20 @@ export default class YYReferList extends React.Component {
         })
         ajax.getJSON(referUrl, _.assign({}, referParams, {pageNumber: pageNumber}), function (result) {
             if (result.code === 'success') {
-
-
                 data[contentname+'list']=result.data.content;
-
+                if(onsearch){
+                    data[contentname+'searchlist'+pageNumber]=result.data.content
+                } else {
+                    data[contentname+'list'+pageNumber]=result.data.content;
+                    data[contentname+'selectlist']=[...data[contentname+'selectlist'],...result.data.content]
+                    pageCount[contentname+'list']=result.data.pageCount;
+                }
                 pageCount[contentname]=result.data.pageCount;
                 self.setState({
                     // [contentname+'name']: result.data.content,
                     pageNumber:pageNumber,
                     pageCount: result.data.pageCount,
-                    animating: false
+                    animating: false,
                 })
 
             } else {
@@ -135,9 +148,12 @@ export default class YYReferList extends React.Component {
             })) {
             // console.log('1')
             selectedNodes.push(selectedNode);
+            selectedNode.checked=true;
             this.setState({
-                selectedNodes: selectedNodes
+                selectedNodes: selectedNodes,
+                row:selectedNodes
             });
+
         } else {
             // console.log('2')
             let newNodes = [];
@@ -147,8 +163,10 @@ export default class YYReferList extends React.Component {
                     newNodes.push(item);
                 }
             })
+            selectedNode.checked=false;
             this.setState({
-                selectedNodes: newNodes
+                selectedNodes: newNodes,
+                row:newNodes,
             });
         }
     }
@@ -163,7 +181,7 @@ export default class YYReferList extends React.Component {
         } else {
             this.setState({
                 selectedId: selectedNode.id,
-                selectedNode: selectedNode
+                selectedNode: selectedNode,
             });
         };
     }
@@ -172,22 +190,53 @@ export default class YYReferList extends React.Component {
     onChangePageNumber = (value) => {
         /*console.log(this.state.searchText)
         console.log(this.props.referName)*/
-        this.setState({
-            pageNumber: value
-        })
-        let referParams = {};
-        referParams.condition = this.props.condition;
-        if(this.state.searchText!==''){
-            referParams.searchText = this.state.searchText;
-            referTreeListParams.searchText = this.state.searchText;
+        //记录最大页数
+        console.log(onsearch)
+        if(onsearch){
+            if(value>searchNUM){
+                searchNUM++;
+                this.setState({
+                    pageNumber: value
+                })
+
+                let referParams = {};
+                referParams.condition = this.props.condition;
+                referParams.pageSize = 10;
+                if(this.state.searchText!==''){
+                    referParams.searchText = this.state.searchText;
+                    referTreeListParams.searchText = this.state.searchText;
+                }
+                this.getListData(referUrl[this.props.referName], referParams, value ,this.props.referName);
+            } else {
+                data[this.props.referName+'list']=data[this.props.referName+'searchlist'+value];
+                this.setState({
+                    pageNumber:value,
+                    animating:false,
+                })
+            }
+        } else {
+            if(value>NUM){
+                NUM++;
+                this.setState({
+                    pageNumber: value
+                })
+
+                let referParams = {};
+                referParams.condition = this.props.condition;
+                referParams.pageSize = 10;
+                if(this.state.searchText!==''){
+                    referParams.searchText = this.state.searchText;
+                    referTreeListParams.searchText = this.state.searchText;
+                }
+                this.getListData(referUrl[this.props.referName], referParams, value ,this.props.referName);
+            } else {
+                    data[this.props.referName+'list']=data[this.props.referName+'list'+value];
+                    this.setState({
+                        pageNumber:value,
+                        animating:false,
+                    })
+            }
         }
-        referParams.pageSize = 10;
-
-        this.getListData(referUrl[this.props.referName], referParams, value ,this.props.referName);
-
-
-
-
     }
 
     showModal = key => (e) => {
@@ -204,13 +253,12 @@ export default class YYReferList extends React.Component {
         this.setState({
             showList:false
         })
-
-        // this.getListData(referUrl[this.props.referName], referParams, 1,this.props.referName);
-
+        onsearch = false;
+        NUM =1 ;
+        searchNUM = 1;
         this.setState({
             pageNumber:1,
             searchText:'',
-            // [key]: false,
         });
         this.props.onClose(key);
     }
@@ -221,6 +269,9 @@ export default class YYReferList extends React.Component {
             searchText:'',
             showList:false,
         })
+        onsearch = false;
+        NUM =1 ;
+        searchNUM = 1;
         let referParams = {};
         referParams.condition = this.props.condition;
 
@@ -243,21 +294,36 @@ export default class YYReferList extends React.Component {
         }
     }
     onSearchSubmit = (value) => {
-        this.setState({
-            searchText:value,
-        })
-        let referParams = {};
-        referParams.searchText = value;
-        referParams.pageSize = 10;
-        referParams.condition = this.props.condition;
-        this.getListData(referUrl[this.props.referName], referParams, 1,this.props.referName);
+        if(value==''){
+            onsearch = false;
+            this.setState({
+                searchText:value,
+            })
+            data[this.props.referName+'list']=data[this.props.referName+'list'+1];
+            pageCount[this.props.referName]=pageCount[this.props.referName+'list'];
+            this.setState({
+                pageNumber:1,
+                animating:false,
+            })
+        } else {
+            onsearch = true;
+            this.setState({
+                searchText:value,
+            })
+            let referParams = {};
+            referParams.searchText = value;
+            referParams.pageSize = 10;
+            referParams.condition = this.props.condition;
+            this.getListData(referUrl[this.props.referName], referParams, 1,this.props.referName);
+        }
+
 
     }
     listContent = (data,selectedId)=>{
         if(this.props.multiMode){
             if(data){
                 return data.map(item => (
-                    <CheckboxItem key={item.id} onChange={(e) => this.onMultiChange(e,item)}>
+                    <CheckboxItem key={item.id} onChange={(e) => this.onMultiChange(e,item)} checked={item.checked}>
                         {item[this.props.displayField]}
                     </CheckboxItem>
                 ))
@@ -274,35 +340,33 @@ export default class YYReferList extends React.Component {
             }
         }
     }
+    handleClick = (item)=>{
+        let fulldata = data[this.props.referName+'selectlist'];
+        let selectdata = this.state.selectedNodes;
+        for(let i = 0;i < selectdata.length; i++){
+            if(item === selectdata[i]){
+                if(i==0){
+                    selectdata.splice(0,1);
+                } else {
+                    selectdata.splice(i,1);
+                }
+                this.setState({
+                    selectNodes:selectdata,
+                    row:selectdata
+                })
+            }
+        }
+        for(let i = 0; i < fulldata.length;i++){
+            if(item.id == fulldata[i].id){
+                fulldata[i].checked = false;
+            }
+        }
+    }
 
     render() {
         let self = this;
         const {value,selectedId,animating,pageNumber,showList} = this.state;
         const {referlabel,referCode,multiMode,displayField,disabled,referStyle,referName,open,modalHeight} = this.props;
-        /*let listContent = (data,selectedId)=>{
-            if(this.props.multiMode){
-                if(data[this.props.referName]){
-                    return data[this.props.referName].map(item => (
-                        <CheckboxItem key={item.id} onChange={() => this.onMultiChange(item)}>
-                            {item[this.props.displayField]}
-                        </CheckboxItem>
-                    ))
-                }
-
-            } else {
-                if(data[this.props.referName]){
-                    data[this.props.referName].map(item => (
-                        <RadioItem key={item.id} checked={selectedId === item.id}
-                                   onChange={() => this.onSingleChange(item)}>
-                            {item[this.props.displayField]}
-                        </RadioItem>
-                    ))
-                }
-
-            }
-        }*/
-
-
 
         return (
             <WingBlank>
@@ -313,36 +377,47 @@ export default class YYReferList extends React.Component {
                     maskClosable={false}
                     animationType="slide-up"
                 >
-                    <div style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw'}}>
+                    <div style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw',display:'flex',flexDirection:'column'}}>
 
+                        <div className='Nav'>
+                            <NavBar leftContent="返回"
+                                    key="nav"
+                                    mode="light"
+                                    onLeftClick={this.onClose(referName)}
+                                    rightContent={[
+                                        <a key="nav" onClick={this.onOk(referName)}>确定</a>,
+                                    ]}
+                            >{referlabel}</NavBar>
+                        </div>
+                        <div className='yyreferlist-content'>
+                            <ActivityIndicator
+                                toast
+                                text="加载中..."
+                                animating={animating}
+                            />
+                            <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>
+                            <List className="list-content">
+                                {self.listContent(data[referName+'list'],selectedId)}
+                            </List>
+                            <div className='YYRefer-list'>
+                                <Pagination total={pageCount[referName]}
+                                            onChange={this.onChangePageNumber}
+                                            className="custom-pagination-with-icon"
+                                            current={pageCount[referName] > 0 ? pageNumber : -1}
+                                            locale={{
+                                                prevText: (<span className="arrow-align">上一页</span>),
+                                                nextText: (<span className="arrow-align">下一页</span>),
+                                            }}
+                                />
+                            </div>
+                        </div>
 
-                        <NavBar leftContent="返回"
-                                key="nav"
-                                mode="light"
-                                onLeftClick={this.onClose(referName)}
-                                rightContent={[
-                                    <a key="nav" onClick={this.onOk(referName)}>确定</a>,
-                                ]}
-                        >{referlabel}</NavBar>
-                        <ActivityIndicator
-                            toast
-                            text="加载中..."
-                            animating={animating}
-                        />
-                        <WhiteSpace/>
-                        <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>
-                        <List className="list-content">
-                            {self.listContent(data[referName+'list'],selectedId)}
-                        </List>
-                        <Pagination total={pageCount[referName]}
-                                    onChange={this.onChangePageNumber}
-                                    className="custom-pagination-with-icon"
-                                    current={pageCount[referName] > 0 ? pageNumber : -1}
-                                    locale={{
-                                        prevText: (<span className="arrow-align">上一页</span>),
-                                        nextText: (<span className="arrow-align">下一页</span>),
-                                    }}
-                        />
+                            {multiMode?<div className='yyrefer-tap'>
+                                <div style={{width:'auto'}}>
+                                    <DeleteTap rows={this.state.row} displayField={displayField} handleClick={this.handleClick}/>
+                                </div>
+                            </div>:''}
+
                     </div>
                 </Modal>
             </WingBlank>

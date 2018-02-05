@@ -6,3 +6,35 @@
 .refer-check-box{
     margin-left:15px;
 }
+.YYRefer-list .custom-pagination-with-icon{
+  margin-top: 2vh;
+}
+
+.refer-tree-content .am-accordion-header{
+    white-space: inherit !important;
+    height:auto !important;
+}
+
+.refer-tree-content .am-list-content{
+    white-space: inherit !important;
+}
+.refer-tree-content{
+    flex-grow:1;
+    overflow:auto;
+}
+.yyreferlist-content{
+    flex-grow:1;
+    overflow:auto;
+}
+.Nav{
+    width: 100vw;
+}
+.yyrefer-tap{
+    width:100vw;
+    height: 48px;
+    background-color: white;
+}
+.refer-lazytree-content{
+    flex-grow:1;
+    overflow:auto;
+ }

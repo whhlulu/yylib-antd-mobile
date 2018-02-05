@@ -1,6 +1,7 @@
 import React from 'react';
-import './swipeNavBar.less'
-class SwipeNavBar extends React.Component {
+import './deleteTap.less'
+import {Icon} from 'antd-mobile'
+class deleteTap extends React.Component {
     constructor(props) {
         super(props)
         this.state = {}
@@ -17,13 +18,13 @@ class SwipeNavBar extends React.Component {
     }
 
     render() {
-        const rows = this.props.rows;
+        const {rows,displayField} = this.props;
         return (
-            <div style={{backgroundColor:'white',textAlign:'left'}}>
-                <div id="mySwipeNavBar" style={this.props.style}  ref={ node => this.refSwipe =node }>
+            <div style={{padding:'0px 10px',backgroundColor:'white',textAlign:'left'}}>
+                <div id="deleteTap" style={this.props.style}  ref={ node => this.refSwipe =node }>
                     {rows&&rows.length>0?
-                        rows.map((item) => {
-                            return <div key={item.id} onClick={()=>this.props.handleClick(item)}><a>{item.name}</a></div>
+                        rows.map((item,index) => {
+                            return <div className='tap-tag' key={index} ><a>{item[displayField]}</a><div className='tap-icon'><Icon  type='cross' size='md' onClick={()=>this.props.handleClick(item)}/></div></div>
                         })
                         :<div>首页</div>}
                 </div>
@@ -31,4 +32,4 @@ class SwipeNavBar extends React.Component {
         )
     }
 }
-export default SwipeNavBar;
+export default deleteTap;

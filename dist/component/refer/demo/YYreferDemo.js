@@ -3,6 +3,7 @@ import {YYRefer,YYForm} from '../../../index'
 import {Button} from 'antd-mobile';
 
 
+
 class YYreferDemo extends React.Component{
     constructor(props){
         super(props);
@@ -35,6 +36,11 @@ class YYreferDemo extends React.Component{
                  openl:true,
              })
          }
+         if(e=='5'){
+             this.setState({
+                 openk:true,
+             })
+         }
 
     }
     onOk = (value,name)=>{
@@ -60,6 +66,11 @@ class YYreferDemo extends React.Component{
             case 'lzftree':
                 this.setState({
                     openl:false
+                })
+                break;
+            case 'lzftreelist':
+                this.setState({
+                    openk:false
                 })
                 break;
             default:
@@ -89,10 +100,15 @@ class YYreferDemo extends React.Component{
                     openl:false
                 })
                 break;
+            case 'lzftreelist':
+                this.setState({
+                    openk:false
+                })
+                break;
         }
     }
     showform = ()=>{
-        this.props.form.validateFields(['zyl', 'lzf','whh','lzftree'], (err, values) => {
+        this.props.form.validateFields(['zyl', 'lzf','whh','lzftree','lzftreelist'], (err, values) => {
             if (!err) {
                 console.log(values);
             } else {
@@ -115,6 +131,7 @@ class YYreferDemo extends React.Component{
                 <Button onClick={this.openRefer.bind(this,'2')}>点击选择树参照lzf</Button>
                 <Button onClick={this.openRefer.bind(this,'3')}>点击选择数表参照whh</Button>
                 <Button onClick={this.openRefer.bind(this,'4')}>点击选择异步树参照</Button>
+                <Button onClick={this.openRefer.bind(this,'5')}>点击选择异步树表参照</Button>
                 <Button onClick={this.showform}>点击显示所有value</Button>
 
                 <YYRefer
@@ -123,7 +140,7 @@ class YYreferDemo extends React.Component{
                     onClose={this.onClose}
                     multiMode={true}
                     form={form}
-                    values={[{code:"15110101919",
+                    /*values={[{code:"15110101919",
                         creationTimestamp:1516707936087,
                         dr:0,
                         id:"0342fcce-1949-426c-8b5a-ec9b4cdfb0f3",
@@ -132,11 +149,12 @@ class YYreferDemo extends React.Component{
                         tenantId:null,
                         userId:"0342fcce-1949-426c-8b5a-ec9b4cdfb0f3",
                         userName:"王祖贤"
-                    }]}
+                    }]}*/
                     open={this.state.open}
                     referCode='00026'
                     referStyle='list'
-                    modalHeight='part'
+                    displayField='name'
+                    // modalHeight='part'
                 />
                 <YYRefer
                     referName='lzf'
@@ -155,7 +173,8 @@ class YYreferDemo extends React.Component{
                     multiMode={true}
                     form={form}
                     open={this.state.openw}
-                    referCode='00023'
+                    // referCode='00023'
+                    referCode='bd-006_test'
                     referStyle='tree-list'
                 />
                 <YYRefer
@@ -167,6 +186,16 @@ class YYreferDemo extends React.Component{
                     open={this.state.openl}
                     referCode='bd-005_lazytree'
                     referStyle='lazy-tree'
+                />
+                <YYRefer
+                    referName='lzftreelist'
+                    onOk={this.onOk}
+                    onClose={this.onClose}
+                    multiMode={true}
+                    form={form}
+                    open={this.state.openk}
+                    referCode='0015'
+                    referStyle='lazy-tree-list'
                 />
             </div>
 

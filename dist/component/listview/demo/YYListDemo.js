@@ -58,6 +58,7 @@ class YYListDemo extends React.Component{
     }
     //下拉刷新数据请求
     onrefresh=function(){
+        //此处init与初始值不同是为了方便对比重新刷新后的数据
         let init = [
             {headurl:'',name:'张二一',dept:'管理部',company:'用友建筑'},
             {headurl:'',name:'张二二',dept:'管理部',company:'用友建筑'},

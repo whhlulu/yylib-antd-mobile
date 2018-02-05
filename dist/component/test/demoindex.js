@@ -15,8 +15,8 @@ class YYreferDemo extends React.Component{
     }
 
     componentDidMount () {
-
-
+        window.addEventListener('scroll', ()=>{console.log(document.documentElement.scrollLeft)});
+        window.addEventListener('resize', ()=>console.log('2'));
     }
     openRefer=(value)=>{
         switch (value){
@@ -46,6 +46,7 @@ class YYreferDemo extends React.Component{
                 break;
         }
     }
+
     onOk = (value)=>{
         console.log(value);
         this.setState({

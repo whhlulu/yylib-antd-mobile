@@ -1,8 +1,9 @@
 import React from 'react';
-import { Radio, Checkbox, Modal, List, WhiteSpace, WingBlank,  Toast, ActivityIndicator, NavBar, SearchBar, Pagination, Accordion} from 'antd-mobile';
+import { Radio, Checkbox, Modal, List, WhiteSpace, WingBlank,  Toast, ActivityIndicator, NavBar, SearchBar, Pagination, Accordion,Icon} from 'antd-mobile';
 import '../../../css/refer.less'
 import '../../../css/YYReferTree.css'
 import SwipeNavBar from '../swipeNavBar/SwipeNavBar'
+import DeleteTap from '../delete-tap/deleteTap'
 import ajax from '../../utils/ajax';
 import RestUrl from "../../common/RestUrl";
 import _ from 'lodash';
@@ -31,8 +32,9 @@ export default class YYReferTree extends React.Component {
             pageCount:'',
             searchText:'',
             showList:false, //tree-list的modal
-            row:[],             //标题导航栏
+            swiperow:[],             //标题导航栏
             changeOrNext:true,         //点击选择或者onclick事件
+            row:[],                 //已选择列表
         };
     }
 
@@ -50,6 +52,8 @@ export default class YYReferTree extends React.Component {
                 })
                 let referCode = page.props.referCode;
                 let referStyle = page.props.referStyle;
+                //储存选择列表有关的数据
+                data[page.props.referName+'fulldata']=[];
                 //根据参照编码获取参照信息
                 ajax.getJSON(RestUrl.REF_SERVER_URL + RestUrl.GET_REFINFO_BYCODE, {refCode: referCode}, function (result) {
                     if (result.success) {
@@ -63,7 +67,8 @@ export default class YYReferTree extends React.Component {
                             page.setState({
                                 referName: result.data.refName,
                                 referUrl: referUrl,
-                                row:rows
+                                swiperow:rows,
+                                row:[]
                             })
                             referParams.condition = page.props.condition;
                             page.getTreeData(referUrl[name], referParams,name);
@@ -92,7 +97,33 @@ export default class YYReferTree extends React.Component {
         })
         ajax.getText(referUrl, referParams, function (result) {
             result = JSON.parse(result);
-            data[contentname]=result;
+            //首页和非首页的数据分别处理,如果存在点击过的情况就用缓存数据
+            if(referParams.pid){
+                let fulldata = data[contentname+'fulldata'];
+                // console.log(fulldata)
+                for(let i = 0;i<fulldata.length;i++){
+                    if(data[contentname+referParams.pid]==fulldata[i]){
+                        data[contentname]=data[contentname+referParams.pid];
+                        _self.setState({
+                            animating: false
+                        })
+                        return;
+                    }
+                }
+                data[contentname+referParams.pid]=result;
+                data[contentname]=data[contentname+referParams.pid];
+                data[contentname+'fulldata'].push( data[contentname+referParams.pid])
+                console.log(data[contentname+'fulldata']);
+            } else {
+                data[contentname]=result;
+                if(!data[contentname+'000001']){
+                    data[contentname+'000001']=result;
+                    data[contentname+'fulldata'].push(data[contentname+'000001']);
+                    // console.log(data[contentname+'fulldata']);
+                }
+
+            }
+
             _self.setState({
                 animating: false
             })
@@ -112,9 +143,11 @@ export default class YYReferTree extends React.Component {
             })) {
             // console.log('onchange');
             selectedNodes.push(selectedNode);
+            selectedNode.checked=true;
             this.setState({
                 changeOrNext:false,
                 selectedNodes: selectedNodes,
+                row:selectedNodes
             });
             setTimeout(()=>{
                 this.setState({
@@ -130,9 +163,11 @@ export default class YYReferTree extends React.Component {
                     newNodes.push(item);
                 }
             })
+            selectedNode.checked=false;
             this.setState({
                 changeOrNext:false,
-                selectedNodes: newNodes
+                selectedNodes: newNodes,
+                row:newNodes
             });
             setTimeout(()=>{
                 this.setState({
@@ -147,22 +182,28 @@ export default class YYReferTree extends React.Component {
         if (selectedNode.id === this.state.selectedId) {
             this.setState({
                 selectedId: null,
-                selectedNode: {}
+                selectedNode: {},
+                changeOrNext:false,
             });
+            setTimeout(()=>{
+                this.setState({
+                    changeOrNext:true,
+                })
+            },10)
         } else {
             this.setState({
                 selectedId: selectedNode.id,
-                selectedNode: selectedNode
+                selectedNode: selectedNode,
+                changeOrNext:false
             });
+            setTimeout(()=>{
+                this.setState({
+                    changeOrNext:true,
+                })
+            },10)
         };
     }
 
-    showModal = key => (e) => {
-        e.preventDefault(); // 修复 Android 上点击穿透
-        this.setState({
-            [key]: true,
-        });
-    }
     onClose = key => (e) => {
         //初始化列表数据后再关闭
         // let referUrl = this.state.referUrl;
@@ -224,11 +265,9 @@ export default class YYReferTree extends React.Component {
             if(treeData){
                 return treeData.map((item) => {
                     if (item.children && item.children.length > 0) {
-                        item.isLeaf = false;
                         return <Accordion onChange={this.onChange} className="refer-accordion" key={item.id}><Accordion.Panel className="refer-pad" key={item.id} header={<CheckboxItem  checked={selectedId === item.id} onChange={(e) => this.onSingleChange(e, item)} key={item.id}>{item[this.props.displayField]}</CheckboxItem>}>{this.treeContent(item.children, selectedId)}</Accordion.Panel></Accordion>;
                     }else{
-                        item.isLeaf = true;
-                        return <CheckboxItem checked={selectedId === item.id} className="refer-check-box" onChange={(e) => this.onSingleChange(e,item)} key={item.id}>{item[this.props.displayField]}</CheckboxItem>;
+                        return <CheckboxItem checked={selectedId === item.id} className="refer-check-box" onChange={(e) => this.onSingleChange(e,item)} onClick={this.nextRefer.bind(this,item)} key={item.id}>{item[this.props.displayField]}</CheckboxItem>;
                     }
                 });
             }
@@ -236,21 +275,30 @@ export default class YYReferTree extends React.Component {
             if(treeData){
                 return treeData.map((item) => {
                     if (item.children && item.children.length > 0) {
-                        return <Accordion onChange={this.onChange} className="refer-accordion"  key={item.id}><Accordion.Panel className="refer-pad" key={item.id} header={<CheckboxItem onChange={(e) => this.onMultiChange(e, item)} key={item.id}>{item[this.props.displayField]}</CheckboxItem>}>{this.treeContent(item.children, selectedId)}</Accordion.Panel></Accordion>;
+                        return <Accordion onChange={this.onChange} className="refer-accordion"  key={item.id}><Accordion.Panel className="refer-pad" key={item.id} header={<CheckboxItem onChange={(e) => this.onMultiChange(e, item)} key={item.id} checked={item.checked}>{item[this.props.displayField]}</CheckboxItem>}>{this.treeContent(item.children, selectedId)}</Accordion.Panel></Accordion>;
                     }else{
-                        return <CheckboxItem className="refer-check-box" onChange={(e) => this.onMultiChange(e, item)} onClick={this.nextRefer.bind(this,item)} key={item.id} >{item[this.props.displayField]}</CheckboxItem>;
+                        if(item.isLeaf){
+                            return <CheckboxItem className="refer-check-box" onChange={(e) => this.onMultiChange(e, item)} onClick={this.nextRefer.bind(this,item)} key={item.id} checked={item.checked} >{item[this.props.displayField]}</CheckboxItem>;
+                        } else {
+                            return <CheckboxItem className="refer-check-box" onChange={(e) => this.onMultiChange(e, item)} onClick={this.nextRefer.bind(this,item)} key={item.id} checked={item.checked} >{item[this.props.displayField]}<div style={{float:'right',color:'RGB(189,189,194)'}} ><Icon type='right'/></div></CheckboxItem>;
+                        }
+
                     }
                 });
             }
         }
     }
+    onChange = ()=>{
+        console.log('change')
+    }
     nextRefer = (value)=>{
             setTimeout(()=>{
                 if(this.state.changeOrNext){
+                    console.log('next')
                     referParams.pid = value.id;
                     if(!value.isLeaf){
                         this.setState({
-                            row:[...this.state.row,value]
+                            swiperow:[...this.state.swiperow,value]
                         })
                         this.getTreeData(referUrl[this.props.referName], referParams,this.props.referName);
                     }
@@ -258,26 +306,23 @@ export default class YYReferTree extends React.Component {
 
             },10)
 
-
-
-
     }
     handleClick = (value) =>{
         //点击导航栏所做的处理
         if(value.name == '首页'){
             this.setState({
-                row:[value]
+                swiperow:[value]
             })
-            this.getTreeData(value.url, {},this.props.referName);
+            data[this.props.referName]=data[this.props.referName+'000001'];
         } else {
-            this.state.row.some((item,index)=>{
+            this.state.swiperow.some((item,index)=>{
                 if(item.id == value.id){
                     let name = this.props.referName;
-                    let oldRow = this.state.row;
+                    let oldRow = this.state.swiperow;
                     let newRow = [];
                     newRow = oldRow.splice(0,index+1);
                    this.setState({
-                       row:newRow
+                       swiperow:newRow
                    })
                     this.getTreeData(referUrl[name], {pid:value.id},this.props.referName);
                 }
@@ -285,34 +330,53 @@ export default class YYReferTree extends React.Component {
         }
     }
 
-    render() {
-        const {value,selectedId,animating,pageNumber,showList} = this.state;
-        const {referlabel,referCode,multiMode,displayField,disabled,referStyle,referName,open,modalHeight} = this.props;
-        /*let listContent = (data,selectedId)=>{
-            if(this.props.multiMode){
-                if(data[this.props.referName]){
-                    return data[this.props.referName].map(item => (
-                        <CheckboxItem key={item.id} onChange={() => this.onMultiChange(item)}>
-                            {item[this.props.displayField]}
-                        </CheckboxItem>
-                    ))
+    tapHandleClick = (item)=>{
+        let fulldata = data[this.props.referName+'fulldata'];
+        let selectdata = this.state.selectedNodes;
+        for(let i = 0;i < selectdata.length; i++){
+            if(item === selectdata[i]){
+                if(i==0){
+                    selectdata.splice(0,1);
+                } else {
+                    selectdata.splice(i,1);
                 }
+                this.setState({
+                    selectNodes:selectdata,
+                    row:selectdata
+                })
+            }
+        }
 
-            } else {
-                if(data[this.props.referName]){
-                    data[this.props.referName].map(item => (
-                        <RadioItem key={item.id} checked={selectedId === item.id}
-                                   onChange={() => this.onSingleChange(item)}>
-                            {item[this.props.displayField]}
-                        </RadioItem>
-                    ))
+        let checkedfalse = (fulldata)=>{
+            for(let j = 0;j<fulldata.length;j++){
+                if(item.id == fulldata[j].id){
+                    fulldata[j].checked = false;
+                    return;
+                } else {
+                    if(_.isArray(fulldata[j].children)){
+                        checkedfalse(fulldata[j].children)
+                    } else {
+                        checkedfalse(fulldata[j])
+                    }
                 }
+            }
+        }
+        checkedfalse(fulldata);
+       // checkedfalse(fulldata);
+
+
+        /*for(let i = 0; i < fulldata.length;i++){
+            if(item.id == fulldata[i].id){
+                fulldata[i].checked = false;
+            } else{
 
             }
         }*/
+    }
 
-
-
+    render() {
+        const {value,selectedId,animating,pageNumber,showList} = this.state;
+        const {referlabel,referCode,multiMode,displayField,disabled,referStyle,referName,open,modalHeight} = this.props;
         return (
             <WingBlank>
                 <WhiteSpace />
@@ -321,26 +385,37 @@ export default class YYReferTree extends React.Component {
                     visible={disabled?'':open}
                     maskClosable={false}
                     animationType="slide-up">
-                    <div style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw'}}>
-                        <NavBar leftContent="返回"
-                                key="nav"
-                                mode="light"
-                                onLeftClick={this.onClose(referName)}
-                                rightContent={[
-                                    <a key="nav" onClick={this.onOk(referName)}>确定</a>,
-                                ]}
-                        >{referlabel}</NavBar>
+                    <div style={modalHeight=='part'?{height:'93vh',width:'100vw'}:{height:'100vh',width:'100vw',display:'flex',flexDirection:'column'}}>
+                        <div className='Nav'>
+                            <NavBar leftContent="返回"
+                                    key="nav"
+                                    mode="light"
+                                    onLeftClick={this.onClose(referName)}
+                                    rightContent={[
+                                        <a key="nav" onClick={this.onOk(referName)}>确定</a>,
+                                    ]}
+                            >{referlabel}</NavBar>
+                        </div>
+
                         <ActivityIndicator
                             toast
                             text="加载中..."
                             animating={animating}
                         />
-                        <WhiteSpace/>
-                        <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>
-                        <SwipeNavBar rows={this.state.row} handleClick={this.handleClick}/>
-                        <div className="refer-tree-content">
+                        {/*<SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>*/}
+
+
+                        <div className="refer-lazytree-content">
+                            <div className='refer-swipe'>
+                                <SwipeNavBar rows={this.state.swiperow} handleClick={this.handleClick}/>
+                            </div>
                             {this.treeContent(data[referName], selectedId)}
                         </div>
+                        {multiMode? <div className='yyrefer-tap'>
+                            <div style={{width:'auto'}}>
+                                <DeleteTap rows={this.state.row} displayField={displayField} handleClick={this.tapHandleClick}/>
+                            </div>
+                        </div>:''}
                     </div>
                 </Modal>
             </WingBlank>
@@ -349,7 +424,7 @@ export default class YYReferTree extends React.Component {
 }
 YYReferTree.defaultProps = {
     referlabel: '参照',
-    referCode: '00026',
+    referCode: '',
     modalHeight:'all',
     displayField: 'name',
     referParams: {},
@@ -358,7 +433,7 @@ YYReferTree.defaultProps = {
     open:false,
     onOk:{},
     referName:'key',
-    referStyle:'list',
+    referStyle:'lazy-tree',
     condition:{},
     listCondition:{},
 };
