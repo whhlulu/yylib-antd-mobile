@@ -45,7 +45,8 @@ export default class YYReferTree extends React.Component {
                 let name = this.props.referName;
                 let open = this.props.open;
                 page.setState({
-                    [name]:open
+                    [name]:open,
+                    row:[]
                 })
                 let referCode = page.props.referCode;
                 let referStyle = page.props.referStyle;
@@ -58,11 +59,11 @@ export default class YYReferTree extends React.Component {
                             treereferUrl[name] = result.data.treerelyurl;
                             relyfield[name] = result.data.relyfield;
                             referParams = {};
-
+                            console.log(page.state.row);
                             page.setState({
                                 referName: result.data.refName,
                                 referUrl: referUrl,
-                                row:[],
+                                selectedNodes:[],       //清空上次已选择
                             })
                             referParams.condition = page.props.condition;
 
@@ -163,15 +164,9 @@ export default class YYReferTree extends React.Component {
         let referParams = {};
         referParams.condition = this.props.condition;
         this.setState({
-            showList:false
-        })
-
-        // this.getListData(referUrl[this.props.referName], referParams, 1,this.props.referName);
-
-        this.setState({
+            showList:false,
             searchText:'',
-            // [key]: false,
-        });
+        })
         this.props.onClose(key);
     }
     onOk = key =>(e)=> {
@@ -255,6 +250,7 @@ export default class YYReferTree extends React.Component {
                 })
             }
         }
+
         let checkedfalse = (data)=>{
             for(let i = 0;i<data.length;i++){
                 if(item.id == data[i].id){

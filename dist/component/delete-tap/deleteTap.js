@@ -23,8 +23,8 @@ class deleteTap extends React.Component {
             <div style={{padding:'0px 10px',backgroundColor:'white',textAlign:'left'}}>
                 <div id="deleteTap" style={this.props.style}  ref={ node => this.refSwipe =node }>
                     {rows&&rows.length>0?
-                        rows.map((item) => {
-                            return <div className='tap-tag' key={item.id} ><a>{item[displayField]}</a><div className='tap-icon'><Icon  type='cross' size='md' onClick={()=>this.props.handleClick(item)}/></div></div>
+                        rows.map((item,index) => {
+                            return <div className='tap-tag' key={index} ><a>{item[displayField]}</a><div className='tap-icon'><Icon  type='cross' size='md' onClick={()=>this.props.handleClick(item)}/></div></div>
                         })
                         :<div>首页</div>}
                 </div>
