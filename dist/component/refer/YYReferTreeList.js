@@ -74,7 +74,11 @@ export default class YYReferTreeList extends React.Component {
                     if (result.success) {
                         // console.log(result.data);
                         if (result.data !== null) {
+                            //初始化参数
                             data[page.props.referName + 'selectlist'] = [];
+                             NUM = 1;       //切换页码时的最大页数
+                             onsearch = false;       //是否在搜索状态
+                             searchNUM = 1;      //搜索状态最大页数
                             referUrl[name] = result.data.dataurl;
                             treereferUrl[name] = result.data.treerelyurl;
                             relyfield[name] = result.data.relyfield;
@@ -82,7 +86,9 @@ export default class YYReferTreeList extends React.Component {
 
                             page.setState({
                                 referName: result.data.refName,
-                                referUrl: referUrl
+                                referUrl: referUrl,
+                                row:[],
+                                selectedNodes:[],       //清空上次已选择
                             })
                             referParams.condition = page.props.condition;
                             page.getTreeData(treereferUrl[name], referParams, name);
@@ -139,10 +145,9 @@ export default class YYReferTreeList extends React.Component {
                     data[contentname + 'searchlist' + pageNumber] = result.data.content
                 } else {
                     data[contentname + 'list' + pageNumber] = result.data.content;
-                    data[contentname + 'selectlist'] = [...data[contentname + 'selectlist'], ...result.data.content]
+                    data[contentname + 'selectlist'] = [...data[contentname + 'selectlist'], ...data[contentname + 'list' + pageNumber]]
                     pageCount[contentname + 'list'] = result.data.pageCount;
                 }
-
 
                 pageCount[contentname] = result.data.pageCount;
                 self.setState({
@@ -172,9 +177,9 @@ export default class YYReferTreeList extends React.Component {
         //多选模式
         let selectedNodes = this.state.selectedNodes;
         if (!selectedNodes.some((item) => {
-                return item.id === selectedNode.id
+                return item.id === selectedNode.id && item.catId === selectedNode.catId
             })) {
-            // console.log('1')
+            console.log('1')
             selectedNodes.push(selectedNode);
             selectedNode.checked = true;
             this.setState({
@@ -182,13 +187,13 @@ export default class YYReferTreeList extends React.Component {
                 row: selectedNodes
             });
         } else {
-            // console.log('2')
+            console.log('2')
             let newNodes = [];
             // eslint-disable-next-line
             selectedNodes.map((item) => {
-                if (item.id !== selectedNode.id) {
-                    newNodes.push(item);
-                }
+                    if (!(item.id == selectedNode.id && item.catId == selectedNode.catId) ) {
+                        newNodes.push(item);
+                    }
             })
             selectedNode.checked = false;
             this.setState({
@@ -229,6 +234,8 @@ export default class YYReferTreeList extends React.Component {
             showList: false
         })
         onsearch = false;
+        NUM=1;
+        searchNUM=1;
         // this.getListData(referUrl[this.props.referName], referParams, 1,this.props.referName);
         this.setState({
             searchText: '',
@@ -237,6 +244,7 @@ export default class YYReferTreeList extends React.Component {
         this.props.onClose(key);
     }
     onOk = key => (e) => {
+        // console.log(data[this.props.referName+'selectlist']);
         let _self = this;
         this.setState({
             pageNumber: 1,
@@ -286,7 +294,6 @@ export default class YYReferTreeList extends React.Component {
         referTreeListParams.relyCondition = (relyfield[this.props.referName] + '=' + selectedNode.id);
         referTreeListParams.condition = this.props.listCondition;
         referTreeListParams.pageSize = 10;
-        console.log(referTreeListParams)
         this.getListData(referUrl[this.props.referName], referTreeListParams, 1, this.props.referName);
     }
     onSearchSubmit = (value) => {
@@ -336,8 +343,8 @@ export default class YYReferTreeList extends React.Component {
     listContent = (data, selectedId) => {
         if (this.props.multiMode) {
             if (data) {
-                return data.map(item => (
-                    <CheckboxItem key={item.id} onChange={(e) => this.onMultiChange(e, item)} checked={item.checked}>
+                return data.map((item,index) => (
+                    <CheckboxItem key={index} onChange={(e) => this.onMultiChange(e, item)} checked={item.checked}>
                         {item[this.props.displayField]}
                     </CheckboxItem>
                 ))
@@ -345,8 +352,8 @@ export default class YYReferTreeList extends React.Component {
 
         } else {
             if (data) {
-                return data.map(item => (
-                    <RadioItem key={item.id} checked={selectedId === item.id}
+                return data.map((item,index) => (
+                    <RadioItem key={index} checked={selectedId === item.id}
                                onChange={(e) => this.onSingleChange(e, item)}>
                         {item[this.props.displayField]}
                     </RadioItem>
@@ -354,7 +361,7 @@ export default class YYReferTreeList extends React.Component {
             }
         }
     }
-    onChangePageNumber = (value) => {
+    onChangePageNumber = (value,E) => {
         if (onsearch) {
             console.log('onsearch')
             if (value > searchNUM) {
@@ -394,7 +401,7 @@ export default class YYReferTreeList extends React.Component {
                 this.getListData(referUrl[this.props.referName], referTreeListParams, value, this.props.referName);
             } else {
                 data[this.props.referName + 'list'] = data[this.props.referName + 'list' + value];
-                console.log(data[this.props.referName + 'list']);
+                // console.log(data[this.props.referName + 'list']);
                 this.setState({
                     pageNumber: value,
                     animating: false,
@@ -497,7 +504,7 @@ export default class YYReferTreeList extends React.Component {
                                             mode="light"
                                             onLeftClick={() => {
                                                 this.setState({selectedTreeId: null, showList: false});
-                                                referTreeListParams = {}
+                                                referTreeListParams = {};NUM=1;searchNUM=1;
                                             }}
                                             rightContent={[
                                                 <a key="nav" onClick={this.onOk(referName)}>确定</a>,

@@ -52,6 +52,8 @@ export default class YYReferTree extends React.Component {
                 })
                 let referCode = page.props.referCode;
                 let referStyle = page.props.referStyle;
+                //储存选择列表有关的数据
+                data[page.props.referName+'fulldata']=[];
                 //根据参照编码获取参照信息
                 ajax.getJSON(RestUrl.REF_SERVER_URL + RestUrl.GET_REFINFO_BYCODE, {refCode: referCode}, function (result) {
                     if (result.success) {
@@ -95,13 +97,31 @@ export default class YYReferTree extends React.Component {
         })
         ajax.getText(referUrl, referParams, function (result) {
             result = JSON.parse(result);
-            //首页和非首页的数据分别处理
+            //首页和非首页的数据分别处理,如果存在点击过的情况就用缓存数据
             if(referParams.pid){
+                let fulldata = data[contentname+'fulldata'];
+                // console.log(fulldata)
+                for(let i = 0;i<fulldata.length;i++){
+                    if(data[contentname+referParams.pid]==fulldata[i]){
+                        data[contentname]=data[contentname+referParams.pid];
+                        _self.setState({
+                            animating: false
+                        })
+                        return;
+                    }
+                }
                 data[contentname+referParams.pid]=result;
                 data[contentname]=data[contentname+referParams.pid];
+                data[contentname+'fulldata'].push( data[contentname+referParams.pid])
+                console.log(data[contentname+'fulldata']);
             } else {
-                data[contentname+'001']=result;
-                data[contentname]=data[contentname+'001'];
+                data[contentname]=result;
+                if(!data[contentname+'000001']){
+                    data[contentname+'000001']=result;
+                    data[contentname+'fulldata'].push(data[contentname+'000001']);
+                    // console.log(data[contentname+'fulldata']);
+                }
+
             }
 
             _self.setState({
@@ -293,7 +313,7 @@ export default class YYReferTree extends React.Component {
             this.setState({
                 swiperow:[value]
             })
-            this.getTreeData(value.url, {},this.props.referName);
+            data[this.props.referName]=data[this.props.referName+'000001'];
         } else {
             this.state.swiperow.some((item,index)=>{
                 if(item.id == value.id){
@@ -308,6 +328,50 @@ export default class YYReferTree extends React.Component {
                 }
             })
         }
+    }
+
+    tapHandleClick = (item)=>{
+        let fulldata = data[this.props.referName+'fulldata'];
+        let selectdata = this.state.selectedNodes;
+        for(let i = 0;i < selectdata.length; i++){
+            if(item === selectdata[i]){
+                if(i==0){
+                    selectdata.splice(0,1);
+                } else {
+                    selectdata.splice(i,1);
+                }
+                this.setState({
+                    selectNodes:selectdata,
+                    row:selectdata
+                })
+            }
+        }
+
+        let checkedfalse = (fulldata)=>{
+            for(let j = 0;j<fulldata.length;j++){
+                if(item.id == fulldata[j].id){
+                    fulldata[j].checked = false;
+                    return;
+                } else {
+                    if(_.isArray(fulldata[j].children)){
+                        checkedfalse(fulldata[j].children)
+                    } else {
+                        checkedfalse(fulldata[j])
+                    }
+                }
+            }
+        }
+        checkedfalse(fulldata);
+       // checkedfalse(fulldata);
+
+
+        /*for(let i = 0; i < fulldata.length;i++){
+            if(item.id == fulldata[i].id){
+                fulldata[i].checked = false;
+            } else{
+
+            }
+        }*/
     }
 
     render() {
@@ -349,7 +413,7 @@ export default class YYReferTree extends React.Component {
                         </div>
                         {multiMode? <div className='yyrefer-tap'>
                             <div style={{width:'auto'}}>
-                                <DeleteTap rows={this.state.row} displayField={displayField} handleClick={this.handleClick}/>
+                                <DeleteTap rows={this.state.row} displayField={displayField} handleClick={this.tapHandleClick}/>
                             </div>
                         </div>:''}
                     </div>

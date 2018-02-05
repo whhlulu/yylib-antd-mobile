@@ -140,7 +140,7 @@ class YYreferDemo extends React.Component{
                     onClose={this.onClose}
                     multiMode={true}
                     form={form}
-                    values={[{code:"15110101919",
+                    /*values={[{code:"15110101919",
                         creationTimestamp:1516707936087,
                         dr:0,
                         id:"0342fcce-1949-426c-8b5a-ec9b4cdfb0f3",
@@ -149,7 +149,7 @@ class YYreferDemo extends React.Component{
                         tenantId:null,
                         userId:"0342fcce-1949-426c-8b5a-ec9b4cdfb0f3",
                         userName:"王祖贤"
-                    }]}
+                    }]}*/
                     open={this.state.open}
                     referCode='00026'
                     referStyle='list'
