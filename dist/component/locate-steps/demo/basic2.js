@@ -16,7 +16,7 @@ class YYLocateStepsDemo2 extends React.Component {
                 <YYLocateSteps data={this.state.data} defaultHeight={44} scrollId="testsc">
                     <Icon type="check" style={{position: 'fixed', bottom: '60px', right: '60px'}}/>
                 </YYLocateSteps>
-                <div style={{height:"44px",backgroundColor:"#fff",flexShrink:"0"}}>title</div>
+                <div style={{height:"44px",backgroundColor:"#eee",flexShrink:"0"}}>title</div>
 	            <div id="testsc" style={{
 		            width: "100%",
 		            overflowY: 'scroll',
@@ -56,7 +56,7 @@ class YYLocateStepsDemo2 extends React.Component {
 			            <li style={{backgroundColor: "#C389FA", height: "80px"}}>1312312312312</li>
 		            </ul>
                 </div>
-	            <div style={{height:"50px",backgroundColor:"#fff",flexShrink:"0"}}>foot</div>
+	            <div style={{height:"50px",backgroundColor:"#eee",flexShrink:"0"}}>foot</div>
             </div>
         )
     }

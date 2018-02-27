@@ -124,7 +124,7 @@ class YYLocateSteps extends React.Component {
 					}) : null}
 				</div>
 				{this.state.right === 0 ?
-					<div className="yy-locate-steps-mask" onTouchStart={this.hideSteps}></div> : null}
+					<div className="yy-locate-steps-mask" onTouchStart={this.hideSteps} onClick={this.hideSteps}></div> : null}
 			</div>
 		)
 	};
