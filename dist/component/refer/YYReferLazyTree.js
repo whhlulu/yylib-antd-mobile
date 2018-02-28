@@ -250,14 +250,35 @@ export default class YYReferTree extends React.Component {
         }
     }
     onSearchSubmit = (value) => {
-        this.setState({
-            searchText:value,
-        })
-        let referParams = {};
-        referParams.searchText = value;
-        referParams.pageSize = 10;
-        referParams.condition = this.props.condition;
-        this.getListData(referUrl[this.props.referName], referParams, 1,this.props.referName);
+        if(value == ''){
+            if(referParams.pid){
+                this.getTreeData(referUrl[this.props.referName], {pid:referParams.pid},this.props.referName);
+            } else {
+                this.getTreeData(referUrl[this.props.referName],{},this.props.referName);
+            }
+
+        } else {
+            console.log(value);
+            let currentData = data[this.props.referName];
+            let searchData = [];                     //搜索结果显示
+            let searchKey = this.props.displayField;         //需要搜索的key
+            let search = (searchText,data)=>{
+                for(let i = 0 ; i < data.length; i++){
+                    if(data[i][searchKey].includes(searchText)){
+                        searchData.push(data[i])
+                    }
+                    if(data[i].children !== null){
+                        search(searchText,data[i].children)
+                    }
+                }
+            }
+            search(value,currentData);
+            data[this.props.referName] = searchData;
+            this.setState({
+                animating:false,
+            })
+        }
+
 
     }
     treeContent = (treeData, selectedId) => {
@@ -320,6 +341,7 @@ export default class YYReferTree extends React.Component {
                     let name = this.props.referName;
                     let oldRow = this.state.swiperow;
                     let newRow = [];
+                    referParams.pid=value.id;
                     newRow = oldRow.splice(0,index+1);
                    this.setState({
                        swiperow:newRow
@@ -402,10 +424,11 @@ export default class YYReferTree extends React.Component {
                             text="加载中..."
                             animating={animating}
                         />
-                        {/*<SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>*/}
+
 
 
                         <div className="refer-lazytree-content">
+                            <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>
                             <div className='refer-swipe'>
                                 <SwipeNavBar rows={this.state.swiperow} handleClick={this.handleClick}/>
                             </div>
