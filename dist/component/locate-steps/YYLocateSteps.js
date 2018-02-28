@@ -22,6 +22,7 @@ class YYLocateSteps extends React.Component {
 		defaultHeight: 0,
 		scrollId: document.documentElement
 	};
+	onOff = false;
 	
 	componentDidMount() {
 		let scrollDom = document.getElementById(this.props.scrollId);
@@ -92,17 +93,28 @@ class YYLocateSteps extends React.Component {
 		});
 		if (_.isFunction(this.props.onChange)) this.props.onChange(index, item)
 	};
-	showSteps = () => {
-		this.setState({
-			right: 0
-		})
+	showSteps = (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		if (!this.onOff) {
+			this.setState({
+				right: 0
+			});
+			this.onOff = !this.onOff;
+		} else {
+			this.setState({
+				right: -62
+			});
+			this.onOff = !this.onOff;
+		}
 	};
 	hideSteps = () => {
 		window.clearInterval(this.timer);
 		this.timer = null;
 		this.setState({
 			right: -62
-		})
+		});
+		this.onOff = false;
 	};
 	
 	render() {
@@ -124,7 +136,8 @@ class YYLocateSteps extends React.Component {
 					}) : null}
 				</div>
 				{this.state.right === 0 ?
-					<div className="yy-locate-steps-mask" onTouchStart={this.hideSteps} onClick={this.hideSteps}></div> : null}
+					<div className="yy-locate-steps-mask" onTouchStart={this.hideSteps}
+					     onClick={this.hideSteps}></div> : null}
 			</div>
 		)
 	};

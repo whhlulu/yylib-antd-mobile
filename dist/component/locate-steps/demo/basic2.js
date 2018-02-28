@@ -14,7 +14,7 @@ class YYLocateStepsDemo2 extends React.Component {
         return (
             <div style={{height: "100vh" , width: "100%",display: "flex", flexDirection: "column"}}>
                 <YYLocateSteps data={this.state.data} defaultHeight={44} scrollId="testsc">
-                    <Icon type="check" style={{position: 'fixed', bottom: '60px', right: '60px'}}/>
+	                <div style={{padding:"6px", border:"1px solid #ece0e0e3", borderRadius: "4px", position: "fixed", bottom: "60px", right: "60px", zIndex:100, backgroundColor: "#fff", boxShadow: "#c3aeae 0 0 10px"}} className="YY-locateBtn-approveZk" ><Icon type="check" size="xxs" color="#108ee9"/></div>
                 </YYLocateSteps>
                 <div style={{height:"44px",backgroundColor:"#eee",flexShrink:"0"}}>title</div>
 	            <div id="testsc" style={{
