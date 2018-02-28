@@ -59,7 +59,7 @@ export default class YYReferTree extends React.Component {
                             treereferUrl[name] = result.data.treerelyurl;
                             relyfield[name] = result.data.relyfield;
                             referParams = {};
-                            console.log(page.state.row);
+                            // console.log(page.state.row);
                             page.setState({
                                 referName: result.data.refName,
                                 referUrl: referUrl,
@@ -95,6 +95,7 @@ export default class YYReferTree extends React.Component {
         ajax.getText(referUrl, referParams, function (result) {
             result = JSON.parse(result);
             data[contentname]=result;
+            data[contentname+'tree']=result;
             _self.setState({
                 // data: result,
                 animating: false
@@ -198,14 +199,42 @@ export default class YYReferTree extends React.Component {
         }
     }
     onSearchSubmit = (value) => {
-        this.setState({
+        let totalData = data[this.props.referName];
+        let searchData = [];            //储存搜索出来的结果
+        let searchKey = this.props.displayField;   //需要搜索的key
+        if(value == ''){
+            data[this.props.referName+'tree'] = data[this.props.referName];
+            this.setState({
+                animating:false,
+            })
+        } else {
+            let search = (searchText,data)=>{
+                for(let i = 0 ; i < data.length; i++){
+                    if(data[i][searchKey].includes(searchText)){
+                        searchData.push(data[i])
+                    }
+                    if(data[i].children !== null){
+                        search(searchText,data[i].children)
+                    }
+                }
+            }
+
+            search(value,totalData);
+            data[this.props.referName+'tree']=searchData;
+            this.setState({
+                animating:false,
+            })
+        }
+
+       /* this.setState({
             searchText:value,
         })
         let referParams = {};
         referParams.searchText = value;
         referParams.pageSize = 10;
         referParams.condition = this.props.condition;
-        this.getListData(referUrl[this.props.referName], referParams, 1,this.props.referName);
+        this.getListData(referUrl[this.props.referName], referParams, 1,this.props.referName);*/
+
 
     }
 
@@ -303,9 +332,10 @@ export default class YYReferTree extends React.Component {
                             text="加载中..."
                             animating={animating}
                         />
-                        {/*<SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>*/}
+
                         <div className="refer-tree-content">
-                            {this.treeContent(data[referName], selectedId)}
+                            <SearchBar placeholder="搜索" onSubmit={this.onSearchSubmit}/>
+                            {this.treeContent(data[referName+'tree'], selectedId)}
                         </div>
                         {multiMode? <div className='yyrefer-tap'>
                             <div style={{width:'auto'}}>
