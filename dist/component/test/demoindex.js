@@ -44,6 +44,10 @@ class YYreferDemo extends React.Component{
                 console.log('datepicker')
                 this.props.router.push({pathname:'/datepicker'});
                 break;
+	        case '7':
+		        console.log('locateSteps')
+		        this.props.router.push({pathname:'/locateSteps'});
+		        break;
         }
     }
 
@@ -64,6 +68,7 @@ class YYreferDemo extends React.Component{
                 <Button onClick={this.openRefer.bind(this,'4')}>查看input输入框</Button>
                 <Button onClick={this.openRefer.bind(this,'5')}>查看switch滑动开关</Button>
                 <Button onClick={this.openRefer.bind(this,'6')}>查看datepicker</Button>
+                <Button onClick={this.openRefer.bind(this,'7')}>查看locateStep</Button>
             </div>
         )
     }

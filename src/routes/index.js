@@ -34,7 +34,7 @@ import YYPicker from '../../dist/component/picker/demo/YYPickerdemo'
 /*Data Display 数据展示-Start*/
 import YYAccordionDemo from '../../dist/component/accordion/demo/basic'
 import YYIconDemo from '../../dist/component/icon/demo/basic'
-import YYLocateStepsDemo from '../../dist/component/locate-steps/demo/basic'
+import YYLocateStepsDemo from '../../dist/component/locate-steps/demo/basic2'
 import Pull from '../../dist/component/listview/Pulltorefresh'
 import YYList from '../../dist/component/listview/demo/YYListDemo'
 
