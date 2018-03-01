@@ -5,7 +5,7 @@ import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import style from '../../../css/YYLocateSteps.css'
+import '../../../css/YYLocateSteps.css'
 
 class YYLocateSteps extends React.Component {
 	state = {
@@ -82,7 +82,7 @@ class YYLocateSteps extends React.Component {
 			if (currentScroll >= target - 10 && currentScroll <= target + 10) {
 				window.clearInterval(this.timer);
 				this.timer = null;
-				scrollDom.scrollTop = curDom.offsetTop - curDom.parentNode.parentNode.offsetTop;
+				scrollDom.scrollTop = target;
 				return;
 			}
 			scrollDom.scrollTop += step;
