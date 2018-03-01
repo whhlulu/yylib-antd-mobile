@@ -2,22 +2,27 @@
     display: flex;
     flex-direction: column;
     background: #fff;
-    padding: .6rem;
+    padding: .4rem 0.2rem;
     position: fixed;
     top: 30%;
     right: 0px;
     text-align: center;
     color: #0091FA;
     z-index: 100;
+    align-items: center;
 }
-
+.yy-locate-steps .yy-locate-steps-body .yy-locate-step{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .yy-locate-steps .yy-locate-steps-body .yy-locate-step.active {
     color: #fe6d3b;
 }
 
 .yy-locate-steps .yy-locate-steps-body .yy-locate-step .yy-locate-step-icon {
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     border: 1px solid #0091FA;
     display: flex;
@@ -26,8 +31,8 @@
 }
 
 .yy-locate-steps .yy-locate-steps-body .yy-locate-step.active .yy-locate-step-icon {
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
     border:none;
     background-color: #fe6d3b;
     color: #ffffff;
