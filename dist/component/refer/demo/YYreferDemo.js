@@ -15,10 +15,14 @@ class YYreferDemo extends React.Component{
         }
     }
     componentDidMount(){
-        console.log(window.location.href)
+        console.log(window.location.href);
         document.addEventListener('backbutton',()=>{
             Toast.info('监听后退键',1)
-            window.history.go(-1);
+            let state = {
+                title:'myCenter',
+                url:'#'
+            }
+            window.history.pushState(state,state.title,state.url)
         },false)
     }
      openRefer=(e)=>{
