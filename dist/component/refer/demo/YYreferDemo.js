@@ -1,6 +1,6 @@
 import React from 'react'
 import {YYRefer,YYForm} from '../../../index'
-import {Button} from 'antd-mobile';
+import {Button,Toast} from 'antd-mobile';
 
 
 
@@ -13,6 +13,12 @@ class YYreferDemo extends React.Component{
             openz:false,
             openw:false,
         }
+    }
+    componentDidMount(){
+        console.log(window.location.href)
+        document.addEventListener('backbutton',()=>{
+            Toast('监听后退键',1)
+        },false)
     }
      openRefer=(e)=>{
          if(e=='1'){
