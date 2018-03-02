@@ -17,7 +17,8 @@ class YYreferDemo extends React.Component{
     componentDidMount(){
         console.log(window.location.href)
         document.addEventListener('backbutton',()=>{
-            Toast('监听后退键',1)
+            Toast.info('监听后退键',1)
+            window.history.go(-1);
         },false)
     }
      openRefer=(e)=>{
