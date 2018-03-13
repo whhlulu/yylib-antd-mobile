@@ -1,0 +1,11 @@
+.backgroud{
+    padding: 10px;
+    text-align: left;
+    background-color: grey;
+}
+
+.innerUrl{
+    background-color: white;
+    border-radius: 5px;
+    overflow-x:scroll;
+}

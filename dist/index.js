@@ -15,6 +15,7 @@ export { default as YYForm} from './component/form/YYForm'
 export { default as YYSwitch} from './component/switch/YYSwitch'
 export { default as YYDatePicker} from './component/date-picker/YYDatePicker'
 export { default as YYPicker} from './component/picker/YYPicker'
+export { default as YYStepper} from './component/stepper/YYStepper'
 
 
 /*Data Display 数据展示-Start*/
@@ -38,3 +39,4 @@ export { default as YYResult} from './component/result/YYResult'
 
 
 //其他以及测试用
+export { default as Url} from './component/test/url'
