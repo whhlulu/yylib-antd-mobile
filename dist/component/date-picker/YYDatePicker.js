@@ -32,7 +32,20 @@ class YYDatePicker extends Component {
             visible: false
         })
     }
-
+    componentWillReceiveProps(nextprops){
+        if(nextprops.value!==this.props.value){
+            let fields = {};
+            fields[this.props.field] = {
+                dirty: true,
+                errors: undefined,
+                name: this.props.field,
+                touched: true,
+                validating: true,
+                value: nextprops.value
+            }
+            this.props.form.setFields(fields);
+        }
+    }
     onChange = (date) => {
         //设值到fieldStore
         let fields = {};
