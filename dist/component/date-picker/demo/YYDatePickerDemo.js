@@ -1,5 +1,6 @@
 import React from 'react'
 import { YYForm,YYDatePicker } from '../../../index'
+import {Button} from "../../../common/antd-m/index";
 import 'moment/locale/zh-cn';
 
 class YYDatePickerDemo extends React.Component{
@@ -9,7 +10,9 @@ class YYDatePickerDemo extends React.Component{
 
         }
     }
+    componentDidMount(){
 
+    }
     onchang = ()=>{
         this.props.form.validateFields(['date','time','datetime'],(err,value)=>{
             if(!err){
@@ -18,14 +21,15 @@ class YYDatePickerDemo extends React.Component{
         })
     }
 
+
     render(){
         let {form}= this.props;
         return(
             <div>
                 <YYForm>
                 <YYDatePicker disabled={true} mode='date' field='date' form={form} onChange={this.onchang}/>
-                <YYDatePicker   mode='time' use12Hours={true} field='time' label='时间' onChange={this.onchang}  form={form}/>
-                    <YYDatePicker   mode='datetime' field='datetime' label='datetime' onChange={this.onchang} maxDate={new Date('2040-1-18')} form={form}/>
+                <YYDatePicker   mode='time' use12Hours={true} field='time' label='时间'  onChange={this.onchang}  form={form}/>
+                    <YYDatePicker   mode='datetime' field='datetime' label='时间+日期' onChange={this.onchang} maxDate={new Date('2040-1-18')} form={form}/>
                 </YYForm>
             </div>
         )
