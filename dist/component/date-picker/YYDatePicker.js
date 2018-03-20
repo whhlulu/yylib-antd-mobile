@@ -3,7 +3,6 @@
  */
 import React, {Component} from 'react';
 import {DatePicker, List} from 'antd-mobile';
-import 'moment/locale/zh-cn';
 import _ from 'lodash';
 import '../../../css/YYDatePicker.css'
 const nowTimeStamp = Date.now();
