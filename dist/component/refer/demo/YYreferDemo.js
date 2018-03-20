@@ -1,6 +1,6 @@
 import React from 'react'
 import {YYRefer,YYForm} from '../../../index'
-import {Button} from 'antd-mobile';
+import {Button,Toast} from 'antd-mobile';
 
 
 
@@ -13,6 +13,9 @@ class YYreferDemo extends React.Component{
             openz:false,
             openw:false,
         }
+    }
+    componentDidMount(){
+
     }
      openRefer=(e)=>{
          if(e=='1'){

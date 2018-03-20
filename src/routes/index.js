@@ -7,6 +7,7 @@ import App from '../App'; //主应用
 // 按照组件分类进行排序
 /*Layout 布局-Start*/
 import index from '../../dist/component/test/demoindex'
+import YYFlex from '../../dist/component/flex/demo/YYFlexDemo'
 
 /*Navigation 导航-Start*/
 import YYNavBarDemo from '../../dist/component/navBar/demo/basic';//NavBar
@@ -30,6 +31,9 @@ import Datepicker from '../../dist/component/date-picker/demo/YYDatePickerDemo'
 import DateDemo from '../../dist/component/date-picker/demo/datepicker'
 import Pickerdemo from '../../dist/component/picker/demo/pickerdemo'
 import YYPicker from '../../dist/component/picker/demo/YYPickerdemo'
+import YYStepper from '../../dist/component/stepper/demo/YYStepperDemo'
+import YYText from '../../dist/component/textareaItem/demo/YYTextareaItemDemo'
+import YYCheckbox from '../../dist/component/checkbox/demo/YYCheckboxDemo'
 
 /*Data Display 数据展示-Start*/
 import YYAccordionDemo from '../../dist/component/accordion/demo/basic'
@@ -59,7 +63,7 @@ export default
     <Route path="/" component={App}>
         <IndexRoute key='001' component={index}></IndexRoute>
         {/*Layout 布局*/}
-
+        <Route path="flex" component={YYFlex}/>
         {/*Navigation 导航*/}
         <Route path="navBar" component={YYNavBarDemo}/>
         <Route path="tabs">
@@ -83,6 +87,9 @@ export default
         <Route path="datedemo" component={DateDemo}/>
         <Route path="pickerdemo" component={Pickerdemo}/>
         <Route path="picker" component={YYPicker}/>
+        <Route path="stepper" component={YYStepper}/>
+        <Route path="textareaItem" component={YYText}/>
+        <Route path="checkbox" component={YYCheckbox}/>
 
 
 

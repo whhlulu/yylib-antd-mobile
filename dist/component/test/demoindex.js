@@ -48,6 +48,18 @@ class YYreferDemo extends React.Component{
 		        console.log('locateSteps')
 		        this.props.router.push({pathname:'/locateSteps'});
 		        break;
+            case '8':
+                console.log('stepper')
+                this.props.router.push({pathname:'/stepper'});
+                break;
+            case '9':
+                console.log('textareaItem')
+                this.props.router.push({pathname:'/textareaItem'});
+                break;
+            case '10':
+                console.log('checkbox')
+                this.props.router.push({pathname:'/checkbox'});
+                break;
         }
     }
 
@@ -69,6 +81,9 @@ class YYreferDemo extends React.Component{
                 <Button onClick={this.openRefer.bind(this,'5')}>查看switch滑动开关</Button>
                 <Button onClick={this.openRefer.bind(this,'6')}>查看datepicker</Button>
                 <Button onClick={this.openRefer.bind(this,'7')}>查看locateStep</Button>
+                <Button onClick={this.openRefer.bind(this,'8')}>查看stepper步进器</Button>
+                <Button onClick={this.openRefer.bind(this,'9')}>查看textareaItem多行输入</Button>
+                <Button onClick={this.openRefer.bind(this,'10')}>查看checkbox复选框</Button>
             </div>
         )
     }

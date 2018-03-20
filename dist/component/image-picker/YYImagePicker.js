@@ -104,7 +104,7 @@ class YYImagePicker extends Component {
                     });
                 } else {
                     this.setState({
-                        files: that.state.files.filter((e, i) => i != 0)
+                        files: that.state.files.filter((e, i) => i != index)
                     },()=>{
                         if (_.isFunction(that.props.onChange)) {
                             that.props.onChange(this.state.files);
