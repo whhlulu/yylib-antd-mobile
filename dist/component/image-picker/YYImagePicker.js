@@ -1,34 +1,15 @@
 import React, {Component} from 'react';
 import {ImagePicker, Modal,List} from 'antd-mobile';
+const alert = Modal.alert;
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import UploadFileUtils from '../../utils/UploadFileUtils';
 import AuthToken from '../../utils/AuthToken';
-const alert = Modal.alert
+import '../../../css/YYImagePicker.css';
 
 class YYImagePicker extends Component {
     state = {
         files: this.props.files,
-    };
-    static propTypes = {
-        selectable: PropTypes.bool,
-        label: PropTypes.string,
-        maxSize: PropTypes.number,
-        disabled: PropTypes.bool,
-        source: PropTypes.object,
-        files: PropTypes.array,
-    };
-    static defaultProps = {
-        selectable: true,
-        label: '上传图片',
-        maxSize: 5,
-        disabled: false,
-        source: {
-            sourceId: '',
-            billType: '',
-            sourceType: '',
-        },
-        files: [],
     };
 
     componentDidMount() {
@@ -125,28 +106,40 @@ class YYImagePicker extends Component {
             userId: AuthToken.getUserId(),
             userName: AuthToken.getUserName()
         };
+        if(this.props.orderQuality){
+            params.orderQuality=this.props.orderQuality;
+        }
+        if(this.props.orderWidth){
+            params.orderWidth=this.props.orderWidth;
+        }
         var file = {};
-        window.YYPlugin.call("CommonPlugin", "postFile", params, function success(result) {
-            file.gid = result.gid;
-            file.name = result.fileName;
-            file.url = result.filePath;
-            file.backData = result;
-            that.setState({
-                files: that.state.files.concat(file),
-            },()=>{
-                if (_.isFunction(that.props.onChange)) {
-                    that.props.onChange(that.state.files);
-                }
+        if(window.YYPlugin){
+            window.YYPlugin.call("CommonPlugin", "postFile", params, function success(result) {
+                file.gid = result.gid;
+                file.name = result.fileName;
+                file.url = result.filePath;
+                file.backData = result;
+                that.setState({
+                    files: that.state.files.concat(file),
+                },()=>{
+                    if (_.isFunction(that.props.onChange)) {
+                        that.props.onChange(that.state.files);
+                    }
+                });
             });
-        });
+        }else{
+            Toast.info('请在手机上进行调试或检查yyplus的引入！')
+        }
     };
 
     render() {
-        const {disabled, maxSize, label} = this.props;
+        const {disabled, maxSize, label, className, ...restProps} = this.props;
+        let wrapClz = classnames('yy-image-picker', className);
         const {files} = this.state;
         return (
-            <div>
-                <List.Item><div>{label}</div></List.Item>
+            <div {...restProps}
+                 className={wrapClz}>
+                {label && <div className="label">{label}</div>}
                 <ImagePicker
                     files={files}
                     onChange={disabled ? null : this.onChange}
@@ -158,5 +151,18 @@ class YYImagePicker extends Component {
         );
     }
 }
-
+YYImagePicker.defaultProps = {
+    selectable: true,
+    label: '上传图片',
+    maxSize: 5,
+    disabled: false,
+    source: {
+        sourceId: '',
+        billType: '',
+        sourceType: '',
+    },
+    files: [],
+    orderQuality:null,
+    orderWidth:null,
+};
 export default YYImagePicker;
