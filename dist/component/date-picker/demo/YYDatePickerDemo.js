@@ -1,6 +1,5 @@
 import React from 'react'
 import { YYForm,YYDatePicker } from '../../../index'
-import {Button} from "../../../common/antd-m/index";
 import 'moment/locale/zh-cn';
 
 class YYDatePickerDemo extends React.Component{

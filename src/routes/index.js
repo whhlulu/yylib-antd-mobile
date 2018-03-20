@@ -29,7 +29,6 @@ import YYImagePickerDemo from '../../dist/component/image-picker/demo/YYImagePic
 import Switch from '../../dist/component/switch/demo/YYSwitchDemo'
 import Datepicker from '../../dist/component/date-picker/demo/YYDatePickerDemo'
 import DateDemo from '../../dist/component/date-picker/demo/datepicker'
-import Pickerdemo from '../../dist/component/picker/demo/pickerdemo'
 import YYPicker from '../../dist/component/picker/demo/YYPickerdemo'
 import YYStepper from '../../dist/component/stepper/demo/YYStepperDemo'
 import YYText from '../../dist/component/textareaItem/demo/YYTextareaItemDemo'
@@ -85,7 +84,6 @@ export default
         <Route path="switch" component={Switch}/>
         <Route path="datepicker" component={Datepicker}/>
         <Route path="datedemo" component={DateDemo}/>
-        <Route path="pickerdemo" component={Pickerdemo}/>
         <Route path="picker" component={YYPicker}/>
         <Route path="stepper" component={YYStepper}/>
         <Route path="textareaItem" component={YYText}/>
