@@ -4,6 +4,7 @@ const alert = Modal.alert;
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import UploadFileUtils from '../../utils/UploadFileUtils';
+import classnames from 'classnames';
 import AuthToken from '../../utils/AuthToken';
 import '../../../css/YYImagePicker.css';
 
